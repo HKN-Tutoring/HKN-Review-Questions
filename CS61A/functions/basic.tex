@@ -1,0 +1,59 @@
+\documentclass[10pt]{article}
+
+% Variables
+\newcommand{\thedate}{Fall 2011}
+\newcommand{\assignment}{CS 61A}
+
+% Formatting packages
+\usepackage{palatino}
+\usepackage{fullpage}
+\usepackage{fancyhdr}
+
+% Math tools
+\usepackage{mathtools}
+\usepackage{amssymb}
+
+% CS tools
+\usepackage{algorithmic}
+
+% Header Settings
+\pagestyle{fancy}
+\headsep = 35pt
+\setlength{\headheight}{20pt}
+
+% Header
+\rhead{\textsc{\thedate}}
+\chead{\Large \textsc{\assignment}}
+\lhead{\textsc{Eta Kappa Nu}}
+\cfoot{\large\thepage}
+
+% Numbered environments
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+% Unnumbered environments
+\newenvironment{proof}[1][Proof]{\begin{trivlist}
+  \item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{definition}[1][Definition]{\begin{trivlist}
+  \item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{example}[1][Example]{\begin{trivlist}
+  \item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{remark}[1][Remark]{\begin{trivlist}
+  \item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+% QED Symbol
+\newcommand{\qed}{\nobreak \ifvmode \relax \else
+  \ifdim\lastskip<1.5em \hskip-\lastskip
+  \hskip1.5em plus0em minus0.5em \fi \nobreak
+  \vrule height0.75em width0.5em depth0.25em\fi}
+
+% Start of document
+\begin{document}
+\section*{Pure vs. Non-pure Functions}
+\begin{enumerate}
+\item Write a pure function.
+\item Now write a non-pure function.
+\end{enumerate}
+\end{document}
