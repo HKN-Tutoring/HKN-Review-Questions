@@ -4,8 +4,8 @@
 % ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ %
 \newcommand{\semestercreated}{SemesterCreated}
 \newcommand{\classname}{ClassName}
-\newcommand{\topic}{Topic - Subtopic}
 \newcommand{\questionauthor}{Author}
+\newcommand{\questiontitle}{QuestionTitle}
 % ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ %
 
 % Ignore Preamble %
@@ -23,19 +23,22 @@
 \usepackage{algorithmic}
 \usepackage{listings}
 \lstset{numbers=left}
-\lstset{language=Python}
-\lstset{numbersep=2pt}
+\lstset{numbersep=-5pt}
+\lstset{morecomment=[l]{//}}
 
 % Header Settings
 \pagestyle{fancy}
-\headsep = 35pt
-\setlength{\headheight}{20pt}
+\headsep = 15pt
+\setlength{\headheight}{15pt}
 
 % Header
-\rhead{\textsc{\topic}}
-\lhead{\textsc{\classname}}
+\lhead{\textsc{Eta Kappa Nu, Mu Chapter}}
+\rhead{\textsc{\classname}}
 \cfoot{\large\thepage}
-\rfoot{\em{\questionauthor - \semestercreated}}
+\rfoot{\em{\questionauthor\ - \semestercreated}}
+
+% General
+\usepackage{enumerate}
 % ---------------------------------------------------------------------------- %
 
 \begin{document}
@@ -45,13 +48,17 @@
 %  * When using numbered environments (e.g., lists), use \begin{enumerate} and
 %    \end{enumerate}
 %  * Keep line width at most 80 characters
-%  * To type code, use \begin{lstlistings} and \end{lstlistings}
+%  * To type code, use \begin{lstlistings} and \end{lstlisting}
 %    * To specify a language, use
 %          \lstset{language=[YOUR LANGUAGE HERE]}
+%  * When using nested environments, indent with two spaces
+%
+% To compile, run the following command:
+%   pdflatex [FILE NAME].tex
+% This will generate [FILE NAME].pdf, as well as some log files.
+%
 % ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ %
-\begin{lstlisting}
-  for i in range(5):
-    print i
-\end{lstlisting}
+\section*{\questiontitle}
+Questions go here.
 \end{document}
 

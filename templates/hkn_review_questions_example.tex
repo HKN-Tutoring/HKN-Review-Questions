@@ -1,0 +1,70 @@
+\documentclass[10pt]{article}
+
+% Fill in variables below %
+% ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ %
+\newcommand{\semestercreated}{Fall 2042}
+\newcommand{\classname}{CS 64}
+\newcommand{\topic}{Computer Science - General}
+\newcommand{\questionauthor}{Louis Reasoner}
+% ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ %
+
+% Ignore Preamble %
+% ---------------------------------------------------------------------------- %
+% Formatting packages
+\usepackage{palatino}
+\usepackage{fullpage}
+\usepackage{fancyhdr}
+
+% Math tools
+\usepackage{mathtools}
+\usepackage{amssymb}
+
+% CS tools
+\usepackage{algorithmic}
+\usepackage{listings}
+\lstset{numbers=left}
+\lstset{numbersep=-5pt}
+\lstset{morecomment=[l]{//}}
+
+% Header Settings
+\pagestyle{fancy}
+\headsep = 5pt
+\setlength{\headheight}{15pt}
+
+% Header
+\rhead{\textsc{\topic}}
+\lhead{\textsc{\classname}}
+\cfoot{\large\thepage}
+\rfoot{\em{\questionauthor - \semestercreated}}
+
+% General
+\usepackage{enumerate}
+% ---------------------------------------------------------------------------- %
+
+\begin{document}
+Example Problem:
+\begin{enumerate}
+  \item
+    Write Python code that will print out the integers 0 to 4.
+
+    \textbf{Answer.}
+    \lstset{language=Python}
+    \begin{lstlisting}
+      for i in range(5):
+        print i
+    \end{lstlisting}
+  \item
+    Give an example of a pure function in Python.
+
+    \textbf{Answer.}
+    \begin{lstlisting}
+      def fact(n):
+        if n is 0:
+          return 1
+        else:
+          return n * fact(n-1)
+    \end{lstlisting}
+
+\end{enumerate}
+\end{document}
+
