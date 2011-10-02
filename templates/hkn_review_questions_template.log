@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.5.18)  1 OCT 2011 17:59
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.5.18)  1 OCT 2011 18:26
 entering extended mode
  %&-line parsing enabled.
 **hkn_review_questions_template.tex
@@ -148,43 +148,39 @@ Package: ifthen 2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
 \ALC@tlm=\skip59
 \algorithmicindent=\skip60
 )
-\c@theorem=\count107
-
 (./hkn_review_questions_template.aux)
 \openout1 = `hkn_review_questions_template.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 53.
-LaTeX Font Info:    ... okay on input line 53.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 53.
-LaTeX Font Info:    ... okay on input line 53.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 53.
-LaTeX Font Info:    ... okay on input line 53.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 53.
-LaTeX Font Info:    ... okay on input line 53.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 53.
-LaTeX Font Info:    ... okay on input line 53.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 53.
-LaTeX Font Info:    ... okay on input line 53.
-LaTeX Font Info:    Try loading font information for OT1+ppl on input line 53.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Try loading font information for OT1+ppl on input line 37.
 
 (/usr/share/texmf-texlive/tex/latex/psnfss/ot1ppl.fd
 File: ot1ppl.fd 2001/06/04 font definitions for OT1/ppl.
-) [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
-
-] (./hkn_review_questions_template.aux) ) 
+)
+(./hkn_review_questions_template.aux) ) 
 Here is how much of TeX's memory you used:
- 1886 strings out of 495061
- 23553 string characters out of 1182621
- 74137 words of memory out of 3000000
- 5081 multiletter control sequences out of 15000+50000
- 9210 words of font info for 24 fonts, out of 3000000 for 9000
+ 1847 strings out of 495061
+ 23168 string characters out of 1182621
+ 73161 words of memory out of 3000000
+ 5050 multiletter control sequences out of 15000+50000
+ 4067 words of font info for 15 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
- 33i,11n,43p,282b,261s stack positions out of 5000i,500n,10000p,200000b,50000s
-{/usr/share/texmf-texlive/fonts/enc/dv
-ips/base/8r.enc}</usr/share/texmf-texlive/fonts/type1/urw/palatino/uplr8a.pfb>
-Output written on hkn_review_questions_template.pdf (1 page, 15366 bytes).
+ 33i,1n,43p,282b,79s stack positions out of 5000i,500n,10000p,200000b,50000s
+
+No pages of output.
 PDF statistics:
- 11 PDF objects out of 1000 (max. 8388607)
+ 0 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
