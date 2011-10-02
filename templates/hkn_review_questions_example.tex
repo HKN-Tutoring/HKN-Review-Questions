@@ -2,10 +2,10 @@
 
 % Fill in variables below %
 % ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ %
-\newcommand{\semestercreated}{SemesterCreated}
-\newcommand{\classname}{ClassName}
-\newcommand{\topic}{Topic - Subtopic}
-\newcommand{\questionauthor}{Author}
+\newcommand{\semestercreated}{Fall 2042}
+\newcommand{\classname}{CS 64}
+\newcommand{\topic}{Computer Science - General}
+\newcommand{\questionauthor}{Louis Reasoner}
 % ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ %
 
 % Ignore Preamble %
@@ -42,22 +42,29 @@
 % ---------------------------------------------------------------------------- %
 
 \begin{document}
-% START DOCUMENT %
-% ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ %
-% Guidelines:
-%  * When using numbered environments (e.g., lists), use \begin{enumerate} and
-%    \end{enumerate}
-%  * Keep line width at most 80 characters
-%  * To type code, use \begin{lstlistings} and \end{lstlistings}
-%    * To specify a language, use
-%          \lstset{language=[YOUR LANGUAGE HERE]}
-%  * When using nested environments, indent with two spaces
-%
-% To compile, run the following command:
-%   pdflatex [FILE NAME].tex
-% This will generate [FILE NAME].pdf, as well as some log files.
-%
-% ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ %
-Questions go here.
+Example Problem:
+\begin{enumerate}
+  \item
+    Write Python code that will print out the integers 0 to 4.
+
+    \textbf{Answer.}
+    \lstset{language=Python}
+    \begin{lstlisting}
+      for i in range(5):
+        print i
+    \end{lstlisting}
+  \item
+    Give an example of a pure function in Python.
+
+    \textbf{Answer.}
+    \begin{lstlisting}
+      def fact(n):
+        if n is 0:
+          return 1
+        else:
+          return n * fact(n-1)
+    \end{lstlisting}
+
+\end{enumerate}
 \end{document}
 
