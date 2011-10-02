@@ -4,8 +4,8 @@
 % ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ %
 \newcommand{\semestercreated}{SemesterCreated}
 \newcommand{\classname}{ClassName}
-\newcommand{\topic}{Topic - Subtopic}
 \newcommand{\questionauthor}{Author}
+\newcommand{\questiontitle}{QuestionTitle}
 % ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ %
 
 % Ignore Preamble %
@@ -28,14 +28,14 @@
 
 % Header Settings
 \pagestyle{fancy}
-\headsep = 5pt
+\headsep = 15pt
 \setlength{\headheight}{15pt}
 
 % Header
-\rhead{\textsc{\topic}}
-\lhead{\textsc{\classname}}
+\lhead{\textsc{Eta Kappa Nu, Mu Chapter}}
+\rhead{\textsc{\classname}}
 \cfoot{\large\thepage}
-\rfoot{\em{\questionauthor - \semestercreated}}
+\rfoot{\em{\questionauthor\ - \semestercreated}}
 
 % General
 \usepackage{enumerate}
@@ -48,7 +48,7 @@
 %  * When using numbered environments (e.g., lists), use \begin{enumerate} and
 %    \end{enumerate}
 %  * Keep line width at most 80 characters
-%  * To type code, use \begin{lstlistings} and \end{lstlistings}
+%  * To type code, use \begin{lstlistings} and \end{lstlisting}
 %    * To specify a language, use
 %          \lstset{language=[YOUR LANGUAGE HERE]}
 %  * When using nested environments, indent with two spaces
@@ -58,6 +58,7 @@
 % This will generate [FILE NAME].pdf, as well as some log files.
 %
 % ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ %
+\section*{\questiontitle}
 Questions go here.
 \end{document}
 
