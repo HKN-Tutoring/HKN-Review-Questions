@@ -1,0 +1,20 @@
+Write what Python will return when each of the following statements are typed
+into the interpreter in sequence. If an expression evaluates to a function, just
+write “function.” If an expression causes an error, just write “error.”
+
+>>> print(3)
+_____
+
+>>> x = lambda x: lambda: x * 3
+>>> x
+_____
+>>> x(3)
+_____
+>>> x(3)(4)
+
+>>> t = (1, (2, 3), (4, (5), (6, 7)))
+>>> t[1][0]
+_____
+>>> t[2][1][0]
+_____
+
