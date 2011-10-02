@@ -21,6 +21,10 @@
 
 % CS tools
 \usepackage{algorithmic}
+\usepackage{listings}
+\lstset{numbers=left}
+\lstset{language=Python}
+\lstset{numbersep=2pt}
 
 % Header Settings
 \pagestyle{fancy}
@@ -41,6 +45,13 @@
 %  * When using numbered environments (e.g., lists), use \begin{enumerate} and
 %    \end{enumerate}
 %  * Keep line width at most 80 characters
+%  * To type code, use \begin{lstlistings} and \end{lstlistings}
+%    * To specify a language, use
+%          \lstset{language=[YOUR LANGUAGE HERE]}
 % ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ %
+\begin{lstlisting}
+  for i in range(5):
+    print i
+\end{lstlisting}
 \end{document}
 
