@@ -1,0 +1,76 @@
+\documentclass[10pt]{article}
+
+% Fill in variables below %
+% ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ %
+\newcommand{\semestercreated}{Fall 2011}
+\newcommand{\classname}{CS61A}
+\newcommand{\topic}{Environment Diagrams}
+\newcommand{\questionauthor}{Brandon Wang}
+% ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ %
+
+% Ignore Preamble %
+% ---------------------------------------------------------------------------- %
+% Formatting packages
+\usepackage{palatino}
+\usepackage{fullpage}
+\usepackage{fancyhdr}
+
+% Math tools
+\usepackage{mathtools}
+\usepackage{amssymb}
+
+% CS tools
+\usepackage{algorithmic}
+\usepackage{listings}
+\lstset{numbers=left}
+\lstset{language=Python}
+\lstset{numbersep=2pt}
+
+% Header Settings
+\pagestyle{fancy}
+\headsep = 35pt
+\setlength{\headheight}{20pt}
+
+% Header
+\rhead{\textsc{\topic}}
+\lhead{\textsc{\classname}}
+\cfoot{\large\thepage}
+\rfoot{\em{\questionauthor \ - \semestercreated}}
+% ---------------------------------------------------------------------------- %
+
+\begin{document}
+% START DOCUMENT %
+% ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ %
+% Guidelines:
+%  * When using numbered environments (e.g., lists), use \begin{enumerate} and
+%    \end{enumerate}
+%  * Keep line width at most 80 characters
+%  * To type code, use \begin{lstlistings} and \end{lstlistings}
+%    * To specify a language, use
+%          \lstset{language=[YOUR LANGUAGE HERE]}
+% ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ %
+
+Draw the environment diagram produced by the following code. Also fill in the
+blank to show what Python would print.
+
+\begin{verbatim}
+>>> def foo():
+...     x = 1
+...     def bar():
+...         x = 2
+...     def foo():
+...         print(x)
+...     return foo, bar
+...
+>>> def john(eric_k, tom):
+...     eric_k()
+...     tom()
+...
+>>> aki, eric_t = foo()
+>>> john(aki, eric_t)
+_____
+>>> aki()
+_____
+\end{verbatim}
+\end{document}
+
