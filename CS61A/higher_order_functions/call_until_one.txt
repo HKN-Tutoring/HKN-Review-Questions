@@ -1,0 +1,21 @@
+Say we have a function, call_until_one, that takes a function we are interested
+in as an argument. It would return another function, that, when called on a
+number, would tell you how many times you can call that original function on the
+number until it will return a value less than or equal to 1. For instance:
+
+>>> f = call_until_one(lambda x: x - 1)
+>>> f(100)
+99
+
+>>> g = call_until_one(lambda x: x / 2)
+>>> g(128)
+7
+
+The first call returned 99, since you can subtract 1 from 100 ninety-nine times
+before you will get a value that is less than or equal to 1. Similarly, the
+second call returned 7, since you can divide 128 in half 7 times before you will
+get a value that is less than or equal to 1.
+
+Write call_until_one. You can assume the argument function will always return a
+value smaller than the value you pass it (i.e. this process will always
+converge).

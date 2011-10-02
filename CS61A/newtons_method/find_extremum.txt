@@ -1,0 +1,38 @@
+Use Newton’s method to define a function, find_extremum, that takes a function
+and an initial guess, and finds a local extremum of that argument function. A
+local extremum is a point at which the derivative of the function is zero. (You
+may assume that the argument function will never have any saddle points.) An
+example call is provided:
+
+>>> f = lambda x: (x-1)**2 # parabola with minimum at x=1
+>>> find_extremum(f, 0)
+0.999995 # very close to 1
+
+For reference, here is the basic Newton's method code.
+
+def newton_update(f):
+    """Return an update function for f using Newton's method."""
+    def update(x):
+        return x - f(x) / approx_derivative(f, x)
+    return update
+
+def approx_derivative(f, x, delta=1e-5):
+    """Return an approximation to the derivative of f at x."""
+    df = f(x + delta) - f(x)
+    return df/delta
+
+def iter_improve(update, done, guess=1, max_updates=1000):
+    """Iteratively improve guess with update until done returns a true value.
+
+    guess -- An initial guess
+    update -- A function from guess to guesses; updates the guess
+    done -- A function from guesses to boolean values; tests if guess is good
+
+    >>> iter_improve(golden_update, golden_test)
+    1.618033988749895
+    """
+    k = 0
+    while not done(guess) and k < max_updates:
+        guess = update(guess)
+        k = k + 1
+    return guess

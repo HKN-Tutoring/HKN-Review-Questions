@@ -1,0 +1,4 @@
+difficulty: 1 out of 5
+
+1. Write a pure function.
+2. Write a non-pure function.
