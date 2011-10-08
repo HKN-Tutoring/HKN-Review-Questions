@@ -1,20 +1,15 @@
-\frametitle {What will be printed?}What is printed after the following code is executed
+\frametitle {List Reversal}Solution:
   \begin{lstlisting}
-public static void main(String[] args) {
-    String x = "Caught in a landslide,";
-    String y = "No escape from reality";
-    String z = x;
-    x = y;
-    System.out.println(z);
+public static void reverse(IntList list) {
+    IntList reversed = null;
+    while(list != null) {
+        IntList temp = list;
+        list = list.tail;
+        temp.tail = reversed;
+        reversed = temp;
+    }
 }
   \end{lstlisting}
-  \begin{enumerate}
-    \item
-      Caught in a landslide,
-    \item
-      \textbf<2>{No escape from reality}
-    \item
-      null
-    \item
-      Error
-  \end{enumerate}
+  \uncover<2->{What is the runtime of this algorithm in terms of {\tt n}, the
+  length of the input {\tt IntList}?}
+  \uncover<3->{\[O(n)\]}
