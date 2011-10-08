@@ -1,0 +1,20 @@
+\frametitle {What will be printed?}What is printed after the following code is executed
+  \begin{lstlisting}
+public static void main(String[] args) {
+    String x = "Caught in a landslide,";
+    String y = "No escape from reality";
+    String z = x;
+    x = y;
+    System.out.println(z);
+}
+  \end{lstlisting}
+  \begin{enumerate}
+    \item
+      Caught in a landslide,
+    \item
+      \textbf<2>{No escape from reality}
+    \item
+      null
+    \item
+      Error
+  \end{enumerate}

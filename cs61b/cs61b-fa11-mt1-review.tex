@@ -1,0 +1,143 @@
+\documentclass[9pt]{beamer}
+
+% Preamble %
+% ---------------------------------------------------------------------------- %
+\usepackage{url}
+\usepackage{relsize}
+\usepackage{color}
+\usepackage{listings}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{bm}
+
+% Listings Package %
+\usepackage{listings}
+\lstset{basicstyle=\small\ttfamily}
+\lstset{language=Java}
+\lstset{escapeinside=\$\$}
+\lstset{keywordstyle=\color{blue}}
+\lstset{numbers=left}
+\lstset{numbersep=10pt}
+\lstset{xleftmargin=20pt}
+\lstset{morecomment=[l]{//}}
+\lstset{showstringspaces=false}
+
+\usepackage{tikz}
+\usetikzlibrary{trees}
+
+\usetheme{Singapore}
+
+\title[Midterm 1 Review]{Midterm 1 Review}
+\author{Jonathan Kotker and Dan Wang}
+\institute{University of California, Berkeley}
+\date{7 October 2011}
+% ---------------------------------------------------------------------------- %
+
+\begin{document}
+
+% Title Page %
+% ---------------------------------------------------------------------------- %
+\begin{frame}
+  \titlepage
+\end{frame}
+
+% Warmup
+% ---------------------------------------------------------------------------- %
+\section{Warmup}
+\begin{frame}[fragile]{What will be printed?}
+  What is printed after the following code is executed?
+  \begin{lstlisting}
+public static void main(String[] args) {
+    String s = "Is this the real life?";
+    change(s);
+    System.out.println(s);
+}
+public static String change(String s) {
+    s = "Is this just fantasy?";
+    return s;
+}
+  \end{lstlisting}
+  \begin{enumerate}
+    \item
+      \textbf<2>{Is this the real life?}
+    \item
+      Is this just fantasy?
+    \item
+      s
+    \item
+      Error
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]{What will be printed?}
+  What is printed after the following code is executed?
+  \begin{lstlisting}
+public static void main(String[] args) {
+    int[] arr = {1, 2, 3};
+    change(arr);
+    System.out.println(arr[0]);
+}
+public static void change(int[] i) {
+    i[0] = 5;
+    i = null;
+}
+  \end{lstlisting}
+  \begin{enumerate}
+    \item
+      1
+    \item
+      \textbf<2>{5}
+    \item
+      null
+    \item
+      error
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]{What will be printed?}
+  What is printed after the following code is executed?
+  \begin{lstlisting}
+public static void main(String[] args) {
+    int herp = 4;
+    int derp = 6;
+    herp = derp;
+    herp = herp + 1;
+    System.out.println(derp);
+}
+  \end{lstlisting}
+  \begin{enumerate}
+    \item
+      4
+    \item
+      \textbf<2>{6}
+    \item
+      5
+    \item
+      7
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]{What will be printed?}
+  What is printed after the following code is executed
+  \begin{lstlisting}
+public static void main(String[] args) {
+    String x = "Caught in a landslide,";
+    String y = "No escape from reality";
+    String z = x;
+    x = y;
+    System.out.println(z);
+}
+  \end{lstlisting}
+  \begin{enumerate}
+    \item
+      Caught in a landslide,
+    \item
+      \textbf<2>{No escape from reality}
+    \item
+      null
+    \item
+      Error
+  \end{enumerate}
+\end{frame}
+
+\end{document}
