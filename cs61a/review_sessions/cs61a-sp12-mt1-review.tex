@@ -1,0 +1,531 @@
+\documentclass[9pt]{beamer}
+
+% Preamble %
+% ---------------------------------------------------------------------------- %
+\usepackage{url}
+\usepackage{relsize}
+\usepackage{color}
+\usepackage{listings}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{bm}
+
+% Listings Package %
+\usepackage{listings}
+\lstset{basicstyle=\small\ttfamily}
+\lstset{language=Java}
+\lstset{escapeinside=\$\$}
+\lstset{keywordstyle=\color{blue}}
+\lstset{numbers=left}
+\lstset{numbersep=10pt}
+\lstset{xleftmargin=20pt}
+\lstset{morecomment=[l]{//}}
+\lstset{showstringspaces=false}
+
+\usetheme{Singapore}
+\setbeamertemplate{mini frames}[circle]
+\setbeamertemplate{footline}[frame number]
+
+\title[CS 61B Midterm 1 Review]{CS 61B Midterm 1 Review}
+\author{Dan Wang and Jonathan Kotker}
+\institute{Eta Kappa Nu, Mu Chapter \\University of California, Berkeley}
+\date{7 October 2011}
+% ---------------------------------------------------------------------------- %
+
+\begin{document}
+
+% Title Page %
+% ---------------------------------------------------------------------------- %
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+% Warmup %
+% ---------------------------------------------------------------------------- %
+\section{Warmup}
+\subsection{What will be printed?}
+\begin{frame}[fragile]{What will be printed?}
+  What is printed after the following code is executed?
+  \begin{lstlisting}
+public static void main(String[] args) {
+    String s = "Is this the real life?";
+    change(s);
+    System.out.println(s);
+}
+public static void change(String s) {
+    s = "Is this just fantasy?";
+}
+  \end{lstlisting}
+  \begin{enumerate}
+    \item
+      \textbf<2>{Is this the real life?}
+    \item
+      Is this just fantasy?
+    \item
+      s
+    \item
+      Error
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]{What will be printed?}
+  What is printed after the following code is executed?
+  \begin{lstlisting}
+public static void main(String[] args) {
+    int[] arr = {1, 2, 3};
+    change(arr);
+    System.out.println(arr[0]);
+}
+public static void change(int[] i) {
+    i[0] = 5;
+    i = null;
+}
+  \end{lstlisting}
+  \begin{enumerate}
+    \item
+      1
+    \item
+      \textbf<2>{5}
+    \item
+      null
+    \item
+      error
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]{What will be printed?}
+  What is printed after the following code is executed?
+  \begin{lstlisting}
+public static void main(String[] args) {
+    int herp = 4;
+    int derp = 6;
+    herp = derp;
+    herp = herp + 1;
+    System.out.println(derp);
+}
+  \end{lstlisting}
+  \begin{enumerate}
+    \item
+      4
+    \item
+      \textbf<2>{6}
+    \item
+      5
+    \item
+      7
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]{What will be printed?}
+  What is printed after the following code is executed?
+  \begin{lstlisting}
+public static void main(String[] args) {
+    String x = "Caught in a landslide,";
+    String y = "No escape from reality";
+    String z = x;
+    x = y;
+    System.out.println(z);
+}
+  \end{lstlisting}
+  \begin{enumerate}
+    \item
+      Caught in a landslide,
+    \item
+      \textbf<2>{No escape from reality}
+    \item
+      null
+    \item
+      Error
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]{What will be printed?}
+  What is printed after the following code is executed?
+  \begin{lstlisting}
+Panda p = new Panda();
+Animal a = p;
+boolean wat = (a == p);
+System.out.println(wat);
+  \end{lstlisting}
+  \begin{enumerate}
+    \item
+      \textbf<2>{true}
+    \item
+      false
+    \item
+      wat
+    \item Error
+  \end{enumerate}
+\end{frame}
+
+% Inheritance %
+% ---------------------------------------------------------------------------- %
+\section{Inheritance}
+\subsection{What will happen?}
+\begin{frame}[fragile]{What will happen?}
+  What will happen when the following code is run? Assume that {\tt Subclass} is
+  a subclass of {\tt Class} and {\tt do\_something} is a non-static method in both
+  classes. 
+  \begin{lstlisting}
+Class c = new Subclass();
+c.do_something();
+  \end{lstlisting}
+  \begin{enumerate}
+    \item
+      {\tt Class}'s method is called
+    \item
+      \textbf<2>{{\tt Subclass}'s method is called}
+    \item
+      Compile-time error
+    \item
+      Run-time error
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]{What will happen?}
+  What will happen when the following code is run? Assume that {\tt Subclass} is
+  a subclass of {\tt Class} and {\tt do\_something} is a non-static method in both
+  classes. 
+  \begin{lstlisting}
+Subclass c = new Class();
+
+c.do_something();
+  \end{lstlisting}
+  \begin{enumerate}
+    \item
+      {\tt Class}'s method is called
+    \item
+      {\tt Subclass}'s method is called
+    \item
+      \textbf<2>{Compile-time error}
+    \item
+      Run-time error
+  \end{enumerate}
+\end{frame}
+
+ 
+\begin{frame}[fragile]{What will happen?}
+  What will happen when the following code is run? Assume that {\tt Subclass} is
+  a subclass of {\tt Class} and {\tt some\_value} is a field in both classes.
+  \begin{lstlisting}
+Class c = new Subclass();
+System.out.println(c.some_value);
+  \end{lstlisting}
+  \begin{enumerate}
+    \item
+      \textbf<2>{{\tt Class}'s field is printed}
+    \item
+      {\tt Subclass}'s field is printed
+    \item
+      Compile-time error
+    \item
+      Run-time error
+  \end{enumerate}
+\end{frame} 
+
+
+\begin{frame}[fragile]{What will happen?}
+  What will happen when the following code is run? Assume that {\tt Subclass} is
+  a subclass of {\tt Class} and {\tt static\_value} is a {\bf static} field in
+  both classes.
+  \begin{lstlisting}
+Class c = new Subclass();
+System.out.println(c.static_value);
+  \end{lstlisting}
+  \begin{enumerate}
+    \item
+      \textbf<2>{{\tt Class}'s field is printed}
+    \item
+      {\tt Subclass}'s field is printed
+    \item
+      Compile-time error
+    \item
+      Run-time error
+  \end{enumerate}
+\end{frame} 
+
+
+\begin{frame}[fragile]{What will happen?}
+  What will happen when the following code is run? Assume that {\tt Subclass} is
+  a subclass of {\tt Class} and {\tt static\_method()} is a {\bf static} method
+  in both classes.
+  \begin{lstlisting}
+Class c = new Subclass();
+c.static_method();
+  \end{lstlisting}
+  \begin{enumerate}
+    \item
+      \textbf<2>{{\tt Class}'s method is called}
+    \item
+      {\tt Subclass}'s method is called
+    \item
+      Compile-time error
+    \item
+      Run-time error
+  \end{enumerate}
+\end{frame} 
+
+\subsection{General Rule}
+\begin{frame}[fragile]{General Rule}
+  In general, if we define a variable {\tt var} as such:
+  \begin{lstlisting}
+// S and D are predefined classes
+S var = new D();
+S.X;
+  \end{lstlisting}
+  Then {\tt S} is the {\bf static type} of {\tt var} and {\tt D} is the {\bf
+  dynamic type} of {\tt var}. If we attempt to access a field or method of {\tt
+  var}, which one is called?
+  \begin{itemize}
+    \item
+      If {\tt X} is a {\bf field}, the field from the {\bf static type} of 
+      {\tt var} will be used.
+    \item
+      If {\tt X} is a {\bf method}, then it depends on whether or not it is
+      static:
+      \begin{itemize}
+        \item
+          If {\tt X} is a {\bf static method}, then the method from the {\bf
+          static type} of {\tt var} will be used
+        \item
+          If {\tt X} is a {\bf non-static method}, then Java will use dynamic
+          method lookup to determine which class's method to call, starting from
+          the lowest class in the hierarchy.
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+  \defverbatim\codeA{
+    \begin{lstlisting}
+Subclass s = new Subclass();
+s.X;
+    \end{lstlisting}
+ }
+  \defverbatim\codeB{
+    \begin{lstlisting}
+Class s = new Subclass();
+s.X;
+    \end{lstlisting}
+  }
+  \defverbatim\codeC{
+    \begin{lstlisting}
+Subclass s = new Subclass();
+((Class) s).X;
+    \end{lstlisting}
+  }
+  \defverbatim\codeD{
+    \begin{lstlisting}
+Subclass s = new Subclass();
+s.X();
+    \end{lstlisting}
+  }
+  \defverbatim\codeE{
+    \begin{lstlisting}
+Class s = new Subclass();
+s.X();
+    \end{lstlisting}
+  }
+  \defverbatim\codeF{
+    \begin{lstlisting}
+Subclass s = new Subclass();
+((Class)s).X();
+    \end{lstlisting}
+  }
+  \defverbatim\codeG{
+    \begin{lstlisting}
+Subclass s = new Subclass();
+s.Y();
+    \end{lstlisting}
+ }
+
+\subsection{Inheritance Exercises}
+\begin{frame}{Fields}
+  If we have an object of type {\tt Subclass} that extends {\tt Class}, how can
+  we access...
+  \begin{itemize}
+    \item
+      A field from {\tt Subclass}? \\
+      \uncover<2->{\codeA}
+    \item
+      A field from {\tt Class}? \\
+      \uncover<3->{\codeB}
+      \uncover<4->{Alternatively, we can cast our variable: \codeC}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Static Methods}
+  If we have an object of type {\tt Subclass} that extends {\tt Class}, how can
+  we access...
+  \begin{itemize}
+   \item
+      A static method from {\tt Subclass}? \\
+      \uncover<2->{\codeD}
+   \item
+      A static method from {\tt Class}? \\
+      \uncover<3->{\codeE}
+      \uncover<4->{Alternatively, we can cast our variable: \codeF}
+ \end{itemize}
+\end{frame}
+
+
+\begin{frame}{Non-static Methods}
+  If we have an object of type {\tt Subclass} that extends {\tt Class}, how can
+  we access...
+  \begin{itemize}
+    \item
+      A non-static method from {\tt Subclass}, assuming that the method is
+      defined in both {\tt Class} and {\tt Subclass}? \\
+      \uncover<2->{\codeG}
+    \item
+      A non-static method from {\tt Class}, assuming that the method is defined
+      in both {\tt Class} and {\tt Subclass}? \\
+      \uncover<3->{This is impossible! This is a feature of Java, not a bug.
+      When you override a non-static method in your parent class, you are
+      specifying a {\em more specific} action for your subclass to take. If you
+      require the original behaviour of the parent class's method, it is much
+      better design to create another method.}
+  \end{itemize}
+\end{frame}
+
+% Linked Lists %
+% ---------------------------------------------------------------------------- %
+\section{Linked Lists}
+\subsection{Remove Duplicates}
+\begin{frame}[fragile]{Remove Duplicates}
+  Write a function {\tt removeDuplicates()} that takes in an {\tt IntList} and
+  {\em destructively} removes all duplicate items without using any other data
+  structures (no arrays or other IntLists!). The {\tt IntList} headers are shown
+  below:
+  \begin{lstlisting}
+class IntList {
+    public int head;
+    public IntList tail;
+
+    public IntList(int head, IntList tail) {
+        ...
+    }
+}
+  \end{lstlisting}
+  You may use helper methods if you wish. Your method should have the following
+  header:
+  \begin{lstlisting}
+public static void removeDuplicates(IntList list) {
+    ...
+}
+  \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Remove Duplicates}
+Solution:
+  \begin{lstlisting}
+public static void removeDuplicates(IntList list) {
+    IntList current = list;
+    while(current != null) {
+        int value = current.head;
+        IntList l = current;
+        while(l.tail != null) {
+            if(l.tail.head == value) {
+                l.tail = l.tail.tail;
+            } else {
+                l = l.tail;
+            }
+        }
+        current = current.tail;
+    }
+}
+  \end{lstlisting}
+  \uncover<2->{What is the runtime of this algorithm in terms of {\tt n}, the
+  length of the input {\tt IntList}?}
+  \uncover<3->{\[O(n^2)\]}
+\end{frame}
+
+\subsection{List Reversal}
+\begin{frame}[fragile]{List Reversal}
+  Write a function {\tt reverse()} that takes in an {\tt IntList} and {\em
+  destructively} removes all duplicate items without using any other data
+  structures (no arrays or other IntLists!). The {\tt IntList} headers are shown
+  below:
+  \begin{lstlisting}
+class IntList {
+    public int head;
+    public IntList tail;
+
+    public IntList(int head, IntList tail) {
+        ...
+    }
+}
+  \end{lstlisting}
+  You may use helper methods if you wish. Your method should have the following
+  header:
+  \begin{lstlisting}
+public static void reverse(IntList list) {
+    ...
+}
+  \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{List Reversal}
+  Solution:
+  \begin{lstlisting}
+public static void reverse(IntList list) {
+    IntList reversed = null;
+    while(list != null) {
+        IntList temp = list;
+        list = list.tail;
+        temp.tail = reversed;
+        reversed = temp;
+    }
+}
+  \end{lstlisting}
+  \uncover<2->{What is the runtime of this algorithm in terms of {\tt n}, the
+  length of the input {\tt IntList}?}
+  \uncover<3->{\[O(n)\]}
+\end{frame}
+
+% Asymptotic Analysis %
+% ---------------------------------------------------------------------------- %
+\section{Asymptotic Analysis}
+
+\subsection{True or False}
+\begin{frame}{True or False}
+  For each of the following statements, determine whether it is true or false.
+  \begin{enumerate}
+    \item
+      $\log^{3}{n} \in O(n)$ \uncover<2->{\alert<2>{True.}}
+    \item
+      $2^n \in O(n^2)$ \uncover<3->{\alert<3>{False.}}
+    \item
+      $n! \in O(n^n)$ \uncover<4->{\alert<4>{True.}}
+    \item
+      $\sin{n} \in O(\log{n})$ \uncover<5->{\alert<5>{True.}}
+    \item
+      $1\in O(\frac{1}{n})$ \uncover<6->{\alert<6>{False.}}
+    \pause
+  \end{enumerate}
+\end{frame}
+
+\subsection{Exercises}
+\begin{frame}{Exercises}
+  Give the tightest upper bound for the following expressions in big-Oh
+  notation.
+  \begin{enumerate}
+    \item
+      $1 + 2 + \dots + n$ \uncover<2->{\alert<2>{$\in O(n^2)$}}
+    \item
+      $n^2+1000$ \uncover<3->{\alert<3>{$\in O(n^2)$}}
+    \item
+      $\sum_{i=0}^n\sum_{j=i}^n1$ \uncover<4->{\alert<4>{$\in O(n^2)$}}
+    \item
+      $n\sin{n}$ \uncover<5->{\alert<5>{$\in O(n)$}}
+    \item
+      $n + \log^{9001}{n}$ \uncover<6->{\alert<6>{$\in O(n)$}}
+    \item
+      $\log{x^3}$ \uncover<7->{\alert<7>{$\in O(\log{x})$}}
+    \item
+      $\frac{1}{n}$ \uncover<8->{\alert<8>{$\in O(1)$}}
+    \pause
+  \end{enumerate}
+\end{frame}
+
+\end{document}
