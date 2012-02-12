@@ -63,11 +63,11 @@ University of California, Berkeley}
     \item
       Every function in Python is a pure function.
 
-      \uncover<1->{\alert<1> {False.}}
+      \uncover<2->{\alert<1> {False.}}
     \item
       Every variable is an object in Python.
 
-      \uncover<2->{\alert<2> {True.}}
+      \uncover<3->{\alert<2> {True.}}
     \item
       The following code will cause an error:
 
@@ -76,7 +76,7 @@ a = 1
 print(a.__add__(2))
       \end{lstlisting}
 
-      \uncover<3->{\alert<3> {False.}}
+      \uncover<4->{\alert<3> {False.}}
   \end{enumerate}
 \end{frame}
 
@@ -85,29 +85,29 @@ print(a.__add__(2))
   \begin{lstlisting}[numbers=none, frame=none, xleftmargin=0pt]
 >>> print(3)
   \end{lstlisting}
-  \uncover<1->{\alert<1> {\tt 3}}
+  \uncover<2->{\alert<1> {\tt 3}}
   \begin{lstlisting}[numbers=none, frame=none, xleftmargin=0pt]
 >>> x = lambda x: lambda: x * 3
 >>> x
   \end{lstlisting}
-  \uncover<2->{\alert<2> {\tt <function <lambda> at 0x...>}}
+  \uncover<3->{\alert<2> {\tt <function <lambda> at 0x...>}}
   \begin{lstlisting}[numbers=none, frame=none, xleftmargin=0pt]
 >>> x(3)
   \end{lstlisting}
-  \uncover<3->{\alert<3> {\tt <function <lambda> at 0x...>}}
+  \uncover<4->{\alert<3> {\tt <function <lambda> at 0x...>}}
   \begin{lstlisting}[numbers=none, frame=none, xleftmargin=0pt]
 >>> x(3)(4)
   \end{lstlisting}
-  \uncover<4->{\alert<4> {\tt Error}}
+  \uncover<5->{\alert<4> {\tt Error}}
   \begin{lstlisting}[numbers=none, frame=none, xleftmargin=0pt]
 >>> t = (1, (2, 3), (4, (5), (6, 7)))
 >>> t[1][0]
   \end{lstlisting}
-  \uncover<5->{\alert<5> {\tt 2}}
+  \uncover<6->{\alert<5> {\tt 2}}
   \begin{lstlisting}[numbers=none, frame=none, xleftmargin=0pt]
 >>> t[2][1][0]
   \end{lstlisting}
-  \uncover<5->{\alert<5> {\tt Error}}
+  \uncover<6->{\alert<5> {\tt Error}}
 \end{frame}
 
 % Functions %
@@ -139,16 +139,16 @@ q = 10
   \end{column}
   \begin{column}{0.5\textwidth}
     Which of these functions is pure? \\
-    \uncover<1->{\alert<1> {\tt b}} \\\vspace{1cm}
+    \uncover<2->{\alert<1> {\tt b}} \\\vspace{1cm}
 
     What will be the result of {\tt c(c(q))}? \\
-    \uncover<2->{\alert<2> {\tt 2}} \\\vspace{1cm}
+    \uncover<3->{\alert<2> {\tt 2}} \\\vspace{1cm}
 
     What will be the result of {\tt d(q)}? \\
-    \uncover<3->{\alert<3> {\tt Error}} \\\vspace{1cm}
+    \uncover<4->{\alert<3> {\tt Error}} \\\vspace{1cm}
 
     What will be the value of {\tt q} after calling {\tt b(q)}? \\
-    \uncover<4->{\alert<4> {\tt 10}}
+    \uncover<5->{\alert<4> {\tt 10}}
   \end{column}
 \end{columns}
 \end{frame}
@@ -182,16 +182,16 @@ def f(m):
   \end{lstlisting}
 
   What will {\tt f(0)} return?
-  \uncover<1->{\alert<1> {\tt 14}}
+  \uncover<2->{\alert<1> {\tt 14}}
 
   What will {\tt f(1)} return?
-  \uncover<2->{\alert<2> {\tt 22}}
+  \uncover<3->{\alert<2> {\tt 22}}
 
   What will {\tt f(11)} return?
-  \uncover<3->{\alert<3> {\tt 11}}
+  \uncover<4->{\alert<3> {\tt 11}}
 
   What will {\tt f(-1)} return?
-  \uncover<4->{\alert<4> {\tt 14}}
+  \uncover<5->{\alert<4> {\tt 14}}
 
 \end{frame}
 
@@ -299,11 +299,11 @@ def commutative(f):
 >>> aki, you = foo()
 >>> hilfinger(aki, you)
   \end{lstlisting}
-  \uncover<1->{\alert<1> {\tt 1}}
+  \uncover<2->{\alert<1> {\tt 1}}
   \begin{lstlisting}[numbers=none, frame=none, xleftmargin=0pt]
 >>> aki()
   \end{lstlisting}
-  \uncover<2->{\alert<2> {\tt 1}}
+  \uncover<3->{\alert<2> {\tt 1}}
 \end{frame}
 
 % RLists %
@@ -356,8 +356,8 @@ def double(rlist):
 (1, (1, (2, (2, (3, (3, None))))))
   \end{lstlisting}
 
-  \uncover<2>{\codeA}
-  \uncover<3->{
+.  \uncover<3-4>{\codeA}
+  \uncover<4->{
   Solution:
   \codeB}
 \end{frame}
@@ -378,9 +378,9 @@ def rest(r):
     return r[1][0]
   \end{lstlisting}
 
-  \uncover<1->{Change {\tt double()} to be compatible with this new {\tt
+  \uncover<2->{Change {\tt double()} to be compatible with this new {\tt
   RList} representation.}
-  \uncover<2->{\alert<2>{Nothing needs to be changed.}}
+  \uncover<3->{\alert<2>{Nothing needs to be changed.}}
 \end{frame}
 
 
