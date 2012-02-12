@@ -1,0 +1,73 @@
+\documentclass[10pt]{article}
+
+% Ignore Preamble %
+% ---------------------------------------------------------------------------- %
+% Formatting packages
+\usepackage{palatino}
+\usepackage{fullpage}
+\usepackage{fancyhdr}
+\usepackage{multirow}
+\renewcommand{\arraystretch}{1.5}
+
+% Math tools
+\usepackage{mathtools}
+\usepackage{amssymb}
+
+% CS tools
+\usepackage{algorithmic}
+\usepackage{listings}
+\lstset{numbers=left}
+\lstset{numbersep=-5pt}
+\lstset{morecomment=[l]{//}}
+
+% Header Settings
+\pagestyle{fancy}
+\headsep = 15pt
+\setlength{\headheight}{15pt}
+
+% ---------------------------------------------------------------------------- %
+
+\begin{document}
+Please rate the following attributes of the review session (1 being the
+least and 5 being the most).
+
+\vspace{0.5cm}
+\begin{tabular}{ | l | c | c | c | c | c | }
+  \hline
+  \textbf{Category} & \multicolumn{5}{c|}{\textbf{Rating}} \\
+  \hline
+  Overall effectiveness of the review session & 1 & 2 & 3 & 4 & 5 \\
+  \hline
+  Overall performance of the tutors & 1 & 2 & 3 & 4 & 5 \\
+  \hline
+  Relevance of the material covered & 1 & 2 & 3 & 4 & 5 \\
+  \hline
+\end{tabular}
+
+\vspace{1cm}
+Comments about specific presenters:
+
+\vspace{6.5cm}
+\hrule
+\vspace{0.5cm}
+Please rate the following attributes of the review session (1 being the
+least and 5 being the most).
+
+\vspace{0.5cm}
+\begin{tabular}{ | l | c | c | c | c | c | }
+  \hline
+  \textbf{Category} & \multicolumn{5}{c|}{\textbf{Rating}} \\
+  \hline
+  Overall effectiveness of the review session & 1 & 2 & 3 & 4 & 5 \\
+  \hline
+  Overall performance of the tutors & 1 & 2 & 3 & 4 & 5 \\
+  \hline
+  Relevance of the material covered & 1 & 2 & 3 & 4 & 5 \\
+  \hline
+\end{tabular}
+
+\vspace{1cm}
+Comments about specific presenters:
+
+\end{document}
+
