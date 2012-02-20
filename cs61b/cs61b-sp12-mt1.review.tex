@@ -1,0 +1,1131 @@
+\documentclass[9pt]{beamer}
+
+% Fill in variables below %
+% ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ %
+\newcommand{\thesemester}{Spring 2012}
+\newcommand{\themidterm}{CS 61B Midterm 1 Review}
+\newcommand{\theauthors}{Dan Wang, Jonathan Lin, Sung Roa Yoon, Edwin Liao}
+\newcommand{\theorganization}{Eta Kappa Nu, Mu Chapter \\
+University of California, Berkeley}
+\newcommand{\thedate}{19 February 2012}
+\newcommand{\thelanguage}{Java}
+% ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ %
+
+% Preamble %
+% ---------------------------------------------------------------------------- %
+\usepackage{url}
+\usepackage{relsize}
+\usepackage{color}
+\usepackage{listings}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{bm}
+\usepackage{framed}
+
+% Listings Package %
+\usepackage{listings}
+\lstset{numbers=left,
+    basicstyle=\ttfamily,
+    numberstyle=\tiny,
+    showstringspaces=false,
+    frame=leftline,
+    language=Java,
+    escapeinside=\$\$,
+    keywordstyle=\color{blue},
+    xleftmargin=20pt,
+    morecomment=[l]{//},
+    }
+
+\usetheme{Singapore}
+\setbeamertemplate{mini frames}[circle]
+\setbeamertemplate{footline}[frame number]
+
+
+\title{\themidterm}
+\author{\theauthors}
+\institute{\theorganization}
+\date{\thedate}
+% ---------------------------------------------------------------------------- %
+
+\begin{document}
+
+% Title Page %
+% ---------------------------------------------------------------------------- %
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+% Warmup %
+% ---------------------------------------------------------------------------- %
+\section{Warmup}
+\subsection{True/False}
+\begin{frame}[fragile]{True/False}
+  The two loops print the same number of lines:
+
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+      \begin{lstlisting}
+int i = 0;
+while (i < 5) {
+    System.out.println();
+    i++;
+}
+      \end{lstlisting}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \begin{lstlisting}
+int j = 0;
+for(; j < 5; j++) {
+    System.out.println();
+}
+      \end{lstlisting}
+    \end{column}
+  \end{columns}
+
+  \uncover<2->{\alert<2>{True}}
+\end{frame}
+
+\defverbatim[colored]\multiarrayA {
+    \begin{lstlisting}
+int[][][] array = new int[][][];
+    \end{lstlisting}
+ }
+
+\defverbatim[colored]\multiarrayB {
+    \begin{lstlisting}
+int[][][] array = new int[3][][];
+    \end{lstlisting}
+ }
+\begin{frame}[fragile]{True/False}
+  This is a valid Java statement:
+
+  \multiarrayA
+
+  \uncover<2->{\alert<2>{False}}
+
+  \uncover<3->{This is a valid Java statement: \multiarrayB}
+
+  \uncover<4->{\alert<4>{True}}
+\end{frame}
+
+\subsection{Multiple Choice}
+\begin{frame}[fragile]{Multiple Choice}
+  What is the value of {\tt k} at the end?
+
+  \begin{lstlisting}
+int[] array = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+int k = 0;
+for (; k < array.length; k++) {
+  k += array[k];
+}
+  \end{lstlisting}
+
+  \begin{enumerate}
+    \item
+      10
+    \item
+      11
+    \item
+      \alert<2>{15}
+    \item
+      55
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]{Multiple Choice}
+  Select the assertions that are true after execution of the following method:
+
+  \begin{lstlisting}
+public static void main(String[] args) {
+    String s1 = “Hello World”;
+    String s2 = s1;
+    String s3 = new String(s1);
+}
+  \end{lstlisting}
+
+  \begin{enumerate}
+    \item
+      \alert<2>{{\tt s1 == s2}}
+    \item
+      {\tt s2 == s3}
+    \item
+      \alert<2>{{\tt s1.equals(s2)}}
+    \item
+      \alert<2>{{\tt s2.equals(s3)}}
+    \item
+      Error
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]{Multiple Choice}
+  What is printed after the following code is executed?
+
+  \begin{lstlisting}
+public static void main(String[] args) {
+    Robot chell = new Robot();
+    String s = "hello human";
+    chell.cake(s);
+    System.out.print(s + " " + chell.s);
+}
+public Robot() {
+    String s = "I have a cake";
+    public void cake(String s) {
+        this.s = "cake is a lie";
+        s = "bye human";
+    }
+}
+      \end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]{Multiple Choice}
+  \begin{enumerate}
+    \item
+      \alert<2>{{\tt "hello human cake is a lie"}}
+    \item
+      {\tt "hello human I have a cake"}
+    \item
+      {\tt "cake is a lie I have a cake"}
+    \item
+      {\tt "bye human I have a cake"}
+    \item
+      {\tt "hello human bye human"}
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]{Multiple Choice}
+  What is printed after the following code is executed?
+
+  \begin{lstlisting}
+public static void main(String[] args) {
+    America Bob = new America();
+    America Mary = new America();
+    Bob.earnMoney(100);
+    Mary.earnMoney(1000);
+    System.out.println(America.publicDebt);
+}
+public America() {
+    int myMoney = 0;
+    static int publicDebt = 1000000; //1,000,000
+    public void earnMoney(int wage) {
+        myMoney += wage;
+        publicDebt += wage * 1000;
+    }
+}
+      \end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]{Multiple Choice}
+  \begin{enumerate}
+    \item
+      {\tt 2000000}
+    \item
+      {\tt 1100000}
+    \item
+      \alert<2>{{\tt 2100000}}
+    \item
+      {\tt 1000000}
+    \item
+      Error
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]{Multiple Choice}
+  What is printed after the following code is executed?
+
+  \begin{lstlisting}
+public static void main(String[] args) {
+    myWallet Bob = new myWallet();
+    Bob.earnMoney();
+    if (Bob.hasMoney) {
+        System.out.println("Yay!");
+    } else {
+        System.out.println("Awww");
+    }
+}
+public myWallet() {
+    boolean hasMoney = false;
+    public static void earnMoney() {
+        hasMoney = true;
+    }
+}
+  \end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]{Multiple Choice}
+  \begin{enumerate}
+    \item
+      {\tt "Yay!"}
+    \item
+      {\tt "Awww"}
+    \item
+      \alert<2>{Error}
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]{Multiple Choice}
+  What is printed after the following code is executed?
+
+  \begin{lstlisting}
+public static void main(String[] args) {
+    int a = 5;
+    int b = 4;
+    int c = a / b;
+    System.out.println(c);
+}
+  \end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]{Multiple Choice}
+  \begin{enumerate}
+    \item
+      {\tt 1.25}
+    \item
+      \alert<2>{{\tt 1}}
+    \item
+      {\tt 2}
+    \item
+      Error
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]{Multiple Choice}
+  What is printed after the following code is executed?
+
+  \begin{lstlisting}
+public static void main(String[] args) {
+    int a = 5;
+    double b = 4;
+    double c = a / b;
+    System.out.println(c);
+}
+  \end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]{Multiple Choice}
+  \begin{enumerate}
+    \item
+      \alert<2>{\tt 1.25}
+    \item
+      {\tt 1}
+    \item
+      {\tt 2}
+    \item
+      Error
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]{Multiple Choice}
+  What is printed after the following code is executed?
+
+  \begin{lstlisting}
+public static void main(String[] args) {
+  double a = 5.5;
+  int b = a;
+  System.out.println(b);
+}
+  \end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]{Multiple Choice}
+  \begin{enumerate}
+    \item
+      {\tt 5.5}
+    \item
+      {\tt 5}
+    \item
+      {\tt 6}
+    \item
+      \alert<2>{Error}
+  \end{enumerate}
+\end{frame}
+
+
+\subsection{Fill in the blanks}
+\begin{frame}[fragile]{Fill in the blanks}
+  Fill in the following function:
+  \begin{lstlisting}
+boolean isSorted(int[] array) {
+    // array: array to test if sorted if not
+    // Returns: true if array is sorted in increasing
+    // order
+
+    for (int i = ___; ________; i++)
+        if (array[___] < array[___]) {
+             return false;
+        }
+    return true;
+}
+  \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Fill in the blanks}
+  Solution:
+  \begin{lstlisting}
+boolean isSorted(int[] array) {
+    for (int i = 1; i < array.length; i++)
+        if (array[i] < array[i - 1]) {
+            return false;
+        }
+    return true;
+}
+  \end{lstlisting}
+\end{frame}
+
+\subsection{Fill in the blanks}
+\begin{frame}[fragile]{Fill in the blanks}
+  Fill in the following function:
+  \begin{lstlisting}
+boolean isPalindrome(int[] array) {
+    // Returns: true if the array is a palindrome
+
+    int lower = ___, upper = ___;
+
+    while (___) {
+        if (array[lower] != array[upper]) {
+            return false;
+        }
+        lower++;
+        upper--;
+    }
+
+    return true;
+}
+  \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Fill in the blanks}
+  Solution:
+  \begin{lstlisting}
+boolean isPalindrome(int[] array) {
+    int lower = 0, upper = array.length - 1;
+
+    while (lower <= upper) {
+        if (array[lower] != array[upper]) {
+              return false;
+        }
+        lower++;
+        upper--;
+    }
+
+    return true;
+}
+  \end{lstlisting}
+\end{frame}
+
+\subsection{Fill in the blanks}
+\begin{frame}[fragile]{Fill in the blanks}
+  Fill in the following function:
+  \begin{lstlisting}[xleftmargin=-10pt]
+boolean hasPalindrome(int[] array, int length) {
+  // Returns: true if array contains a palindrome
+  // of length at least i
+
+  for (int i = 0; i <= _____; i++) {
+    for (int j = _____; j <= _____; j++) {
+      if (isPalindrome(Arrays.copyOfRange(array, i, j))) {
+        return true;
+      }
+    }
+  }
+
+  return false;
+}
+  \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Fill in the blanks}
+  Solution:
+  \begin{lstlisting}[xleftmargin=-10pt]
+boolean hasPalindrome(int[] array, int length) {
+  for (int i = 0; i <= array.length - length; i++) {
+    for (int j = i + length; j <= array.length; j++) {
+      if (isPalindrome(Arrays.copyOfRange(array, i, j))) {
+        return true;
+      }
+    }
+  }
+  return false;
+}
+  \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Fill in the blanks}
+  Fill in the following function:
+  \begin{lstlisting}
+int largestPalindrome(int[] array) {
+    // Returns: the length of the longest
+    // palindrome in the array
+
+    for (int i = ___; ___; ___) {
+        if (_____) {
+            return i;
+        }
+    }
+
+    return 0;
+}
+  \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Fill in the blanks}
+  Solution:
+  \begin{lstlisting}
+int largestPalindrome(int[] array) {
+    for (int i = array.length; i >= 1; i--) {
+        if (hasPalindrome(array, i)) {
+            return i;
+        }
+    }
+
+    return 0;
+}
+  \end{lstlisting}
+\end{frame}
+
+\subsection{What will be printed?}
+\begin{frame}[fragile]{What will be printed?}
+  What is printed after the following code is executed?
+  \begin{lstlisting}
+public static void main(String[] args) {
+    String s = "Is this the real life?";
+    change(s);
+    System.out.println(s);
+}
+public static void change(String s) {
+    s = "Is this just fantasy?";
+}
+  \end{lstlisting}
+  \begin{enumerate}
+    \item
+      \alert<2>{Is this the real life?}
+    \item
+      Is this just fantasy?
+    \item
+      s
+    \item
+      Error
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]{What will be printed?}
+  What is printed after the following code is executed?
+  \begin{lstlisting}
+public static void main(String[] args) {
+    int[] arr = {1, 2, 3};
+    change(arr);
+    System.out.println(arr[0]);
+}
+public static void change(int[] i) {
+    i[0] = 5;
+    i = null;
+}
+  \end{lstlisting}
+  \begin{enumerate}
+    \item
+      1
+    \item
+      \alert<2>{5}
+    \item
+      null
+    \item
+      error
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]{What will be printed?}
+  What is printed after the following code is executed?
+  \begin{lstlisting}
+public static void main(String[] args) {
+    int herp = 4;
+    int derp = 6;
+    herp = derp;
+    herp = herp + 1;
+    System.out.println(derp);
+}
+  \end{lstlisting}
+  \begin{enumerate}
+    \item
+      4
+    \item
+      \alert<2>{6}
+    \item
+      5
+    \item
+      7
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]{What will be printed?}
+  What is printed after the following code is executed?
+  \begin{lstlisting}
+public static void main(String[] args) {
+    String x = "Caught in a landslide,";
+    String y = "No escape from reality";
+    String z = x;
+    x = y;
+    System.out.println(z);
+}
+  \end{lstlisting}
+  \begin{enumerate}
+    \item
+      \alert<2>{Caught in a landslide,}
+    \item
+      No escape from reality
+    \item
+      null
+    \item
+      Error
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]{What will be printed?}
+  What is printed after the following code is executed?
+  \begin{lstlisting}
+Panda p = new Panda();
+Animal a = p;
+boolean wat = (a == p);
+System.out.println(wat);
+  \end{lstlisting}
+  \begin{enumerate}
+    \item
+      \alert<2>{true}
+    \item
+      false
+    \item
+      wat
+    \item Error
+  \end{enumerate}
+\end{frame}
+
+% Inheritance %
+% ---------------------------------------------------------------------------- %
+\section{Inheritance}
+\subsection{Overriding Methods}
+\begin{frame}[fragile]{Overriding Methods}
+  Assume that {\tt Subclass} is a subclass of {\tt Class} and that {\tt
+  Class} has the following method defined:
+
+  \begin{lstlisting}
+class Class {
+    public void foo(int x) { ... }
+}
+  \end{lstlisting}
+
+  True or false: The following method in {\tt Subclass} overrides {\tt
+  Class}'s {\tt foo()}.
+
+  \begin{lstlisting}
+class Subclass extends Class {
+    public int foo(int y) { ... }
+}
+  \end{lstlisting}
+
+  \begin{enumerate}
+    \item
+      True
+    \item
+      \alert<2>{False}
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]{Overriding Methods}
+  Assume that {\tt Subclass} is a subclass of {\tt Class} and that {\tt
+  Class} has the following method defined:
+
+  \begin{lstlisting}
+class Class {
+    public void foo(Object o) { ... }
+}
+  \end{lstlisting}
+
+  True or false: The following method in {\tt Subclass} overrides {\tt
+  Class}'s {\tt foo()}.
+
+  \begin{lstlisting}
+class Subclass extends Class {
+    public void foo(String s) { ... }
+}
+  \end{lstlisting}
+
+  \begin{enumerate}
+    \item
+      True
+    \item
+      \alert<2>{False}
+  \end{enumerate}
+\end{frame}
+
+
+\subsection{What will happen?}
+\begin{frame}[fragile]{What will happen?}
+  What will happen when the following code is run? Assume that {\tt
+  Subclass} is a subclass of {\tt Class} and {\tt do\_something} is a
+  {\tt public} non-static method in both classes.
+  \begin{lstlisting}
+Class c = new Class();
+c.do_something();
+  \end{lstlisting}
+  \begin{enumerate}
+    \item
+      \alert<2>{{\tt Class}'s method is called}
+    \item
+      {\tt Subclass}'s method is called
+    \item
+      Compile-time error
+    \item
+      Run-time error
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]{What will happen?}
+  What will happen when the following code is run? Assume that {\tt
+  Subclass} is a subclass of {\tt Class} and {\tt do\_something} is a
+  {\tt public} non-static method in both classes.
+  \begin{lstlisting}
+Subclass c = new Class();
+c.do_something();
+  \end{lstlisting}
+  \begin{enumerate}
+    \item
+      {\tt Class}'s method is called
+    \item
+      {\tt Subclass}'s method is called
+    \item
+      \alert<2>{Compile-time error}
+    \item
+      Run-time error
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]{What will happen?}
+  What will happen when the following code is run? Assume that {\tt
+  Subclass} is a subclass of {\tt Class} and {\tt do\_something} is a
+  {\tt public} non-static method in both classes.
+  \begin{lstlisting}
+Class c = new Subclass();
+c.do_something();
+  \end{lstlisting}
+  \begin{enumerate}
+    \item
+      {\tt Class}'s method is called
+    \item
+      \alert<2>{{\tt Subclass}'s method is called}
+    \item
+      Compile-time error
+    \item
+      Run-time error
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]{What will happen?}
+  What will happen when the following code is run? Assume that {\tt
+  Subclass} is a subclass of {\tt Class} and {\tt do\_something} is a
+  {\tt public} non-static method in both classes.
+  \begin{lstlisting}
+Object c = new Class();
+c.do_something();
+  \end{lstlisting}
+  \begin{enumerate}
+    \item
+      {\tt Class}'s method is called
+    \item
+      {\tt Subclass}'s method is called
+    \item
+      \alert<2>{Compile-time error}
+    \item
+      Run-time error
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]{What will happen?}
+  What will happen when the following code is run? Assume that {\tt
+  Subclass} is a subclass of {\tt Class} and {\tt some\_value} is a {\tt
+  public} field in both classes.
+  \begin{lstlisting}
+Class c = new Subclass();
+System.out.println(c.some_value);
+  \end{lstlisting}
+  \begin{enumerate}
+    \item
+      \alert<2>{{\tt Class}'s field is printed}
+    \item
+      {\tt Subclass}'s field is printed
+    \item
+      Compile-time error
+    \item
+      Run-time error
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]{What will happen?}
+  What will happen when the following code is run? Assume that {\tt Subclass} is
+  a subclass of {\tt Class} and {\tt static\_value} is a {\bf public static}
+  field in both classes.
+  \begin{lstlisting}
+Class c = new Subclass();
+System.out.println(c.static_value);
+  \end{lstlisting}
+  \begin{enumerate}
+    \item
+      \alert<2>{{\tt Class}'s field is printed}
+    \item
+      {\tt Subclass}'s field is printed
+    \item
+      Compile-time error
+    \item
+      Run-time error
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]{What will happen?}
+  What will happen when the following code is run? Assume that {\tt Subclass} is
+  a subclass of {\tt Class} and {\tt static\_method()} is a {\bf public static} method
+  in both classes.
+  \begin{lstlisting}
+Class c = new Subclass();
+c.static_method();
+  \end{lstlisting}
+  \begin{enumerate}
+    \item
+      \alert<2>{{\tt Class}'s method is called}
+    \item
+      {\tt Subclass}'s method is called
+    \item
+      Compile-time error
+    \item
+      Run-time error
+  \end{enumerate}
+\end{frame}
+
+\subsection{General Rule}
+\begin{frame}[fragile]{General Rule}
+  In general, if we define a variable {\tt var} as such:
+  \begin{lstlisting}
+// S and D are predefined classes
+S var = new D();
+S.X;
+  \end{lstlisting}
+  Then {\tt S} is the {\bf static type} of {\tt var} and {\tt D} is the {\bf
+  dynamic type} of {\tt var}. If we attempt to access a field or method of
+  {\tt var}, which one is called?
+  \begin{itemize}
+    \item
+      If {\tt X} is a {\bf field}, the field from the {\bf static type} of
+      {\tt var} will be used.
+    \item
+      If {\tt X} is a {\bf method}, then it depends on whether or not it is
+      static:
+      \begin{itemize}
+        \item
+          If {\tt X} is a {\bf static method}, then the method from the {\bf
+          static type} of {\tt var} will be used
+        \item
+          If {\tt X} is a {\bf non-static method}, then Java will use
+          dynamic method lookup to determine which class's method to call,
+          starting from the lowest class in the hierarchy.
+      \end{itemize}
+  \end{itemize}
+  \begin{framed}
+    Important: {\tt D} must be either a child class of or equal to {\tt S},
+    or it is a compile-time error.
+  \end{framed}
+\end{frame}
+
+  \defverbatim[colored]\codeA{
+    \begin{lstlisting}
+s.x;
+    \end{lstlisting}
+ }
+  \defverbatim[colored]\codeB{
+    \begin{lstlisting}
+Class c = s;
+c.x;
+    \end{lstlisting}
+  }
+  \defverbatim[colored]\codeC{
+    \begin{lstlisting}
+((Class) s).x;
+    \end{lstlisting}
+  }
+  \defverbatim[colored]\codeD{
+    \begin{lstlisting}
+s.f();
+    \end{lstlisting}
+  }
+  \defverbatim[colored]\codeE{
+    \begin{lstlisting}
+Class c = s;
+c.f();
+    \end{lstlisting}
+  }
+  \defverbatim[colored]\codeF{
+    \begin{lstlisting}
+((Class)s).f();
+    \end{lstlisting}
+  }
+  \defverbatim[colored]\codeG{
+    \begin{lstlisting}
+s.f();
+    \end{lstlisting}
+ }
+
+\subsection{Inheritance Exercises}
+\begin{frame}[fragile]{Fields}
+  If we have an object of type {\tt Subclass} that extends {\tt Class}:
+
+  \begin{lstlisting}
+Subclass s = new Subclass();
+  \end{lstlisting}
+
+  How can we access...
+  \begin{itemize}
+    \item
+      A field {\tt x} from {\tt Subclass}?
+
+      \uncover<2->{\codeA}
+    \item
+      A field {\tt x} from {\tt Class}?
+
+      \uncover<3->{\codeB}
+
+      \uncover<4->{Alternatively, we can cast our variable: \codeC}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Static Methods}
+  If we have an object of type {\tt Subclass} that extends {\tt Class}:
+
+  \begin{lstlisting}
+Subclass s = new Subclass();
+  \end{lstlisting}
+
+  How can we access...
+  \begin{itemize}
+    \item
+      A static method {\tt f()} from {\tt Subclass} (without calling {\tt
+      Suclass.f()})?
+
+      \uncover<2->{\codeD}
+    \item
+      A static method {\tt f()} from {\tt Class} (without calling {\tt
+      Class.f()})?
+
+      \uncover<3->{\codeE}
+
+      \uncover<4->{Again, we can simply cast our variable: \codeF}
+ \end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]{Non-static Methods}
+  If we have an object of type {\tt Subclass} that extends {\tt Class}:
+
+  \begin{lstlisting}
+Subclass s = new Subclass();
+  \end{lstlisting}
+
+  How can we access...
+  \begin{itemize}
+    \item
+      A non-static method {\tt f()} from {\tt Subclass}, assuming that the
+      method is defined in both {\tt Class} and {\tt Subclass}?
+
+      \uncover<2->{\codeG}
+    \item
+      A non-static method {\tt f()} from {\tt Class}, assuming that the
+      method is defined in both {\tt Class} and {\tt Subclass}?
+
+      \uncover<3->{This is impossible! This is a feature of Java, not a bug.
+      When you override a non-static method in your parent class, you are
+      specifying a {\em more specific} action for your subclass to take. If
+      you require the original behaviour of the parent class's method, it is
+      much better design to create another method.}
+  \end{itemize}
+\end{frame}
+
+\section{Stack and Heap Diagrams}
+\subsection{Stack and Heap Diagrams}
+\begin{frame}[fragile]{Stack and Heap Diagrams}
+  Draw a picture of what memory looks like when execution reaches the
+  commented line:
+
+  \begin{lstlisting}[basicstyle=\footnotesize]
+class Foo {
+    int[] x;
+    String s;
+
+    public void bar(int x, Foo f) {
+        this.x[x] = x;
+        f.s = this.s;
+        if (f.s != null) {
+            // Draw what memory looks like here!
+        } else {
+            s = "herp derp";
+            f.bar(++x, this);
+        }
+    }
+
+    public static void main(String[] args) {
+        Foo f = new Foo();
+        f.x = new int[4];
+        f.bar(2, f);
+    }
+}
+  \end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile]{Stack and Heap Diagrams}
+  Solution:
+
+  {\footnotesize
+  \begin{verbatim}
+   +-----------------------+----------------------------------+
+   |                       |                                  |
+   |                       |                                  |
+   |                       |                                  |
+   |                       |                                  |
+   |                       |                                  |
+   |                       |                                  |
+   |                       |                                  |
+   |                       |                                  |
+   |                       |                                  |
+   |                       |                                  |
+   |                       |                                  |
+   |                       |                                  |
+   |                       |                                  |
+   |                       |                                  |
+   |                       |                                  |
+   |-----------------------|                                  |
+   | main                  |                                  |
+   |        +-+            |                                  |
+   |   args |?|            |                                  |
+   |        +-+            |                                  |
+   +-----------------------+----------------------------------+
+             Stack                         Heap
+  \end{verbatim}
+  }
+\end{frame}
+
+\begin{frame}[fragile]{Stack and Heap Diagrams}
+  Solution:
+
+  {\footnotesize
+  \begin{verbatim}
+   +-----------------------+----------------------------------+
+   | bar              +-+  |       +----------+               |
+   |                x |3|  |       |      +-+ |    +-+-+-+-+  |
+   |        +-+       +-+  |       |   x  |+------>|0|0|2|3|  |
+   |  this  |+-------------------->|      +-+ |    +-+-+-+-+  |
+   |        +-+       +-+  |       |          |               |
+   |                f |+---------->|      +-+ |               |
+   |                  +-+  |       |   s  |+------+           |
+   |-----------------------|       |      +-+ |   |           |
+   | bar              +-+  |       +----------+   |           |
+   |                x |3|  |          |  |  |     |           |
+   |        +-+       +-+  |          |  |  |     |           |
+   |   this |+------------------------|--|--+     |           |
+   |        +-+       +-+  |          |  |        |           |
+   |                f |+--------------|--+        v           |
+   |                  +-+  |          |     +-------------+   |
+   |-----------------------|          |     |             |   |
+   | main                  |          |     | "herp derp" |   |
+   |        +-+       +-+  |          |     |             |   |
+   |   args |?|     f |+--------------+     +-------------+   |
+   |        +-+       +-+  |                                  |
+   +-----------------------+----------------------------------+
+             Stack                         Heap
+  \end{verbatim}
+  }
+\end{frame}
+
+% Linked Lists %
+% ---------------------------------------------------------------------------- %
+\section{Linked Lists}
+\subsection{Short Answer}
+\begin{frame}{Short Answer}
+  How can you test if Java's implementation of {\tt LinkedList} is singly
+  linked or doubly linked? Assume that you only have one method:
+
+  \vspace{1cm}
+  {\tt Object get(int index)}
+  \vspace{1cm}
+
+  which returns the element at index {\tt index}.
+\end{frame}
+
+\subsection{Coding}
+\begin{frame}[fragile]{Cyclic Linked Lists}
+  Complete the method for detecting if a singly linked list has a cycle:
+
+  \begin{lstlisting}
+public static boolean containsCycle(SList myList){
+    SListNode a = myList.head;
+    SListNode b = myList.head;
+
+    /*
+     * Your code goes here. Available SListNode
+     * instance variables: next, item.
+     */
+}
+  \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Cyclic Linked Lists}
+  Solution:
+
+  \begin{lstlisting}
+public static boolean containsCycle(SList myList){
+    SListNode a = myList.head;
+    SListNode b = myList.head;
+
+    while((a.next != null) && (b.next != null)){
+        a = a.next;
+        b = b.next;
+        if(b.next != null){
+            b = b.next;
+        }
+
+        if(a == b){
+            return true;
+        }
+    }
+
+    return false;
+}
+  \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Reversing Linked lists}
+  Complete the method for reversing a doubly-linked non-circular tailless
+  linked list
+
+  \begin{lstlisting}
+public static void reverse(DList myList){
+    DListNode b = myList.head;
+    DListNode c = myList.head;
+    /*
+     * Your code goes here. Available DListNode
+     * instance variables: next, prev.
+     */
+}
+  \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Reversing Linked Lists}
+  Solution:
+
+  \begin{lstlisting}
+public static void reverse(DList myList){
+    DListNode b = myList.head;
+    DListNode c = myList.head;
+
+    while(c.next != null){
+        c = c.next;
+        b.next = b.prev;
+        b.prev = c;
+        b = c;
+    }
+    this.head = b;
+}
+  \end{lstlisting}
+\end{frame}
+
+
+
+\end{document}

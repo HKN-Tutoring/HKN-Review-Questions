@@ -1,0 +1,15 @@
+\frametitle {Reversing Linked Lists}Solution:
+
+  \begin{lstlisting}
+public static void reverse(DList myList){
+    DListNode b = myList.head;
+    DListNode c = myList.head;
+
+    while(c.next != null){
+        c = c.next;
+        b.next = b.prev;
+        b.prev = c;
+        b = c;
+    }
+}
+  \end{lstlisting}
