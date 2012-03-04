@@ -52,7 +52,7 @@ University of California, Berkeley}
 % Title Page %
 % ---------------------------------------------------------------------------- %
 
-\begin{frame}
+\begin{frame}[fragile]
   \titlepage
 \end{frame}
 
@@ -60,7 +60,8 @@ University of California, Berkeley}
 % ---------------------------------------------------------------------------- %
 \section{Warmup}
 \subsection{True/False}
-\begin{frame}[fragile]{True/False}
+\begin{frame}[fragile]
+  \frametitle{True/False}
   The two loops print the same number of lines:
 
   \begin{columns}
@@ -97,7 +98,8 @@ int[][][] array = new int[][][];
 int[][][] array = new int[3][][];
     \end{lstlisting}
  }
-\begin{frame}[fragile]{True/False}
+\begin{frame}[fragile]
+  \frametitle{True/False}
   This is a valid Java statement:
 
   \multiarrayA
@@ -110,7 +112,8 @@ int[][][] array = new int[3][][];
 \end{frame}
 
 \subsection{Multiple Choice}
-\begin{frame}[fragile]{Multiple Choice}
+\begin{frame}[fragile]
+  \frametitle{Multiple Choice}
   What is the value of {\tt k} at the end?
 
   \begin{lstlisting}
@@ -133,7 +136,8 @@ for (; k < array.length; k++) {
   \end{enumerate}
 \end{frame}
 
-\begin{frame}[fragile]{Multiple Choice}
+\begin{frame}[fragile]
+  \frametitle{Multiple Choice}
   Select the assertions that are true after execution of the following method:
 
   \begin{lstlisting}
@@ -158,7 +162,8 @@ public static void main(String[] args) {
   \end{enumerate}
 \end{frame}
 
-\begin{frame}[fragile]{Multiple Choice}
+\begin{frame}[fragile]
+  \frametitle{Multiple Choice}
   What is printed after the following code is executed?
 
   \begin{lstlisting}
@@ -177,7 +182,8 @@ public Robot() {
 }
       \end{lstlisting}
 \end{frame}
-\begin{frame}[fragile]{Multiple Choice}
+\begin{frame}[fragile]
+  \frametitle{Multiple Choice}
   \begin{enumerate}
     \item
       \alert<2>{{\tt "hello human cake is a lie"}}
@@ -192,7 +198,8 @@ public Robot() {
   \end{enumerate}
 \end{frame}
 
-\begin{frame}[fragile]{Multiple Choice}
+\begin{frame}[fragile]
+  \frametitle{Multiple Choice}
   What is printed after the following code is executed?
 
   \begin{lstlisting}
@@ -213,7 +220,8 @@ public America() {
 }
       \end{lstlisting}
 \end{frame}
-\begin{frame}[fragile]{Multiple Choice}
+\begin{frame}[fragile]
+  \frametitle{Multiple Choice}
   \begin{enumerate}
     \item
       {\tt 2000000}
@@ -228,7 +236,8 @@ public America() {
   \end{enumerate}
 \end{frame}
 
-\begin{frame}[fragile]{Multiple Choice}
+\begin{frame}[fragile]
+  \frametitle{Multiple Choice}
   What is printed after the following code is executed?
 
   \begin{lstlisting}
@@ -249,7 +258,8 @@ public myWallet() {
 }
   \end{lstlisting}
 \end{frame}
-\begin{frame}[fragile]{Multiple Choice}
+\begin{frame}[fragile]
+  \frametitle{Multiple Choice}
   \begin{enumerate}
     \item
       {\tt "Yay!"}
@@ -260,7 +270,8 @@ public myWallet() {
   \end{enumerate}
 \end{frame}
 
-\begin{frame}[fragile]{Multiple Choice}
+\begin{frame}[fragile]
+  \frametitle{Multiple Choice}
   What is printed after the following code is executed?
 
   \begin{lstlisting}
@@ -272,7 +283,8 @@ public static void main(String[] args) {
 }
   \end{lstlisting}
 \end{frame}
-\begin{frame}[fragile]{Multiple Choice}
+\begin{frame}[fragile]
+  \frametitle{Multiple Choice}
   \begin{enumerate}
     \item
       {\tt 1.25}
@@ -285,7 +297,8 @@ public static void main(String[] args) {
   \end{enumerate}
 \end{frame}
 
-\begin{frame}[fragile]{Multiple Choice}
+\begin{frame}[fragile]
+  \frametitle{Multiple Choice}
   What is printed after the following code is executed?
 
   \begin{lstlisting}
@@ -297,7 +310,8 @@ public static void main(String[] args) {
 }
   \end{lstlisting}
 \end{frame}
-\begin{frame}[fragile]{Multiple Choice}
+\begin{frame}[fragile]
+  \frametitle{Multiple Choice}
   \begin{enumerate}
     \item
       \alert<2>{\tt 1.25}
@@ -310,7 +324,8 @@ public static void main(String[] args) {
   \end{enumerate}
 \end{frame}
 
-\begin{frame}[fragile]{Multiple Choice}
+\begin{frame}[fragile]
+  \frametitle{Multiple Choice}
   What is printed after the following code is executed?
 
   \begin{lstlisting}
@@ -321,7 +336,8 @@ public static void main(String[] args) {
 }
   \end{lstlisting}
 \end{frame}
-\begin{frame}[fragile]{Multiple Choice}
+\begin{frame}[fragile]
+  \frametitle{Multiple Choice}
   \begin{enumerate}
     \item
       {\tt 5.5}
@@ -336,7 +352,8 @@ public static void main(String[] args) {
 
 
 \subsection{Fill in the blanks}
-\begin{frame}[fragile]{Fill in the blanks}
+\begin{frame}[fragile]
+  \frametitle{Fill in the blanks}
   Fill in the following function:
   \begin{lstlisting}
 boolean isSorted(int[] array) {
@@ -353,7 +370,8 @@ boolean isSorted(int[] array) {
   \end{lstlisting}
 \end{frame}
 
-\begin{frame}[fragile]{Fill in the blanks}
+\begin{frame}[fragile]
+  \frametitle{Fill in the blanks}
   Solution:
   \begin{lstlisting}
 boolean isSorted(int[] array) {
@@ -366,8 +384,8 @@ boolean isSorted(int[] array) {
   \end{lstlisting}
 \end{frame}
 
-\subsection{Fill in the blanks}
-\begin{frame}[fragile]{Fill in the blanks}
+\begin{frame}[fragile]
+  \frametitle{Fill in the blanks}
   Fill in the following function:
   \begin{lstlisting}
 boolean isPalindrome(int[] array) {
@@ -388,7 +406,8 @@ boolean isPalindrome(int[] array) {
   \end{lstlisting}
 \end{frame}
 
-\begin{frame}[fragile]{Fill in the blanks}
+\begin{frame}[fragile]
+  \frametitle{Fill in the blanks}
   Solution:
   \begin{lstlisting}
 boolean isPalindrome(int[] array) {
@@ -407,8 +426,8 @@ boolean isPalindrome(int[] array) {
   \end{lstlisting}
 \end{frame}
 
-\subsection{Fill in the blanks}
-\begin{frame}[fragile]{Fill in the blanks}
+\begin{frame}[fragile]
+  \frametitle{Fill in the blanks}
   Fill in the following function:
   \begin{lstlisting}[xleftmargin=-10pt]
 boolean hasPalindrome(int[] array, int length) {
@@ -428,7 +447,8 @@ boolean hasPalindrome(int[] array, int length) {
   \end{lstlisting}
 \end{frame}
 
-\begin{frame}[fragile]{Fill in the blanks}
+\begin{frame}[fragile]
+  \frametitle{Fill in the blanks}
   Solution:
   \begin{lstlisting}[xleftmargin=-10pt]
 boolean hasPalindrome(int[] array, int length) {
@@ -444,7 +464,8 @@ boolean hasPalindrome(int[] array, int length) {
   \end{lstlisting}
 \end{frame}
 
-\begin{frame}[fragile]{Fill in the blanks}
+\begin{frame}[fragile]
+  \frametitle{Fill in the blanks}
   Fill in the following function:
   \begin{lstlisting}
 int largestPalindrome(int[] array) {
@@ -462,7 +483,8 @@ int largestPalindrome(int[] array) {
   \end{lstlisting}
 \end{frame}
 
-\begin{frame}[fragile]{Fill in the blanks}
+\begin{frame}[fragile]
+  \frametitle{Fill in the blanks}
   Solution:
   \begin{lstlisting}
 int largestPalindrome(int[] array) {
@@ -478,7 +500,8 @@ int largestPalindrome(int[] array) {
 \end{frame}
 
 \subsection{What will be printed?}
-\begin{frame}[fragile]{What will be printed?}
+\begin{frame}[fragile]
+  \frametitle{What will be printed?}
   What is printed after the following code is executed?
   \begin{lstlisting}
 public static void main(String[] args) {
@@ -502,7 +525,8 @@ public static void change(String s) {
   \end{enumerate}
 \end{frame}
 
-\begin{frame}[fragile]{What will be printed?}
+\begin{frame}[fragile]
+  \frametitle{What will be printed?}
   What is printed after the following code is executed?
   \begin{lstlisting}
 public static void main(String[] args) {
@@ -527,7 +551,8 @@ public static void change(int[] i) {
   \end{enumerate}
 \end{frame}
 
-\begin{frame}[fragile]{What will be printed?}
+\begin{frame}[fragile]
+  \frametitle{What will be printed?}
   What is printed after the following code is executed?
   \begin{lstlisting}
 public static void main(String[] args) {
@@ -550,7 +575,8 @@ public static void main(String[] args) {
   \end{enumerate}
 \end{frame}
 
-\begin{frame}[fragile]{What will be printed?}
+\begin{frame}[fragile]
+  \frametitle{What will be printed?}
   What is printed after the following code is executed?
   \begin{lstlisting}
 public static void main(String[] args) {
@@ -573,7 +599,8 @@ public static void main(String[] args) {
   \end{enumerate}
 \end{frame}
 
-\begin{frame}[fragile]{What will be printed?}
+\begin{frame}[fragile]
+  \frametitle{What will be printed?}
   What is printed after the following code is executed?
   \begin{lstlisting}
 Panda p = new Panda();
@@ -596,7 +623,8 @@ System.out.println(wat);
 % ---------------------------------------------------------------------------- %
 \section{Inheritance}
 \subsection{Overriding Methods}
-\begin{frame}[fragile]{Overriding Methods}
+\begin{frame}[fragile]
+  \frametitle{Overriding Methods}
   Assume that {\tt Subclass} is a subclass of {\tt Class} and that {\tt
   Class} has the following method defined:
 
@@ -623,7 +651,8 @@ class Subclass extends Class {
   \end{enumerate}
 \end{frame}
 
-\begin{frame}[fragile]{Overriding Methods}
+\begin{frame}[fragile]
+  \frametitle{Overriding Methods}
   Assume that {\tt Subclass} is a subclass of {\tt Class} and that {\tt
   Class} has the following method defined:
 
@@ -652,7 +681,8 @@ class Subclass extends Class {
 
 
 \subsection{What will happen?}
-\begin{frame}[fragile]{What will happen?}
+\begin{frame}[fragile]
+  \frametitle{What will happen?}
   What will happen when the following code is run? Assume that {\tt
   Subclass} is a subclass of {\tt Class} and {\tt do\_something} is a
   {\tt public} non-static method in both classes.
@@ -672,7 +702,8 @@ c.do_something();
   \end{enumerate}
 \end{frame}
 
-\begin{frame}[fragile]{What will happen?}
+\begin{frame}[fragile]
+  \frametitle{What will happen?}
   What will happen when the following code is run? Assume that {\tt
   Subclass} is a subclass of {\tt Class} and {\tt do\_something} is a
   {\tt public} non-static method in both classes.
@@ -692,7 +723,8 @@ c.do_something();
   \end{enumerate}
 \end{frame}
 
-\begin{frame}[fragile]{What will happen?}
+\begin{frame}[fragile]
+  \frametitle{What will happen?}
   What will happen when the following code is run? Assume that {\tt
   Subclass} is a subclass of {\tt Class} and {\tt do\_something} is a
   {\tt public} non-static method in both classes.
@@ -712,7 +744,8 @@ c.do_something();
   \end{enumerate}
 \end{frame}
 
-\begin{frame}[fragile]{What will happen?}
+\begin{frame}[fragile]
+  \frametitle{What will happen?}
   What will happen when the following code is run? Assume that {\tt
   Subclass} is a subclass of {\tt Class} and {\tt do\_something} is a
   {\tt public} non-static method in both classes.
@@ -732,7 +765,8 @@ c.do_something();
   \end{enumerate}
 \end{frame}
 
-\begin{frame}[fragile]{What will happen?}
+\begin{frame}[fragile]
+  \frametitle{What will happen?}
   What will happen when the following code is run? Assume that {\tt
   Subclass} is a subclass of {\tt Class} and {\tt some\_value} is a {\tt
   public} field in both classes.
@@ -752,7 +786,8 @@ System.out.println(c.some_value);
   \end{enumerate}
 \end{frame}
 
-\begin{frame}[fragile]{What will happen?}
+\begin{frame}[fragile]
+  \frametitle{What will happen?}
   What will happen when the following code is run? Assume that {\tt Subclass} is
   a subclass of {\tt Class} and {\tt static\_value} is a {\bf public static}
   field in both classes.
@@ -772,7 +807,8 @@ System.out.println(c.static_value);
   \end{enumerate}
 \end{frame}
 
-\begin{frame}[fragile]{What will happen?}
+\begin{frame}[fragile]
+  \frametitle{What will happen?}
   What will happen when the following code is run? Assume that {\tt Subclass} is
   a subclass of {\tt Class} and {\tt static\_method()} is a {\bf public static} method
   in both classes.
@@ -793,7 +829,8 @@ c.static_method();
 \end{frame}
 
 \subsection{General Rule}
-\begin{frame}[fragile]{General Rule}
+\begin{frame}[fragile]
+  \frametitle{General Rule}
   In general, if we define a variable {\tt var} as such:
   \begin{lstlisting}
 // S and D are predefined classes
@@ -803,6 +840,7 @@ S.X;
   Then {\tt S} is the {\bf static type} of {\tt var} and {\tt D} is the {\bf
   dynamic type} of {\tt var}. If we attempt to access a field or method of
   {\tt var}, which one is called?
+
   \begin{itemize}
     \item
       If {\tt X} is a {\bf field}, the field from the {\bf static type} of
@@ -820,6 +858,7 @@ S.X;
           starting from the lowest class in the hierarchy.
       \end{itemize}
   \end{itemize}
+
   \begin{framed}
     Important: {\tt D} must be either a child class of or equal to {\tt S},
     or it is a compile-time error.
@@ -865,7 +904,8 @@ s.f();
  }
 
 \subsection{Inheritance Exercises}
-\begin{frame}[fragile]{Fields}
+\begin{frame}[fragile]
+  \frametitle{Fields}
   If we have an object of type {\tt Subclass} that extends {\tt Class}:
 
   \begin{lstlisting}
@@ -887,7 +927,8 @@ Subclass s = new Subclass();
 \end{itemize}
 \end{frame}
 
-\begin{frame}[fragile]{Static Methods}
+\begin{frame}[fragile]
+  \frametitle{Static Methods}
   If we have an object of type {\tt Subclass} that extends {\tt Class}:
 
   \begin{lstlisting}
@@ -912,7 +953,8 @@ Subclass s = new Subclass();
 \end{frame}
 
 
-\begin{frame}[fragile]{Non-static Methods}
+\begin{frame}[fragile]
+  \frametitle{Non-static Methods}
   If we have an object of type {\tt Subclass} that extends {\tt Class}:
 
   \begin{lstlisting}
@@ -940,7 +982,8 @@ Subclass s = new Subclass();
 
 \section{Stack and Heap Diagrams}
 \subsection{Stack and Heap Diagrams}
-\begin{frame}[fragile]{Stack and Heap Diagrams}
+\begin{frame}[fragile]
+  \frametitle{Stack and Heap Diagrams}
   Draw a picture of what memory looks like when execution reaches the
   commented line:
 
@@ -970,7 +1013,8 @@ class Foo {
 
 \end{frame}
 
-\begin{frame}[fragile]{Stack and Heap Diagrams}
+\begin{frame}[fragile]
+  \frametitle{Stack and Heap Diagrams}
   Solution:
 
   {\footnotesize
@@ -1002,7 +1046,8 @@ class Foo {
   }
 \end{frame}
 
-\begin{frame}[fragile]{Stack and Heap Diagrams}
+\begin{frame}[fragile]
+  \frametitle{Stack and Heap Diagrams}
   Solution:
 
   {\footnotesize
@@ -1038,7 +1083,8 @@ class Foo {
 % ---------------------------------------------------------------------------- %
 \section{Linked Lists}
 \subsection{Short Answer}
-\begin{frame}{Short Answer}
+\begin{frame}[fragile]
+  \frametitle{Short Answer}
   How can you test if Java's implementation of {\tt LinkedList} is singly
   linked or doubly linked? Assume that you only have one method:
 
@@ -1050,7 +1096,8 @@ class Foo {
 \end{frame}
 
 \subsection{Coding}
-\begin{frame}[fragile]{Cyclic Linked Lists}
+\begin{frame}[fragile]
+  \frametitle{Cyclic Linked Lists}
   Complete the method for detecting if a singly linked list has a cycle:
 
   \begin{lstlisting}
@@ -1066,7 +1113,8 @@ public static boolean containsCycle(SList myList){
   \end{lstlisting}
 \end{frame}
 
-\begin{frame}[fragile]{Cyclic Linked Lists}
+\begin{frame}[fragile]
+  \frametitle{Cyclic Linked Lists}
   Solution:
 
   \begin{lstlisting}
@@ -1091,7 +1139,8 @@ public static boolean containsCycle(SList myList){
   \end{lstlisting}
 \end{frame}
 
-\begin{frame}[fragile]{Reversing Linked lists}
+\begin{frame}[fragile]
+  \frametitle{Reversing Linked Lists}
   Complete the method for reversing a doubly-linked non-circular tailless
   linked list
 
@@ -1107,7 +1156,8 @@ public static void reverse(DList myList){
   \end{lstlisting}
 \end{frame}
 
-\begin{frame}[fragile]{Reversing Linked Lists}
+\begin{frame}[fragile]
+  \frametitle{Reversing Linked Lists}
   Solution:
 
   \begin{lstlisting}
