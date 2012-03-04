@@ -1,0 +1,324 @@
+\documentclass[9pt]{beamer}
+
+% Fill in variables below %
+% ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ %
+\newcommand{\thesemester}{Spring 2012}
+\newcommand{\themidterm}{CS 61A Midterm 2 Review}
+\newcommand{\theauthors}{Dan Wang, Chris Giola, and Jon Kotker}
+\newcommand{\theorganization}{Eta Kappa Nu, Mu Chapter \\
+University of California, Berkeley}
+\newcommand{\thedate}{3 March 2012}
+\newcommand{\thelanguage}{Python}
+% ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ %
+
+% Preamble %
+% ------------------------------------------------------------------------ %
+\usepackage{url}
+\usepackage{relsize}
+\usepackage{color}
+\usepackage{listings}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{bm}
+
+% Listings Package %
+\usepackage{listings}
+\lstset{numbers=left,
+    numberstyle=\tiny,
+    showstringspaces=false,
+    frame=leftline,
+    language=Python,
+    escapeinside=\$\$,
+    keywordstyle=\color{blue},
+    xleftmargin=20pt,
+    morecomment=[l]{//},
+    }
+
+\usetheme{Singapore}
+\setbeamertemplate{mini frames}[circle]
+\setbeamertemplate{footline}[frame number]
+
+\title{\themidterm}
+\author{\theauthors}
+\institute{\theorganization}
+\date{\thedate}
+% ------------------------------------------------------------------------ %
+
+\begin{document}
+
+% Title Page %
+% ------------------------------------------------------------------------ %
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+% Warmup %
+% ------------------------------------------------------------------------ %
+\section{Warmup}
+\subsection{Scoping}
+\begin{frame}[fragile]{Scoping}
+  What is printed after the code is executed in Python 3?
+
+  \begin{lstlisting}
+x = 3
+def f():
+    x = 4
+print(x)
+  \end{lstlisting}
+
+  \begin{enumerate}
+    \item
+      \alert<2>{3}
+    \item
+      4
+    \item
+      x
+    \item
+      Error
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]{Scoping}
+  What is printed after the code is executed in Python 3?
+
+  \begin{lstlisting}
+x = 3
+def f():
+    x = x + 1
+print(x)
+  \end{lstlisting}
+
+  \begin{enumerate}
+    \item
+      3
+    \item
+      4
+    \item
+      x
+    \item
+      \alert<2>{Error}
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]{Scoping}
+  What is printed after the code is executed in Python 3?
+
+  \begin{lstlisting}
+x = 3
+def f():
+    global x
+    x = 4
+print(x)
+  \end{lstlisting}
+
+  \begin{enumerate}
+    \item
+      3
+    \item
+      \alert<2>{4}
+    \item
+      x
+    \item
+      Error
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]{Scoping}
+  What is printed after the code is executed in Python 3?
+
+  \begin{lstlisting}
+def f():
+    x = 3
+    def g():
+        x = 4
+    g()
+    print(x)
+f()
+  \end{lstlisting}
+
+  \begin{enumerate}
+    \item
+      \alert<2>{3}
+    \item
+      4
+    \item
+      x
+    \item
+      Error
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]{Scoping}
+  What is printed after the code is executed in Python 3?
+
+  \begin{lstlisting}
+def f():
+    nonlocal x
+    x = 3
+    def g():
+        x = 4
+    g()
+    print(x)
+f()
+  \end{lstlisting}
+
+  \begin{enumerate}
+    \item
+      3
+    \item
+      4
+    \item
+      x
+    \item
+      \alert<2>{Error}
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]{Scoping}
+  What is printed after the code is executed in Python 3?
+
+  \begin{lstlisting}
+def f():
+    x = 3
+    def g():
+        nonlocal x
+        x = 4
+    g()
+    print(x)
+f()
+  \end{lstlisting}
+
+  \begin{enumerate}
+    \item
+      3
+    \item
+      \alert<2>{4}
+    \item
+      x
+    \item
+      Error
+  \end{enumerate}
+\end{frame}
+
+\subsection{Mutable Types}
+\begin{frame}[fragile]{Mutable Types}
+  What is printed after the code is executed in Python 3?
+
+  \begin{lstlisting}
+x = [1, 2]
+y = x
+y[0] = 3
+print(x[0])
+  \end{lstlisting}
+
+  \begin{enumerate}
+    \item
+      1
+    \item
+      2
+    \item
+      \alert<2>{3}
+    \item
+      Error
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]{Mutable Types}
+  What is printed after the code is executed in Python 3?
+
+  \begin{lstlisting}
+x = [1, 2]
+y = [x, 3]
+y[0] = [4, 5]
+print(x)
+  \end{lstlisting}
+
+  \begin{enumerate}
+    \item
+      {\tt [4, 5]}
+    \item
+      \alert<2>{\tt [1, 2]}
+    \item
+      {\tt [[4, 5], 2]}
+    \item
+      Error
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]{Mutable Types}
+  What is printed after the code is executed in Python 3?
+
+  \begin{lstlisting}
+x = [1, 2]
+y = [x, 3]
+y[0][0] = [4, 5]
+print(x)
+  \end{lstlisting}
+
+  \begin{enumerate}
+    \item
+      {\tt [4, 5]}
+    \item
+      {\tt [1, 2]}
+    \item
+      \alert<2>{\tt [[4, 5], 2]}
+    \item
+      Error
+  \end{enumerate}
+\end{frame}
+
+% Classes %
+% ------------------------------------------------------------------------ %
+\section{Classes}
+\subsection{Classes}
+
+\begin{frame}[fragile]{Classes}
+  Convert the following below-the-line implementation of a class
+  representing a point on the cartesian plane to a Python 3 class:
+
+  \begin{lstlisting}[basicstyle=\small]
+import math
+def make_point(x, y):
+    def point(op, *opnds):
+        nonlocal x, y
+        if op == 'distance_from_origin' and len(opnds) == 0:
+            return math.sqrt(math.pow(x, 2) + math.pow(y, 2))
+        elif op = 'distance_from_point' and len(opnds) == 1:
+            return math.sqrt(math.pow(x - opnds[0]('x'), 2)
+                + math.pow(y - opnds[0]('y'), 2))
+        elif op = 'x' and len(opnds) == 0:
+            return x
+        elif op = 'y' and len(opnds) == 0:
+            return y
+        else:
+            raise ValueError()
+    return point
+  \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Classes}
+  Solution
+
+  \begin{lstlisting}[basicstyle=\small]
+import math
+class Point:
+    def __init__(self, x, y):
+        self.x, self.y = x, y
+
+    def distance_from_origin(self):
+        return math.sqrt(math.pow(self.x, 2)
+            + math.pow(self.y, 2))
+
+    def distance_from_point(self, p):
+        return math.sqrt(math.pow(x - p.x, 2)
+            + math.pow(y - p.y, 2))
+  \end{lstlisting}
+\end{frame}
+
+
+
+
+
+
+\end{document}
