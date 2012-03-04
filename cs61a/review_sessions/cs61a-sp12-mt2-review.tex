@@ -278,15 +278,15 @@ print(x)
   representing a point on the cartesian plane to a Python 3 class:
 
   \begin{lstlisting}[basicstyle=\small]
-import math
+from math import *
 def make_point(x, y):
     def point(op, *opnds):
         nonlocal x, y
         if op == 'distance_from_origin' and len(opnds) == 0:
-            return math.sqrt(math.pow(x, 2) + math.pow(y, 2))
+            return sqrt(pow(x, 2) + pow(y, 2))
         elif op = 'distance_from_point' and len(opnds) == 1:
-            return math.sqrt(math.pow(x - opnds[0]('x'), 2)
-                + math.pow(y - opnds[0]('y'), 2))
+            return sqrt(pow(x - opnds[0]('x'), 2)
+                + pow(y - opnds[0]('y'), 2))
         elif op = 'x' and len(opnds) == 0:
             return x
         elif op = 'y' and len(opnds) == 0:
@@ -301,24 +301,129 @@ def make_point(x, y):
   Solution
 
   \begin{lstlisting}[basicstyle=\small]
-import math
+from math import *
 class Point:
     def __init__(self, x, y):
         self.x, self.y = x, y
 
     def distance_from_origin(self):
-        return math.sqrt(math.pow(self.x, 2)
-            + math.pow(self.y, 2))
+        return sqrt(pow(self.x, 2) + pow(self.y, 2))
 
     def distance_from_point(self, p):
-        return math.sqrt(math.pow(x - p.x, 2)
-            + math.pow(y - p.y, 2))
+        return sqrt(pow(self.x-p.x, 2) + pow(self.y-p.y, 2))
   \end{lstlisting}
 \end{frame}
 
+\subsection{Identifying Parts of Classes}
+\begin{frame}[fragile]{Identifying Parts of Classes}
+  Consider the following class:
 
+  \begin{lstlisting}
+class Foo:
+    x = 3
+    def __init__(self, var):
+        self.y = var
 
+    def bar(self, z):
+        Foo.x = Foo.x + 1
+        return self.y + z
 
+f = Foo()
+  \end{lstlisting}
 
+  Identify variables that reference
+  \begin{enumerate}
+    \item
+      A class: \uncover<2->{\alert<2>{Foo}}
+    \item
+      An instance variable: \uncover<3->{\alert<3>{y}}
+    \item
+      A static variable: \uncover<4->{\alert<4>{x}}
+    \item
+      A method: \uncover<5->{\alert<5>{bar, \_\_init\_\_}}
+    \item
+      A parameter: \uncover<6->{\alert<6>{self, var, z}}
+    \item
+      An object: \uncover<7->{\alert<7>{f}}
+  \end{enumerate}
+
+\end{frame}
+
+\section{Mutable Data}
+\subsection{List Mutation}
+
+\begin{frame}[fragile]{Destructive map}
+  Write a destructive method {\tt d\_map()} that takes in a function {\tt f}
+  and a list {\tt l} and changes the list so that each element {\tt e} is
+  changed to {\tt f(e)}. For example,
+
+  \begin{lstlisting}
+>>> l = [1, 2, 3]
+>>> d_map(lambda x: x + 1, [1, 2, 3])
+>>> l
+[2, 3, 4]
+  \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Destructive map}
+  Solution
+
+  \begin{lstlisting}
+def d_map(f, l):
+    for i in range(len(l)):
+        l[i] = f(l[i])
+  \end{lstlisting}
+
+\end{frame}
+
+\section{Memoization}
+\subsection{Memoization}
+
+\begin{frame}[fragile]{Memoization}
+  Consider the mapping of the numbers $1, 2, \dots, 26$ to the letters where
+  $1$ maps to {\tt A}, $2$ maps to {\tt B}, and so on.
+
+  Given a string of numbers, how many ways are there to insert spaces such
+  that all the numbers correspond to valid letters (i.e., are in $\{1, 2,
+  \dots, 26\}$)? For example, for the string {\tt '1012'}, there are two
+  ways:
+
+  \begin{itemize}
+    \item
+      10, 1, 2
+    \item
+      10, 12
+  \end{itemize}
+
+  The splitting into {\tt 1, 0, 12} is not valid because {\tt 0} does not
+  correspond to a letter. Also, the splitting into {\tt 1, 01, 2} is not
+  valid because {\tt 01} does not correspond to a letter.
+\end{frame}
+
+\begin{frame}[fragile]{Memoization}
+  The following function definition is a recursive solution. This function
+  is very inefficient. Write a version that uses memoization to reduce the
+  number of recursive calls.
+
+  \begin{lstlisting}
+def num_of_splits(s):
+    if len(s) == 0:
+        return 1
+    else:
+        return (check1(s) * num_of_splits(s[1:]))
+            + (check2(s) * num_of_splits(s[2:]))
+
+def check1(s):
+    return s[0] in '123456789'
+
+def check2(s):
+    if len(s) > 1:
+        if s[0] == '1':
+            return s[1] in '0123456789'
+        elif s[0] == '2':
+            return s[1] in '0123456'
+    return false
+  \end{lstlisting}
+\end{frame}
 
 \end{document}
