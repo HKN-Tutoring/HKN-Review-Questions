@@ -1,6 +1,8 @@
-*.aux
+*.nav
+*.out
+*.snm
+*.toc
+*.vrb
 *.log
-*~
-\#*#
-.DS_Store
+*.aux
 *.swp

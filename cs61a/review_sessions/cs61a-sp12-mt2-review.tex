@@ -268,6 +268,240 @@ print(x)
   \end{enumerate}
 \end{frame}
 
+\subsection{Recursion}
+\begin{frame}[fragile]{Recursion}
+  What is printed after the code is executed in Python 3?
+  \begin{lstlisting}
+def foo1(a,b):
+    if b == 0:
+        return 0
+    else:
+        return a + foo1(a,b-1)
+
+print(foo1(4,3))
+  \end{lstlisting}
+
+  \begin{enumerate}
+    \item
+      4
+    \item
+      7
+    \item
+      \alert<2>{12}
+    \item
+      Error
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]{Recursion}
+  What is printed after the code is executed in Python 3?
+
+  \begin{lstlisting}
+def foo2(a,b):
+    if b == 0:
+        return 0
+    else:
+        return a + foo2(a,b-2)
+
+print(foo2(4,3))
+  \end{lstlisting}
+
+  \begin{enumerate}
+    \item
+      4
+    \item
+      7
+    \item
+      12
+    \item
+      \alert<2>{Error}
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]{Recursion}
+  What is printed after the code is executed in Python 3?
+
+  \begin{lstlisting}
+def foo3(a,b):
+    if b == 0:
+        return 0
+    else:
+        return a + foo3(a,b)
+
+print(foo3(4,3))
+  \end{lstlisting}
+
+  \begin{enumerate}
+    \item
+      4
+    \item
+      7
+    \item
+      12
+    \item
+      \alert<2>{Error}
+  \end{enumerate}
+\end{frame}
+
+% Recursion %
+% ------------------------------------------------------------------------ %
+\section{Recursion}
+\subsection{Designing Recursive Algorithms}
+\begin{frame}[fragile]{Designing Recursive Algorithms}
+  Design a recursive algorithm that computes the number of ways to choose
+  $k$ objects out of $n$ objects.
+
+  \begin{lstlisting}[numbers=none, frame=none, xleftmargin=0pt]
+def nChooseK(n,k):
+  \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Designing Recursive Algorithms}
+  Solution:
+
+  \begin{lstlisting}
+def nChooseK(n,k):
+   if k == 0:
+      return 1
+   elif k == n:
+      return n
+   else:
+      return nChooseK(n-1,k) + nChooseK(n-1,k-1)
+  \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Designing Recursive Algorithms}
+  \includegraphics[scale=0.5]{nChooseK.png}
+\end{frame}
+
+\subsection{Multiple Recursion}
+\begin{frame}[fragile]{Multiple Recursion}
+  This problem is modified from lab 8, Exercise 4.
+
+  Consider an insect in an $M$ by $N$ grid. The insect starts at the left
+  corner, $(0,0)$, and wants to end up at the bottom right corner,
+  $(M-1,N-1)$.
+
+  Every minute, the insect is capable of moving right or down \emph{any
+  number of squares between $1$ and $l$}. Write a function that determines
+  the number of ways the insect can go from start to finish if we regard
+  each minute as a distinct state.
+
+  \begin{lstlisting}
+def countpaths(M,N,l):
+  \end{lstlisting}
+
+  \includegraphics[scale=0.5]{insect.jpeg}
+\end{frame}
+
+\begin{frame}[fragile]{Multiple Recursion}
+  Below is an example of calling countpaths(3,2,2)
+
+  \includegraphics[scale=0.5]{countpaths.png}
+\end{frame}
+
+\begin{frame}[fragile]{Multiple Recursion}
+
+  \begin{lstlisting}
+def countpaths(M,N,l):
+    return helper(M,N,l,l,0,0)
+
+def helper(M,N,l,steps,x,y):
+    if x == M - 1 and y == N - 1:
+        return 1
+    elif x > M-1 or y > M - 1:
+        return 0
+    else:
+        if steps == 0:
+            return 0
+        else:
+            return helper(M,N,l,steps-1,x,y) +
+                helper(M,N,l,l,x+steps,y) +
+                helper(M,N,l,l,x,y+steps)
+  \end{lstlisting}
+\end{frame}
+
+% Order of Growth %
+% ------------------------------------------------------------------------ %
+\section{Order of Growth}
+\subsection{Order of Growth}
+\begin{frame}[fragile]{Order of Growth}
+  What is the order of growth for the following function?
+
+  \begin{lstlisting}
+def fib1(n):
+    if n == 1:
+        return 1
+    elif n == 2:
+        return 1
+    else:
+        return fib(n-1)+fib(n-2)
+  \end{lstlisting}
+
+  \begin{enumerate}
+    \item
+      $O(1)$
+    \item
+      $O(\text{log}n)$
+    \item
+      $O(n)$
+    \item
+      $O(n^2)$
+    \item
+      \alert<2>{$O(2^n)$}
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]{Order of Growth}
+  What is the order of growth for the following function?
+
+  \begin{lstlisting}
+def fib2(n):
+    ls = [1,1]
+    for i in range(2,n):
+        ls.append(ls[-1]+ls[-2])
+    return ls[-1]
+  \end{lstlisting}
+
+  \begin{enumerate}
+    \item
+      $O(1)$
+    \item
+      $O(\text{log}n)$
+    \item
+      \alert<2>{$O(n)$}
+    \item
+      $O(n^2)$
+    \item
+      $O(2^n)$
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]{Order of Growth}
+  What is the order of growth for the following function?
+
+  \begin{lstlisting}
+def foo(n):
+    if n <= 1:
+        return 0
+    else:
+        return 1 + foo(n/2)
+  \end{lstlisting}
+
+  \begin{enumerate}
+    \item
+      $O(1)$
+    \item
+      \alert<2>{$O(\text{log}n)$}
+    \item
+      $O(n)$
+    \item
+      $O(n^2)$
+    \item
+      $O(2^n)$
+  \end{enumerate}
+\end{frame}
+
 % Classes %
 % ------------------------------------------------------------------------ %
 \section{Classes}
@@ -349,6 +583,143 @@ f = Foo()
 
 \end{frame}
 
+\subsection{Facepalm}
+\begin{frame}[fragile]{Classes}
+  It is 2001 and you are a college student at Cal. You decide to create {\sc
+  Facepalm}, an application for the Palm Pilot that maintains information
+  about different people in your address book. {\sc Facepalm} will have a
+  {\em profile} for each person. You decide to write a class called {\tt
+  Profile} that simulates a {\sc Facepalm} profile. It stores a person's
+  name, the person's institution, and a list of profiles of the person's
+  friends. It also has the following methods:
+
+  \begin{enumerate}
+    \item
+      \textcolor{blue}{\tt add\_friend(profile)} adds the given profile to
+      the list of profiles of friends, if the profile is not already
+      present.
+    \item
+      \textcolor{blue}{\tt get\_name()} returns the person's name.
+    \item
+      \textcolor{blue}{\tt get\_inst()} returns the person's institution.
+  \end{enumerate}
+
+  Write the definition of the {\tt Profile} class as specified above. We
+  have given you a template.
+
+  \begin{lstlisting}
+class Profile:
+    def __init__(self, name, inst):
+        pass
+  \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Classes}
+  Solution:
+  \begin{lstlisting}[basicstyle=\small]
+class Profile:
+    def __init__(self, name, inst):
+        self.name = name
+        self.inst = inst
+        self.friends = []
+
+    def add_friend(self, profile):
+        if profile not in self.friends:
+            self.friends.append(profile)
+
+    def get_name(self):
+        return self.name
+
+    def get_inst(self):
+        return self.inst
+  \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Dictionaries}
+  You now want to give a user a sense of the geographical distribution of
+  their friends. To achieve that, you provide a method {\tt
+  friends\_in\_inst}, which returns a dictionary that maps an institution to
+  a list of the profiles of all the friends at that institution. Write the
+  definition of {\tt{friends\_in\_inst}}.
+
+  \begin{lstlisting}
+class Profile:
+    ...
+    def friends_in_inst(self):
+        ''' FILL ME IN '''
+        pass
+  \end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]{Dictionaries}
+  Solution:
+
+  \begin{lstlisting}
+class Profile:
+    ...
+    def friends_in_inst(self):
+        result = {}
+        for friend_profile in self.friends:
+            inst = friend_profile.inst
+            if inst in result:
+                result[inst].append(friend_profile)
+            else:
+                result[inst] = [friend_profile]
+        return result
+  \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Inheritance}
+  You are not earning too much money from the application.  In an attempt to
+  get some revenue, you decide that profiles will be "restricted" by
+  default: when restricted, users are only allowed to add 100 friends,
+  beyond which they will not be allowed to add more friends.  You then offer
+  "paid" profiles that lift this restriction.
+
+  \begin{enumerate}
+    \item
+      Modify the definition of {\tt add\_friend} in the class {\tt Profile}
+      that implements the restriction.
+    \item
+      Define another class called {\tt Paid\_profile} that mimics the {\tt
+      Profile} class, except in the behavior of the {\tt add\_friend}
+      method. ({\em Hint}: You should not have to rewrite a lot of {\tt
+      Profile}.)
+  \end{enumerate}
+\end{frame}
+
+
+\begin{frame}[fragile]{Inheritance}
+  Solution:
+  \begin{lstlisting}
+class Profile:
+    ...
+    def add_friend(self, profile):
+        if profile not in self.friends:
+            if len(self.friends) < 100:
+                self.friends.append(profile)
+            else:
+                print "Cannot add more than 100
+                       friends. Please upgrade."
+
+class Paid_profile(Profile):
+    def add_friend(self, profile):
+        if profile not in self.friends:
+            self.friends.append(profile)
+  \end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]{Epilogue}
+  The application, unfortunately, dies out because you have not had a chance
+  to move it to other platforms. However, in 2003, a Harvard student named
+  Mark Zuckerberg comes up with a suspiciously similar idea...
+\end{frame}
+
+
+% Mutable Data %
+% ------------------------------------------------------------------------ %
 \section{Mutable Data}
 \subsection{List Mutation}
 
@@ -422,8 +793,29 @@ def check2(s):
             return s[1] in '0123456789'
         elif s[0] == '2':
             return s[1] in '0123456'
-    return false
+    return False
   \end{lstlisting}
 \end{frame}
+
+\begin{frame}[fragile]{Memoization}
+  Solution:
+
+  \begin{lstlisting}
+def num_of_splits2(s):
+    m = {}
+    def helper(s):
+        if s in m:
+            return m[s]
+        elif len(s) == 0:
+            return 1
+        else:
+            m[s] = (check1(s) * helper(s[1:])) +
+                (check2(s) * helper(s[2:]))
+            return m[s]
+    return helper(s)
+  \end{lstlisting}
+\end{frame}
+
+
 
 \end{document}
