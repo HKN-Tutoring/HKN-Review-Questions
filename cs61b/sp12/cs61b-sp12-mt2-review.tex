@@ -1,0 +1,1758 @@
+\documentclass[9pt]{beamer}
+
+% Fill in variables below %
+% ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ %
+\newcommand{\thesemester}{Spring 2012}
+\newcommand{\themidterm}{CS 61B Midterm 2 Review}
+\newcommand{\theauthors}{Dan Wang, George Yiu, Lewin Gan, and Richard Hsu}
+\newcommand{\theorganization}{Eta Kappa Nu, Mu Chapter \\
+University of California, Berkeley}
+\newcommand{\thedate}{8 April 2012}
+\newcommand{\thelanguage}{Java}
+% ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ %
+
+% Preamble %
+% ------------------------------------------------------------------------ %
+\usepackage{url}
+\usepackage{relsize}
+\usepackage{color}
+\usepackage{listings}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{bm}
+\usepackage{framed}
+\usepackage{tikz}
+\usetikzlibrary{trees}
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{shapes.misc}
+\usetikzlibrary{shapes.multipart}
+\usetikzlibrary{positioning}
+
+% Listings Package %
+\usepackage{listings}
+\lstset{numbers=left,
+    numberstyle=\tiny,
+    showstringspaces=false,
+    frame=leftline,
+    language=Python,
+    escapeinside=\$\$,
+    keywordstyle=\color{blue},
+    xleftmargin=20pt,
+    morecomment=[l]{//},
+    }
+
+\usetheme{Singapore}
+\setbeamertemplate{mini frames}[circle]
+\setbeamertemplate{footline}[frame number]
+
+\title{\themidterm}
+\author{\theauthors}
+\institute{\theorganization}
+\date{\thedate}
+% ------------------------------------------------------------------------ %
+
+\begin{document}
+
+% Title Page %
+% ------------------------------------------------------------------------ %
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+% Warmup %
+% ------------------------------------------------------------------------ %
+\section{Warmup}
+\subsection{True/False}
+\begin{frame}[fragile]{True/False}
+  Determine the truth value of the following statement:
+
+  \[n^2 \in \Omega(n!)\]
+
+  \begin{enumerate}
+    \item
+      True
+    \item
+      \alert<2>{False}
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]{True/False}
+  Determine the truth value of the following statement:
+
+  \[(\log{n})^{6} \in O(n^{\frac{1}{6}})\]
+
+  \begin{enumerate}
+    \item
+      \alert<2>{True}
+    \item
+      False
+  \end{enumerate}
+
+  \uncover<3>{\begin{framed}{\bf General Rule:}
+    Any polynomial ($n^{k}$ for some positive $k$) always dominates any
+    logarithm ($(\log{n})^\ell$ for some $\ell$).
+  \end{framed}}
+\end{frame}
+
+\begin{frame}[fragile]{True/False}
+  Determine the truth value of the following statement:
+
+  \begin{quote}
+    If $f\in O(g)$ and $g\in O(h)$, then $f\in O(h)$.
+  \end{quote}
+
+  \begin{enumerate}
+    \item
+      \alert<2>{True}
+    \item
+      False
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]{True/False}
+  Determine the truth value of the following statement:
+
+  \begin{quote}
+    A {\bf preorder} traversal of a binary search tree will visit the nodes
+    in {\bf ascending} order of their keys.
+  \end{quote}
+
+  \begin{enumerate}
+    \item
+      True
+    \item
+      \alert<2->{False}
+  \end{enumerate}
+
+  \uncover<3>{\begin{framed}
+    An {\bf inorder} traversal of a BST will visit the nodes in ascending
+    order.
+  \end{framed}}
+\end{frame}
+
+\begin{frame}[fragile]{True/False}
+  Determine the truth value of the following statement:
+
+  \begin{quote}
+    If $\log{f(n)} \in \Theta(\log{g(n)})$, then $f\in \Theta(g)$.
+  \end{quote}
+
+  \begin{enumerate}
+    \item
+      True
+    \item
+      \alert<2->{False}
+  \end{enumerate}
+
+  \uncover<3>{\begin{framed}{\bf Counter-example:}
+    Let $f(n)=n$ and $g(n)=n^2$. Then $\log{f(n)} = \log{n}$ and $\log{g(n)}
+    = \log{(n^2)} = 2\log{n}$.
+  \end{framed}}
+\end{frame}
+
+\begin{frame}[fragile]{True/False}
+  Determine the truth value of the following statement:
+
+  \begin{quote}
+    \[n^{\log_2{5}} \in O(n^2\log{n})\]
+  \end{quote}
+
+  \begin{enumerate}
+    \item
+      True
+    \item
+      \alert<2->{False}
+  \end{enumerate}
+
+  \uncover<3>{\begin{framed}
+    Because $\log_2{5} \approx 2.3 > 2$, $n^{\log_2{5}}$ dominates
+    $n^2\log{n}$ because $n^{\log_2{5}-2}$ dominates $\log{n}$ (any
+    polynomial dominates any logarithm).
+  \end{framed}}
+\end{frame}
+
+\begin{frame}[fragile]{True/False}
+  Determine the truth value of the following statement:
+
+  \begin{quote}
+    Let $f\in O(g)$, and let $c>0$. If $f(n)$ and $g(n)$ are always greater
+    than one,
+
+    \[f(n)\log_2{(f(n)^c)} \in O(g(n)\log_2{(g(n))})\]
+  \end{quote}
+
+  \begin{enumerate}
+    \item
+      \alert<2->{True}
+    \item
+      False
+  \end{enumerate}
+
+  \uncover<3>{\begin{framed}
+    Because the constant $c$ is in the exponent of a logarithm, it can be
+    pulled out:
+    \[f(n)\log_2{(f(n)^c)} = cf(n)\log_2{(f(n))}; g(n)\log_2{(g(n))^c} =
+    cg(n)\log_2{g(n)}\]
+    Which will not affect the big-O relationship.
+  \end{framed}}
+\end{frame}
+
+\subsection{Multiple Choice}
+\begin{frame}[fragile]{Multiple Choice}
+  Select the strongest correct answer:
+
+  \begin{quote}
+    The {\bf average-case} running time to {\tt insert()} into a binary
+    search tree with $n$ nodes is
+  \end{quote}
+
+  \begin{enumerate}
+    \item
+      $O(1)$
+    \item
+      \alert<2>{$O(\log{n})$}
+    \item
+      $O(n)$
+    \item
+      $O(n^2)$
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]{Multiple Choice}
+  Select the strongest correct answer:
+
+  \begin{quote}
+    The {\bf best-case} running time to {\tt insert()} into a binary search
+    tree with $n$ nodes is
+  \end{quote}
+
+  \begin{enumerate}
+    \item
+      \alert<2>{$O(1)$}
+    \item
+      $O(\log{n})$
+    \item
+      $O(n)$
+    \item
+      $O(n^2)$
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]{Multiple Choice}
+  Select the strongest correct answer:
+
+  \begin{quote}
+    The {\bf worst-case} running time to {\tt insert()} into a binary search
+    tree with $n$ nodes is
+  \end{quote}
+
+  \begin{enumerate}
+    \item
+      $O(1)$
+    \item
+      $O(\log{n})$
+    \item
+      \alert<2->{$O(n)$}
+    \item
+      $O(n^2)$
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]{Multiple Choice}
+  Select the strongest correct answer:
+
+  \begin{quote}
+    The amount of memory needed to store a graph with $v$ vertices and $e$
+    edges using an {\bf adjacency matrix} is
+  \end{quote}
+
+  \begin{enumerate}
+    \item
+      $O(v+e)$
+    \item
+      $O(ve)$
+    \item
+      $O(e^2)$
+    \item
+      \alert<2>{$O(v^2)$}
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]{Multiple Choice}
+  Select the strongest correct answer:
+
+  \begin{quote}
+    The amount of memory needed to store a graph with $v$ vertices and $e$
+    edges using an {\bf adjacency list} is
+  \end{quote}
+
+  \begin{enumerate}
+    \item
+      \alert<2>{$O(v+e)$}
+    \item
+      $O(ve)$
+    \item
+      $O(e^2)$
+    \item
+      $O(v^2)$
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]{Multiple Choice}
+  Select the strongest correct answer:
+
+  \begin{quote}
+    The {\bf average-case} running time for {\tt insert()} into a hash table
+    with $n$ entries is
+  \end{quote}
+
+  \begin{enumerate}
+    \item
+      \alert<2>{$O(1)$}
+    \item
+      $O(\log{n})$
+    \item
+      $O(n)$
+    \item
+      $O(n^2)$
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]{Multiple Choice}
+  Select the strongest correct answer:
+
+  \begin{quote}
+    The {\bf worst-case} running time for {\tt insert()} into a hash table
+    with $n$ entries is
+  \end{quote}
+
+  \begin{enumerate}
+    \item
+      $O(1)$
+    \item
+      $O(\log{n})$
+    \item
+      \alert<2>{$O(n)$}
+    \item
+      $O(n^2)$
+  \end{enumerate}
+\end{frame}
+
+% Algorithm Analysis %
+% ------------------------------------------------------------------------ %
+\section{Asymptotic Analysis}
+\subsection{Asymptotic Analysis}
+\begin{frame}[fragile]{Asymptotic Analysis}
+  The sum of the haromic series $1, \frac{1}{2}, \frac{1}{3}, \frac{1}{4},
+  \frac{1}{5}, \dots$ diverges; that is:
+
+  \[\sum_{i=1}^\infty \frac{1}{i} = \infty\]
+
+  However, for large $n$, the sum of the first $n$ terms of this series can
+  be well approximated as
+
+  \[\sum_{i=1}^n \frac{1}{i} \approx \ln{n} + \gamma\]
+
+  Where $\ln$ is the natural logarithm and $\gamma$ is a constant
+  approximately equal to $0.57721$. Show (prove) the following:
+
+  \[\sum_{i=1}^n \frac{1}{i} \in \Theta(\log{n})\]
+\end{frame}
+
+\begin{frame}[fragile]{Asymptotic Analysis}
+
+  {\bf Proposition:}
+  \[\sum_{i=1}^n \frac{1}{i} \in \Theta(\log{n})\]
+
+  {\bf Proof:}
+  (Show $O$): By decreasing each denominator to the next power of two, we
+  can find the upper bound:
+
+  \begin{eqnarray*}
+    \frac{1}{1} + \frac{1}{2} + \frac{1}{3} + \dots + \frac{1}{n} &<&
+    \frac{1}{1} + \frac{1}{2} + \frac{1}{2} + \frac{1}{4} + \frac{1}{4} +
+    \frac{1}{4} + \frac{1}{4} + \frac{1}{8} + \dots \\
+    &\approx& \left(\sum_{i=1}^{\lfloor\log{n}\rfloor} 1\right) + c' \in
+    \Theta(\log{n})
+  \end{eqnarray*}
+  So $\sum_{i=1}^n\frac{1}{i} \in O(\log{n})$.
+\end{frame}
+
+\begin{frame}[fragile]{Asymptotic Analysis}
+
+  {\bf Proposition:}
+  \[\sum_{i=1}^n \frac{1}{i} \in \Theta(\log{n})\]
+
+  {\bf Proof (continued):}
+
+  (Show $\Omega$): By increasing each denominator to the next power of two,
+  we can find the lower bound:
+
+  \begin{eqnarray*}
+    \frac{1}{1} + \frac{1}{2} + \frac{1}{3} + \dots + \frac{1}{n} &>&
+    \frac{1}{1} + \frac{1}{2} + \frac{1}{4} + \frac{1}{4} + \frac{1}{8} +
+    \frac{1}{8} + \frac{1}{8} + \frac{1}{8} + \dots \\
+    &\approx& 1 + \left(\sum_{i=1}^{\lfloor\log{n}\rfloor}
+    \frac{1}{2}\right) + c' \in \Theta(\log{n})
+  \end{eqnarray*}
+  So $\sum_{i=1}^n\frac{1}{i} \in \Omega(\log{n})$, and thus
+  $\sum_{i=1}^n\frac{1}{i} \in \Theta(\log{n})$.
+
+\end{frame}
+
+\begin{frame}[fragile]{Asymptotic Analysis}
+  Prove the following:
+
+  \begin{quote}
+    For any positive real constants $a, b$:
+    \[(n+a)^b \in \Theta(n^b)\]
+  \end{quote}
+
+  \uncover<2>{
+  {\bf Proof:}
+  (Show $\Omega$): Take $c=1$, $N=1$. Then because $a$ is positive, $n+a >
+  n$ for any $n$, so
+  \[(n+a)^b > n^b\]
+  and thus $(n+a)^b \in \Omega(n^b)$.
+
+  (Show $O$): Take $d=2^b$ ($b$ is a constant, so this is valid) and $N=a$.
+  Then for any $n > N = a$, surely $2n > n+a$, so
+  \[(n+a)^b < 2^b n^b = (2n)^b\]
+  and thus $(n+a)^b \in O(n^b)$, and $(n+a)^b \in \Theta(n^b)$.
+  \qed
+  }
+\end{frame}
+
+% Trees %
+% ------------------------------------------------------------------------ %
+\section{Trees}
+\subsection{Binary Search Trees}
+\begin{frame}[fragile]{Binary Search Trees: Review}
+  A binary search tree is a tree with the following properties:
+  \begin{itemize}
+    \item
+      The tree is a binary tree (each node has at most two children).
+    \item
+      The left subtree of any node contains only keys less than that node's
+      key
+    \item
+      The right subtree of any node contains only keys greater than that
+      node's key
+  \end{itemize}
+
+  \uncover<2>{
+  To {\tt find()} an element $e$:
+  \begin{enumerate}
+    \item
+      Start at the root. If the tree is empty, then the key is not in the
+      tree.
+    \item
+      If the root's key is $e$, then return the value. Otherwise:
+      \begin{enumerate}[1.]
+        \item
+          If the root's key is greater than $e$, then run {\tt find()}
+          on its left child.
+        \item
+          Otherwise, run {\tt find()} on its right child.
+      \end{enumerate}
+  \end{enumerate}
+  }
+\end{frame}
+
+\begin{frame}[fragile]{Binary Search Trees: Review}
+  To {\tt insert()} an element, traverse the tree like {\tt find()}
+  until a leaf node is reached. Insert the element as the right or left
+  child of the leaf, depending on if it is greater than or less than the
+  leaf.
+
+  \vspace{2em}
+
+  \uncover<2->{
+  To {\tt remove()} an element:
+  \begin{enumerate}
+    \item
+      Search for the item using {\tt find()}.
+      \begin{enumerate}[1.]
+        \item
+          If it has 0 children, remove the node from the tree.
+        \item
+          If it has 1 child, replace the node with its child.
+        \item
+          If it has 2 children, replace the label of the node with the label
+          of its in-order successor and remove that node.
+      \end{enumerate}
+  \end{enumerate}
+  }
+
+  \uncover<3->{
+  \begin{framed}
+    The {\bf in-order successor} of a node is the node that is visited after
+    the first node in an in-order traversal of the tree. In a binary search
+    tree, the label of the in-order successor is the smallest value that is
+    greater than the node's label. The in-order successor of a node is the
+    bottom leftmost child in its right subtree.
+  \end{framed}
+  }
+\end{frame}
+
+\begin{frame}[fragile]{Binary Search Trees}
+  Given the following binary search tree:
+
+  \tikzstyle{level 1}=[level distance=3em, sibling distance=8em]
+  \tikzstyle{level 2}=[level distance=3em, sibling distance=4em]
+  \tikzstyle{node} = [circle, draw, text width=1em]
+
+  \begin{tikzpicture}[grow=down]
+    \node[node] {7}
+      child {
+        node[node] {3}
+          child {
+            node[node] {1}
+          }
+          child {
+            node[node] {6}
+          }
+      }
+      child {
+        node[node] {9}
+          child {
+            node[node] {8}
+          }
+          child {
+            node[node] {12}
+          }
+      };
+  \end{tikzpicture}
+
+  Draw what it looks like after each of the following consecutive method
+  calls:
+  \begin{itemize}
+    \item
+      {\tt insert(5)}
+    \item
+      {\tt remove(3)}
+    \item
+      {\tt insert(3)}
+    \item
+      {\tt remove(9)}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Binary Search Trees}
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+      After {\tt insert(5)}:
+      \vspace{1em}
+
+      \uncover<2->{
+      \tikzstyle{level 1}=[level distance=3em, sibling distance=8em]
+      \tikzstyle{level 2}=[level distance=3em, sibling distance=4em]
+      \tikzstyle{level 3}=[level distance=3em, sibling distance=3em]
+      \tikzstyle{node} = [circle, draw, text width=1em]
+
+      \begin{tikzpicture}[grow=down]
+        \node[node] {7}
+          child {
+            node[node] {3}
+              child {
+                node[node] {1}
+              }
+              child {
+                node[node] {6}
+                  child {
+                    node[node] {5}
+                  }
+                  child[missing] {}
+              }
+          }
+          child {
+            node[node] {9}
+              child {
+                node[node] {8}
+              }
+              child {
+                node[node] {12}
+              }
+          };
+      \end{tikzpicture}
+      }
+
+      After {\tt remove(3)}:
+      \vspace{1em}
+
+      \uncover<3-> {
+      \begin{tikzpicture}[grow=down]
+        \node[node] {7}
+          child {
+            node[node] {5}
+              child {
+                node[node] {1}
+              }
+              child {
+                node[node] {6}
+              }
+          }
+          child {
+            node[node] {9}
+              child {
+                node[node] {8}
+              }
+              child {
+                node[node] {12}
+              }
+          };
+      \end{tikzpicture}
+      }
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      After {\tt insert(3)}:
+      \vspace{1em}
+
+      \uncover<4-> {
+      \tikzstyle{level 1}=[level distance=3em, sibling distance=8em]
+      \tikzstyle{level 2}=[level distance=3em, sibling distance=4em]
+      \tikzstyle{level 3}=[level distance=3em, sibling distance=3em]
+      \tikzstyle{node} = [circle, draw, text width=0.8em]
+
+      \begin{tikzpicture}[grow=down,scale=0.8]
+        \node[node] {7}
+          child {
+            node[node] {5}
+              child {
+                node[node] {1}
+                  child[missing] {}
+                  child {
+                    node[node] {3}
+                  }
+              }
+              child {
+                node[node] {6}
+              }
+          }
+          child {
+            node[node] {9}
+              child {
+                node[node] {8}
+              }
+              child {
+                node[node] {12}
+              }
+          };
+      \end{tikzpicture}
+      }
+
+      After {\tt remove(9)}:
+      \vspace{1em}
+
+      \uncover<5-> {
+      \begin{tikzpicture}[grow=down,scale=0.8]
+        \node[node] {7}
+          child {
+            node[node] {5}
+              child {
+                node[node] {1}
+                  child[missing] {}
+                  child {
+                    node[node] {3}
+                  }
+              }
+              child {
+                node[node] {6}
+              }
+          }
+          child {
+            node[node] {12}
+              child {
+                node[node] {8}
+              }
+              child[missing] {}
+          };
+      \end{tikzpicture}
+      }
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{Binary Search Trees}
+  If you are given the shape of a binary search tree with $n$ nodes and a
+  collection of $n$ keys containing no duplicates, how many possible binary
+  search trees can be formed?
+
+  \begin{enumerate}
+    \item
+      \alert<2->{$1$}
+    \item
+      $2$
+    \item
+      $\log{n}$
+    \item
+      $n$
+    \item
+      $n!$
+  \end{enumerate}
+
+  \uncover<3->{\begin{framed}
+    Given the shape of the tree, if there are $\ell$ nodes in the left
+    subtree, the root must the the $\ell+1$th smallest key. The keys can
+    then be recursively assigned to the left and right subtrees.
+  \end{framed}}
+\end{frame}
+
+\subsection{Heaps}
+\begin{frame}[fragile]{Heaps: Review}
+  A heap is a binary tree with the following properties:
+  \begin{itemize}
+    \item
+      The tree is complete. That is, every level is filled except possibly
+      the last, which is filled from left to right.
+    \item
+      The {\em heap property} or {\em heap invariant} holds for all nodes of
+      the tree: If $B$ is a descendant of $A$, then the key of $B$ is less
+      than or equal to that of $A$.
+  \end{itemize}
+
+  \pause
+  Heaps are usually implemented as arrays:
+
+  \tikzstyle{level 1}=[level distance=3em, sibling distance=8em]
+  \tikzstyle{level 2}=[level distance=3em, sibling distance=4em]
+  \tikzstyle{level 3}=[level distance=3em, sibling distance=3em]
+  \tikzstyle{node} = [circle, draw, text width=0.8em]
+
+  \begin{tikzpicture}[grow=down,scale=0.8]
+    \node [rectangle split, rectangle split parts=8, rectangle split
+    horizontal, draw] at (0, -1) {
+      $\times$
+      \nodepart{two}3
+      \nodepart{three}5
+      \nodepart{four}4
+      \nodepart{five}8
+      \nodepart{six}7
+      \nodepart{seven}6
+      \nodepart{eight}9
+    };
+
+    \node[node] at (8, 0) {3}
+      child {
+        node[node] {5}
+          child {
+            node[node] {8}
+          }
+          child {
+            node[node] {7}
+          }
+      }
+      child {
+        node[node] {4}
+          child {
+            node[node] {6}
+          }
+          child {
+            node[node] {9}
+          }
+      };
+  \end{tikzpicture}
+\end{frame}
+
+\begin{frame}[fragile]{Heaps: Review}
+  To {\tt insert()} an element:
+  \begin{enumerate}
+    \item
+      Insert the item at the end of the array.
+    \item
+      Bubble up by repeatedly swapping with parents until the heap property
+      is satisfied.
+  \end{enumerate}
+
+  \vspace{2em}
+
+  \pause
+  To {\tt removeMin()}:
+  \begin{enumerate}
+    \item
+      Swap the first and last elements of the array.
+    \item
+      Remove the last element and return it.
+    \item
+      Bubble the root down by repeatedly comparing with both of its children
+      and swapping until the heap property is satisfied.
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]{Heaps}
+  Starting with an empty max heap, perform the following consecutive
+  insertions:
+  \begin{enumerate}
+    \item
+      {\tt insert(5)}
+    \item
+      {\tt insert(1)}
+    \item
+      {\tt insert(2)}
+    \item
+      {\tt insert(6)}
+    \item
+      {\tt insert(4)}
+    \item
+      {\tt insert(3)}
+  \end{enumerate}
+
+  Draw what the heap looks like after these values are inserted.
+
+  \tikzstyle{level 1}=[level distance=3em, sibling distance=8em]
+  \tikzstyle{level 2}=[level distance=3em, sibling distance=4em]
+  \tikzstyle{level 3}=[level distance=3em, sibling distance=3em]
+  \tikzstyle{node} = [circle, draw, text width=1em]
+
+  \pause
+  {\bf Answer:}
+
+  \begin{tikzpicture}[grow=down]
+    \node[node] {6}
+      child {
+        node[node] {5}
+          child {
+            node[node] {1}
+          }
+          child {
+            node[node] {4}
+          }
+      }
+      child {
+        node[node] {3}
+          child {
+            node[node] {2}
+          }
+          child[missing] {}
+      };
+  \end{tikzpicture}
+
+  \pause
+  What does the heap look like after calling {\tt removeMax()}?
+\end{frame}
+
+\begin{frame}[fragile]{Heaps}
+
+  {\bf Answer:}
+
+  \tikzstyle{level 1}=[level distance=3em, sibling distance=8em]
+  \tikzstyle{level 2}=[level distance=3em, sibling distance=4em]
+  \tikzstyle{level 3}=[level distance=3em, sibling distance=3em]
+  \tikzstyle{node} = [circle, draw, text width=1em]
+
+  \begin{tikzpicture}[grow=down]
+    \node[node] {5}
+      child {
+        node[node] {4}
+          child {
+            node[node] {1}
+          }
+          child {
+            node[node] {2}
+          }
+      }
+      child {
+        node[node] {3}
+          child[missing] {}
+          child[missing] {}
+      };
+  \end{tikzpicture}
+\end{frame}
+
+\begin{frame}[fragile]{Heaps}
+  Given the following heap:
+
+  \tikzstyle{level 1}=[level distance=3em, sibling distance=8em]
+  \tikzstyle{level 2}=[level distance=3em, sibling distance=4em]
+  \tikzstyle{node} = [circle, draw, text width=1em]
+
+  \begin{tikzpicture}[grow=down]
+    \node[node] {2}
+      child {
+        node[node] {6}
+          child {
+            node[node] {9}
+          }
+          child {
+            node[node] {8}
+          }
+      }
+      child {
+        node[node] {4}
+          child {
+            node[node] {16}
+          }
+          child {
+            node[node] {12}
+          }
+      };
+  \end{tikzpicture}
+
+  Draw what it looks like after each of the following consecutive method
+  calls:
+  \begin{itemize}
+    \item
+      {\tt insert(10)}
+    \item
+      {\tt removeMin()}
+    \item
+      {\tt insert(3)}
+    \item
+      {\tt removeMin()}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Heaps}
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+      After {\tt insert(10)}:
+      \vspace{1em}
+
+      \tikzstyle{level 1}=[level distance=3em, sibling distance=8em]
+      \tikzstyle{level 2}=[level distance=3em, sibling distance=4em]
+      \tikzstyle{level 3}=[level distance=3em, sibling distance=3em]
+      \tikzstyle{node} = [circle, draw, text width=1em]
+
+      \uncover<2-> {
+      \begin{tikzpicture}[grow=down]
+        \node[node] {2}
+          child {
+            node[node] {6}
+              child {
+                node[node] {9}
+                  child {
+                    node[node] {10}
+                  }
+                  child[missing] {}
+              }
+              child {
+                node[node] {8}
+              }
+          }
+          child {
+            node[node] {4}
+              child {
+                node[node] {16}
+              }
+              child {
+                node[node] {12}
+              }
+          };
+      \end{tikzpicture}
+      }
+
+      After {\tt removeMin()}:
+      \vspace{1em}
+
+      \uncover<3-> {
+      \begin{tikzpicture}[grow=down]
+        \node[node] {4}
+          child {
+            node[node] {6}
+              child {
+                node[node] {9}
+              }
+              child {
+                node[node] {8}
+              }
+          }
+          child {
+            node[node] {10}
+              child {
+                node[node] {16}
+              }
+              child {
+                node[node] {12}
+              }
+          };
+      \end{tikzpicture}
+      }
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      After {\tt insert(3)}:
+      \vspace{1em}
+
+      \tikzstyle{level 1}=[level distance=3em, sibling distance=8em]
+      \tikzstyle{level 2}=[level distance=3em, sibling distance=4em]
+      \tikzstyle{level 3}=[level distance=3em, sibling distance=3em]
+      \tikzstyle{node} = [circle, draw, text width=0.8em]
+
+      \uncover<4-> {
+      \begin{tikzpicture}[grow=down]
+        \node[node] {3}
+          child {
+            node[node] {4}
+              child {
+                node[node] {6}
+                  child {
+                    node[node] {9}
+                  }
+                  child[missing] {}
+              }
+              child {
+                node[node] {8}
+              }
+          }
+          child {
+            node[node] {10}
+              child {
+                node[node] {16}
+              }
+              child {
+                node[node] {12}
+              }
+          };
+      \end{tikzpicture}
+      }
+
+      After {\tt removeMin()}:
+      \vspace{1em}
+
+      \uncover<5-> {
+      \begin{tikzpicture}[grow=down]
+        \node[node] {4}
+          child {
+            node[node] {6}
+              child {
+                node[node] {9}
+              }
+              child {
+                node[node] {8}
+              }
+          }
+          child {
+            node[node] {10}
+              child {
+                node[node] {16}
+              }
+              child {
+                node[node] {12}
+              }
+          };
+      \end{tikzpicture}
+      }
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{Heaps}
+  Describe how you can implement a method {\tt removeKthMin()} that,
+  assuming there are $n>k$ nodes in the heap, removes the $k$th
+  smallest item in $O(k\log{n})$ time.
+
+  \vspace{2em}
+  \uncover<2->{{\bf Answer:}
+  Call {\tt removeMin()} $k$ times and store the $k$ smallest values. Insert
+  all of them back in except for the $k$th smallest, and return it.
+
+  This takes $O(2k\log{n}) = O(k\log{n})$ time.
+  }
+\end{frame}
+
+\subsection{2-3-4 Trees}
+\begin{frame}[fragile]{2-3-4 Trees: Review}
+  In a 2-3-4 tree, each node is one of the following:
+  \begin{itemize}
+    \item
+      {\bf 2-node:} contains one key and has two or no children
+    \item
+      {\bf 3-node:} contains two keys and has three or no children
+    \item
+      {\bf 4-node:} contains three keys and has four or no children
+  \end{itemize}
+
+  \pause
+  Additionally, the following invariants are held:
+  \begin{itemize}
+    \item
+      All the leaves are at the same level
+    \item
+      All the keys are in sorted order
+      \begin{itemize}
+        \item
+          In a 2-node, the key is greater than all the keys in the left
+          subtree and less than all the keys in the right subtree
+        \item
+          Analogous properties hold for 3-nodes and 4-nodes
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{2-3-4 Trees: Review}
+  To {\tt insert()} an element, we traverse the tree to find the correct
+  spot to insert the key. On the way down, we fix 4-nodes. If the root is a
+  4-node, the tree grows by one level:
+
+  \pause
+  \tikzstyle{level 1}=[level distance=3em, sibling distance=4em]
+  \tikzstyle{level 2}=[level distance=3em, sibling distance=2em]
+  \tikzstyle{node} = [rectangle, draw]
+
+  \pause
+  \begin{tikzpicture}[grow=down]
+    \node[node] at (0, -1) {A $\cdot$ B $\cdot$ C}
+      child {
+        node {a}
+      }
+      child {
+        node {b}
+      }
+      child {
+        node {c}
+      }
+      child {
+        node {d}
+      };
+
+    \node[node] at (5, 0) {B}
+      child {
+        node[node] {A}
+          child {
+            node {a}
+          }
+          child {
+            node {b}
+          }
+      }
+      child {
+        node[node] {C}
+          child {
+            node {c}
+          }
+          child {
+            node {d}
+          }
+      };
+  \end{tikzpicture}
+
+  Otherwise, the middle key is inserted into the parent (which is guaranteed
+  not to be a 4-node).
+
+  \begin{tikzpicture}[grow=down]
+    \node[node] {X}
+      child {
+        node {x}
+      }
+      child {
+        node[node] {A $\cdot$ B $\cdot$ C}
+          child {
+            node {a}
+          }
+          child {
+            node {b}
+          }
+          child {
+            node {c}
+          }
+          child {
+            node {d}
+          }
+      };
+
+    \node[node] at (5, 0) {X $\cdot$ B}
+      child {
+        node {x}
+      }
+      child {
+        node[node] {A}
+          child {
+            node {a}
+          }
+          child {
+            node {b}
+          }
+      }
+      child {
+        node[node] {C}
+          child {
+            node {c}
+          }
+          child {
+            node {d}
+          }
+      };
+  \end{tikzpicture}
+
+  When we finish fixing all 4-nodes, we insert it into the appropriate leaf.
+\end{frame}
+
+\begin{frame}[fragile]{2-3-4 Trees: Review}
+  To {\tt remove()} an element, we traverse the tree, first finding the
+  element to remove and then the smallest key greater than it. On the way
+  down, we fix 2-nodes. If a 2-node is reached, we first try to borrow from
+  a sibling and perform a {\bf rotation}:
+
+  \vspace{1em}
+  {\bf Case 1: Rotation}
+
+  \pause
+  \tikzstyle{level 1}=[level distance=3em, sibling distance=4em]
+  \tikzstyle{level 2}=[level distance=3em, sibling distance=2em]
+  \tikzstyle{node} = [rectangle, draw]
+
+  \vspace{2em}
+  \begin{tikzpicture}[grow=down]
+    \node[node] {A}
+      child {
+      node[node] {{\bf B}}
+          child {
+            node {a}
+          }
+          child {
+            node {b}
+          }
+      }
+      child {
+        node[node] {C $\cdot$ D}
+          child {
+            node {c}
+          }
+          child {
+            node {d}
+          }
+          child {
+            node {e}
+          }
+      };
+
+      \node[node] at (5, 0) {C}
+      child {
+      node[node] {{\bf B} $\cdot$ A}
+          child {
+            node {a}
+          }
+          child {
+            node {b}
+          }
+          child {
+            node {c}
+          }
+      }
+      child {
+        node[node] {D}
+          child {
+            node {d}
+          }
+          child {
+            node {e}
+          }
+      };
+  \end{tikzpicture}
+\end{frame}
+
+\begin{frame}[fragile]{2-3-4 Trees: Review}
+  If there are no siblings that are not 2-nodes, then a key needs to be
+  borrowed from the parent in a {\bf fusion} operation:
+
+  \vspace{1em}
+
+  {\bf Case 2: Fusion}
+
+  \pause
+  \tikzstyle{level 1}=[level distance=3em, sibling distance=6em]
+  \tikzstyle{level 2}=[level distance=3em, sibling distance=2em]
+  \tikzstyle{node} = [rectangle, draw]
+
+  \vspace{2em}
+  \begin{tikzpicture}[grow=down]
+    \node[node] {A $\cdot$ B}
+      child {
+        node[node] {{\bf C}}
+          child {
+            node {a}
+          }
+          child {
+            node {b}
+          }
+      }
+      child {
+        node[node] {D}
+          child {
+            node {c}
+          }
+          child {
+            node {d}
+          }
+      }
+      child {
+        node[node] {E}
+          child {
+            node {e}
+          }
+          child {
+            node {f}
+          }
+      };
+
+      \node[node] at (7, 0) {B}
+      child {
+        node[node] {{\bf C} $\cdot$ A $\cdot$ D}
+          child {
+            node {a}
+          }
+          child {
+            node {b}
+          }
+          child {
+            node {c}
+          }
+          child {
+            node {d}
+          }
+      }
+      child {
+        node[node] {E}
+          child {
+            node {e}
+          }
+          child {
+            node {f}
+          }
+      };
+  \end{tikzpicture}
+\end{frame}
+
+\begin{frame}[fragile]{2-3-4 Trees: Review}
+  If the parent is also a 2-node (this will only happen at the root), then a
+  special type of fusion needs to be done:
+
+  \vspace{1em}
+
+  {\bf Case 3: Root Fusion}
+
+  \pause
+  \tikzstyle{level 1}=[level distance=3em, sibling distance=4em]
+  \tikzstyle{level 2}=[level distance=3em, sibling distance=2em]
+  \tikzstyle{node} = [rectangle, draw]
+
+  \vspace{2em}
+  \begin{tikzpicture}[grow=down]
+    \node[node] {A}
+      child {
+        node[node] {{\bf B}}
+          child {
+            node {a}
+          }
+          child {
+            node {b}
+          }
+      }
+      child {
+        node[node] {C}
+          child {
+            node {c}
+          }
+          child {
+            node {d}
+          }
+      };
+
+      \node[node] at (5, -1) {B $\cdot$ A $\cdot$ C}
+        child {
+          node {a}
+        }
+        child {
+          node {b}
+        }
+        child {
+          node {c}
+        }
+        child {
+          node {d}
+        };
+  \end{tikzpicture}
+\end{frame}
+
+\begin{frame}[fragile]{2-3-4 Trees}
+  Given the following 2-3-4 tree:
+
+  \vspace{2em}
+  \tikzstyle{level 1}=[level distance=3em, sibling distance=8em]
+  \tikzstyle{level 2}=[level distance=3em, sibling distance=4em]
+  \tikzstyle{node} = [rectangle, draw]
+
+  \begin{tikzpicture}[grow=down]
+    \node[node] {30 $\cdot$ 42 $\cdot$ 57}
+      child {
+        node[node] {21}
+          child {
+            node[node] {16}
+          }
+          child {
+            node[node] {25}
+          }
+      }
+      child {
+        node[node] {35}
+          child {
+            node[node] {32}
+          }
+          child {
+            node[node] {38}
+          }
+      }
+      child {
+        node[node] {45}
+          child {
+            node[node] {43}
+          }
+          child {
+            node[node] {50}
+          }
+      }
+      child {
+        node[node] {65}
+          child {
+            node[node] {59}
+          }
+          child {
+            node[node] {69}
+          }
+      };
+  \end{tikzpicture}
+
+  \vspace{2em}
+  Draw what it looks like after each of the following consecutive method
+  calls:
+  \begin{itemize}
+    \item
+      {\tt insert(60)}
+    \item
+      {\tt insert(68)}
+    \item
+      {\tt remove(59)}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{2-3-4 Trees}
+  After {\tt insert(60)}:
+
+  \tikzstyle{level 1}=[level distance=2em, sibling distance=12em]
+  \tikzstyle{level 2}=[level distance=2em, sibling distance=6em]
+  \tikzstyle{level 3}=[level distance=2em, sibling distance=3em]
+  \tikzstyle{node} = [rectangle, draw]
+
+  \pause
+  \vspace{1em}
+  \begin{tikzpicture}[grow=down]
+    \node[node] {40}
+      child {
+        node[node] {30}
+          child {
+            node[node] {21}
+              child {
+                node[node] {16}
+              }
+              child {
+                node[node] {25}
+              }
+          }
+      child {
+        node[node] {35}
+          child {
+            node[node] {32}
+          }
+          child {
+            node[node] {38}
+          }
+      }
+    }
+    child {
+      node[node] {47}
+        child {
+          node[node] {45}
+            child {
+              node[node] {43}
+            }
+            child {
+              node[node] {50}
+            }
+        }
+        child {
+          node[node] {65}
+            child {
+              node[node] {59}
+            }
+            child {
+              node[node] {69}
+            }
+        }
+    };
+  \end{tikzpicture}
+
+  \vspace{2em}
+
+  After {\tt insert(68)}:
+
+  \pause
+  \vspace{1em}
+  \begin{tikzpicture}[grow=down]
+    \node[node] {40}
+      child {
+        node[node] {30}
+          child {
+            node[node] {21}
+              child {
+                node[node] {16}
+              }
+              child {
+                node[node] {25}
+              }
+          }
+      child {
+        node[node] {35}
+          child {
+            node[node] {32}
+          }
+          child {
+            node[node] {38}
+          }
+      }
+    }
+    child {
+      node[node] {47}
+        child {
+          node[node] {45}
+            child {
+              node[node] {43}
+            }
+            child {
+              node[node] {50}
+            }
+        }
+        child {
+          node[node] {65}
+            child {
+              node[node] {59}
+            }
+            child {
+              node[node] {68 $\cdot$ 69}
+            }
+        }
+    };
+  \end{tikzpicture}
+\end{frame}
+
+\begin{frame}[fragile]{2-3-4 Trees}
+  After {\tt remove(59)}:
+
+  \tikzstyle{level 1}=[level distance=3em, sibling distance=10em]
+  \tikzstyle{level 2}=[level distance=3em, sibling distance=2em]
+  \tikzstyle{node} = [rectangle, draw]
+
+  \pause
+  \vspace{1em}
+  \begin{tikzpicture}[grow=down]
+    \node[node] {30 $\cdot$ 40}
+      child {
+        node[node] {21}
+          child {
+            node[node] {16}
+          }
+          child {
+            node[node] {25}
+          }
+      }
+      child {
+        node[node] {35}
+          child {
+            node[node] {32}
+          }
+          child {
+            node[node] {38}
+          }
+      }
+      child {
+        node[node] {45 $\cdot$ 47 $\cdot$ 68}
+          child {
+            node[node] {43}
+          }
+          child {
+            node[node] {50}
+          }
+          child {
+            node[node] {59}
+          }
+          child {
+            node[node] {69}
+          }
+      };
+  \end{tikzpicture}
+\end{frame}
+
+% Hashing %
+% ------------------------------------------------------------------------ %
+\section{Hashing}
+\subsection{Hash Tables}
+\begin{frame}{Hash Tables}
+
+  {\tt put(key, value)}:
+  \begin{enumerate}
+    \pause
+    \item
+      The key (must be an object!) has its {\tt hashCode()} method called by
+      the hash table
+    \pause
+    \item
+      The key is compressed (usually a modulo function) into the range of
+      the number of buckets
+    \pause
+    \item
+      The key and value are stored into the corresponding bucket
+  \end{enumerate}
+
+  \vspace{1em}
+  {\tt get(key)}:
+  \begin{enumerate}
+    \pause
+    \item
+      The key's {\tt hashCode()} is compressed to find the appropriate
+      bucket
+    \pause
+    \item
+      The contents of the bucket are searched for the key
+  \end{enumerate}
+
+  \pause
+  Common implementations:
+  \begin{enumerate}
+    \pause
+    \item
+      Buckets represented as an array
+    \pause
+    \item
+      Items in buckets can be put in linked lists
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}{Analysis}
+  What's the running time for {\tt put()}?
+  \begin{itemize}
+    \pause
+    \item
+      Running time: $O(1)$ (constant time -- why?)
+  \end{itemize}
+
+  \vspace{1em}
+  What's the running time for {\tt get()}?
+  \begin{itemize}
+    \pause
+    \item
+      Let $b$ be the number of buckets and $n$ be the number of key-value
+      pairs in the {\tt hash table}
+    \pause
+    \item
+      Finding the appropriate bucket is a constant-time operation (why?)
+    \pause
+    \item
+      On average, there are $n/b$ elements in a bucket
+    \pause
+    \item
+      Finding the key in a bucket is proportional to the number of items in the bucket
+    \pause
+    \item
+      Running time: $O(n/b)$
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Analysis}
+  What happens if $b$ is constant?
+  \begin{itemize}
+    \item
+      We end up with a linear-time {\tt get()}, which is no better than
+      storing key-value pairs in an {\tt ArrayList}!
+  \end{itemize}
+  \pause
+  Solution: Keep $b$ proportional to $n$
+
+  \begin{itemize}
+    \pause
+    \item
+      Let $k$ be the proportionality constant -- define $k = n/b$ = average
+      number  of key-value pairs in a bucket
+    \pause
+    \item
+      Once we have more than $b*k$ key-value pairs, we double the size of
+      the array and re-hash all of our key-value pairs
+    \pause
+    \item
+      How long does this take?
+    \begin{itemize}
+      \pause
+      \item
+        Creating a new array takes $O(n)$ time
+      \pause
+      \item
+        For each key-value pair, {\tt put(key, value)} takes constant time
+        -- there are $b*k$ pairs, so it takes $O(b*k) = O(n)$ time
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Hash Tables}{Analysis}
+  How long will {\tt put()} take?
+  \begin{itemize}
+    \pause
+    \item
+      Take average running time -- divide the running time to insert $n$
+      key-value pairs by $n$
+    \begin{itemize}
+      \pause
+      \item
+        We need to double the array $\log{n}$ times, which will take
+        \[\dots + n/8 + n/4 + n/2 + n = 2n = O(n)\]
+      \pause
+      \item
+        Other than doubling the array, insertion takes constant time for
+        each key-value pair, so an additional $O(n)$ time required
+      \pause
+      \item
+        Total time: $O(n+n) = O(n)$ time, so average (amortized) running
+        time is $O(n/n) = O(1)$ time -- constant time!
+    \end{itemize}
+  \end{itemize}
+
+  How long will {\tt get()} take?
+  \begin{itemize}
+    \pause
+    \item
+      The average bucket size is no greater than $k$ (a constant)
+    \pause
+    \item
+      Time to search a bucket is proportional to $k$
+    \pause
+    \item
+      Running time: $O(k) = O(1)$
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Hash Codes}{Review}
+  What makes a hash code good?
+  \begin{itemize}
+    \pause
+    \item
+      If two numbers are {\tt .equals()}, then their hash codes {\bf must}
+      be the same!
+    \pause
+    \item
+      Avoid collisions
+    \begin{itemize}
+      \pause
+      \item
+        Collisions -- two objects have the same hash code
+      \pause
+      \item
+        Too many collisions for one bucket will slow down {\tt get()}
+    \end{itemize}
+    \pause
+    \item
+      Should be able to compute hash codes quickly
+  \end{itemize}
+\end{frame}
+
+
+
+
+\end{document}
+
