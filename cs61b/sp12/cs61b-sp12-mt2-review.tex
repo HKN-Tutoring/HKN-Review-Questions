@@ -192,8 +192,7 @@ University of California, Berkeley}
   \uncover<3>{\begin{framed}
     Because the constant $c$ is in the exponent of a logarithm, it can be
     pulled out:
-    \[f(n)\log_2{(f(n)^c)} = cf(n)\log_2{(f(n))}; g(n)\log_2{(g(n))^c} =
-    cg(n)\log_2{g(n)}\]
+    \[f(n)\log_2{(f(n)^c)} = cf(n)\log_2{(f(n))}\]
     Which will not affect the big-O relationship.
   \end{framed}}
 \end{frame}
@@ -303,7 +302,7 @@ University of California, Berkeley}
   Select the strongest correct answer:
 
   \begin{quote}
-    The {\bf average-case} running time for {\tt insert()} into a hash table
+    The {\bf average-case} running time for {\tt put()} into a hash table
     with $n$ entries is
   \end{quote}
 
@@ -323,7 +322,7 @@ University of California, Berkeley}
   Select the strongest correct answer:
 
   \begin{quote}
-    The {\bf worst-case} running time for {\tt insert()} into a hash table
+    The {\bf worst-case} running time for {\tt get()} into a hash table
     with $n$ entries is
   \end{quote}
 
@@ -339,7 +338,7 @@ University of California, Berkeley}
   \end{enumerate}
 \end{frame}
 
-% Algorithm Analysis %
+% Asymptotic Analysis %
 % ------------------------------------------------------------------------ %
 \section{Asymptotic Analysis}
 \subsection{Asymptotic Analysis}
@@ -417,11 +416,78 @@ University of California, Berkeley}
   and thus $(n+a)^b \in \Omega(n^b)$.
 
   (Show $O$): Take $d=2^b$ ($b$ is a constant, so this is valid) and $N=a$.
-  Then for any $n > N = a$, surely $2n > n+a$, so
+  Then for any $n > N = a$, surely $n+a < 2n$, so
   \[(n+a)^b < 2^b n^b = (2n)^b\]
   and thus $(n+a)^b \in O(n^b)$, and $(n+a)^b \in \Theta(n^b)$.
   \qed
   }
+\end{frame}
+
+% Graphs %
+% ------------------------------------------------------------------------ %
+\section{Graphs}
+\subsection{Graphs}
+\begin{frame}[fragile]{Graphs}
+
+  {\small
+  Suppose you have a complete graph with $n$ vertices (that is, between each
+  pair of distinct nodes, there exists an edge). Suppose you run the
+  following algorithm to find the shortest path between a vertex $u$ and a
+  goal node.  What is the running time of this algorithm:
+  }
+
+  {\small
+  \begin{lstlisting}
+public class Graph {
+    public int slow-dfs(Vertex u, Vertex goal) {
+        // clearly shortest path from goal to goal is zero
+        if (u.equals(goal)) return 0;
+        u.visited = true; // Mark the vertex u visited
+        shortestPath = infinity; // a large number
+        for (each edge e adjacent to u in E) {
+            v = e.destination;
+            if (!v.visited) {
+                testPath = e.weight + slow-dfs(v, goal);
+                if (testPath < shortestPath) {
+                    shortestPath = testPath;
+                }
+            }
+        }
+        u.visited = false; // unvisit u, since we want to
+                           // consider all orders of vertices
+        return shortestPath;
+    }
+}
+  \end{lstlisting}
+  }
+\end{frame}
+
+\begin{frame}[fragile]{Graphs}
+
+  {\bf Answer:}
+  Running the algorithm will take time proportional to the number of ways we
+  can order the nodes, so this algorithm takes $O(n!)$ time.
+\end{frame}
+
+\begin{frame}[fragile]{Graphs}
+  Suppose we have a connected graph $G$ with all edge weights distinct. How
+  many minimum spanning trees exist in $G$?
+  \vspace{2em}
+
+  \pause
+  If there are two minimum spanning trees $A$ and $B$ of $G$, then
+
+  \begin{itemize}
+    \item
+      There exists some edge $e_1\in A$ that is not in $B$.
+    \item
+      $B \cup e_1$ has a cycle $C$
+    \item
+      There is another edge $e_2\in C$. Without loss of generality (if not,
+      switch $A$ and $B$), the weight of $e_2$ is greater than that of
+      $e_1$, and removing it will form a spanning tree with weight smaller
+      than $B$, which is a contradiction.
+  \end{itemize}
 \end{frame}
 
 % Trees %
@@ -462,9 +528,7 @@ University of California, Berkeley}
 
 \begin{frame}[fragile]{Binary Search Trees: Review}
   To {\tt insert()} an element, traverse the tree like {\tt find()}
-  until a leaf node is reached. Insert the element as the right or left
-  child of the leaf, depending on if it is greater than or less than the
-  leaf.
+  until an empty tree is reached. Insert the element into that spot.
 
   \vspace{2em}
 
@@ -694,7 +758,7 @@ University of California, Berkeley}
 
   \uncover<3->{\begin{framed}
     Given the shape of the tree, if there are $\ell$ nodes in the left
-    subtree, the root must the the $\ell+1$th smallest key. The keys can
+    subtree, the root must be the $\ell+1$th smallest key. The keys can
     then be recursively assigned to the left and right subtrees.
   \end{framed}}
 \end{frame}
@@ -708,8 +772,8 @@ University of California, Berkeley}
       the last, which is filled from left to right.
     \item
       The {\em heap property} or {\em heap invariant} holds for all nodes of
-      the tree: If $B$ is a descendant of $A$, then the key of $B$ is less
-      than or equal to that of $A$.
+      the tree: If $B$ is a descendant of $A$, then the key of $B$ is
+      greater than or equal to that of $A$ (for a min heap).
   \end{itemize}
 
   \pause
@@ -781,8 +845,7 @@ University of California, Berkeley}
 \end{frame}
 
 \begin{frame}[fragile]{Heaps}
-  Starting with an empty max heap, perform the following consecutive
-  insertions:
+  Starting with an empty {\bf max heap}, perform the following consecutive insertions:
   \begin{enumerate}
     \item
       {\tt insert(5)}
@@ -861,7 +924,7 @@ University of California, Berkeley}
 \end{frame}
 
 \begin{frame}[fragile]{Heaps}
-  Given the following heap:
+  Given the following {\bf min heap}:
 
   \tikzstyle{level 1}=[level distance=3em, sibling distance=8em]
   \tikzstyle{level 2}=[level distance=3em, sibling distance=4em]
@@ -1428,15 +1491,15 @@ University of California, Berkeley}
 \begin{frame}[fragile]{2-3-4 Trees}
   After {\tt insert(60)}:
 
-  \tikzstyle{level 1}=[level distance=2em, sibling distance=12em]
-  \tikzstyle{level 2}=[level distance=2em, sibling distance=6em]
-  \tikzstyle{level 3}=[level distance=2em, sibling distance=3em]
+  \tikzstyle{level 1}=[level distance=2em, sibling distance=14em]
+  \tikzstyle{level 2}=[level distance=2em, sibling distance=8em]
+  \tikzstyle{level 3}=[level distance=2em, sibling distance=4em]
   \tikzstyle{node} = [rectangle, draw]
 
   \pause
   \vspace{1em}
   \begin{tikzpicture}[grow=down]
-    \node[node] {40}
+    \node[node] {42}
       child {
         node[node] {30}
           child {
@@ -1459,7 +1522,7 @@ University of California, Berkeley}
       }
     }
     child {
-      node[node] {47}
+      node[node] {57}
         child {
           node[node] {45}
             child {
@@ -1472,7 +1535,7 @@ University of California, Berkeley}
         child {
           node[node] {65}
             child {
-              node[node] {59}
+              node[node] {59 $\cdot$ 60}
             }
             child {
               node[node] {69}
@@ -1488,7 +1551,7 @@ University of California, Berkeley}
   \pause
   \vspace{1em}
   \begin{tikzpicture}[grow=down]
-    \node[node] {40}
+    \node[node] {20}
       child {
         node[node] {30}
           child {
@@ -1511,7 +1574,7 @@ University of California, Berkeley}
       }
     }
     child {
-      node[node] {47}
+      node[node] {57}
         child {
           node[node] {45}
             child {
@@ -1524,7 +1587,7 @@ University of California, Berkeley}
         child {
           node[node] {65}
             child {
-              node[node] {59}
+              node[node] {59 $\cdot$ 60}
             }
             child {
               node[node] {68 $\cdot$ 69}
@@ -1537,14 +1600,14 @@ University of California, Berkeley}
 \begin{frame}[fragile]{2-3-4 Trees}
   After {\tt remove(59)}:
 
-  \tikzstyle{level 1}=[level distance=3em, sibling distance=10em]
-  \tikzstyle{level 2}=[level distance=3em, sibling distance=2em]
+  \tikzstyle{level 1}=[level distance=3em, sibling distance=12em]
+  \tikzstyle{level 2}=[level distance=3em, sibling distance=3em]
   \tikzstyle{node} = [rectangle, draw]
 
   \pause
   \vspace{1em}
   \begin{tikzpicture}[grow=down]
-    \node[node] {30 $\cdot$ 40}
+    \node[node] {30 $\cdot$ 42}
       child {
         node[node] {21}
           child {
@@ -1564,7 +1627,7 @@ University of California, Berkeley}
           }
       }
       child {
-        node[node] {45 $\cdot$ 47 $\cdot$ 68}
+        node[node] {45 $\cdot$ 57 $\cdot$ 65}
           child {
             node[node] {43}
           }
@@ -1572,10 +1635,153 @@ University of California, Berkeley}
             node[node] {50}
           }
           child {
-            node[node] {59}
+            node[node] {60}
           }
           child {
-            node[node] {69}
+            node[node] {68 $\cdot$ 69}
+          }
+      };
+  \end{tikzpicture}
+\end{frame}
+
+\subsection{Game Trees}
+\begin{frame}[fragile]{$\alpha$-$\beta$ Pruning}
+  To reduce the number of nodes visited by the minimax algorithm,
+  $\alpha$-$\beta$ pruning can be used:
+
+  \begin{itemize}
+    \pause
+    \item
+      $\alpha$ values are associated with {\sc max} nodes. They represent
+      the current best (highest) guaranteed score seen so far.
+    \pause
+    \item
+      $\beta$ values are associated with {\sc min} nodes. They represent the
+      current best (lowest) guaranteed score seen so far.
+  \end{itemize}
+
+  \pause
+  When we start $\alpha$-$\beta$ pruning, $\alpha$ values start at $-\infty$
+  and $\beta$ values start at $\infty$. We prune on two cases:
+
+  \begin{itemize}
+    \pause
+    \item
+      Search can stop below any {\sc min} node whose $\beta$ value is less
+      than or equal to the $\alpha$ value of any of its {\sc max} ancestors.
+    \pause
+    \item
+      Search can stop below any {\sc max} node whose $\alpha$ value is
+      greater than or equal to the $\beta$ value of any of its {\sc min}
+      ancestors.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{$\alpha$-$\beta$ Pruning}
+  Consider the following tree below:
+
+  \tikzstyle{level 1}=[level distance=2cm, sibling distance=3cm]
+  \tikzstyle{level 2}=[level distance=2cm, sibling distance=1cm]
+  \tikzstyle{box} = [regular polygon, regular polygon sides=4, draw, text
+  width=1em]
+  \tikzstyle{end} = [regular polygon, regular polygon sides=3, draw,]
+
+  \begin{tikzpicture}[grow=down]
+    \node[box] {}
+      child {
+        node[box] {}
+          child {
+            node[end, label=below:5] {}
+          }
+          child {
+            node[end, label=below:12] {}
+          }
+          child {
+            node[end, label=below:8] {}
+          }
+      }
+      child {
+        node[box] {}
+          child {
+            node[end, label=below:3] {}
+          }
+          child {
+            node[end, label=below:200] {}
+          }
+          child {
+            node[end, label=below:1] {}
+          }
+      }
+      child {
+        node[box] {}
+          child {
+            node[end, label=below:8] {}
+          }
+          child {
+            node[end, label=below:4] {}
+          }
+          child {
+            node[end, label=below:13] {}
+          }
+      };
+  \end{tikzpicture}
+
+  Determine which nodes will be pruned using $\alpha$-$\beta$ pruning and
+  the final minimax value of the root. Assume the first player is {\sc max}.
+\end{frame}
+
+\begin{frame}[fragile]{$\alpha$-$\beta$ Pruning}
+
+  {\bf Solution:}
+
+  \tikzstyle{level 1}=[level distance=2cm, sibling distance=3cm]
+  \tikzstyle{level 2}=[level distance=2cm, sibling distance=1cm]
+  \tikzstyle{box} = [regular polygon, regular polygon sides=4, draw, text
+  width=1em]
+  \tikzstyle{end} = [regular polygon, regular polygon sides=3, draw,]
+
+  \begin{tikzpicture}[grow=down]
+    \node[box] {5}
+      child {
+        node[box] {5}
+          child {
+            node[end, label=below:5] {}
+          }
+          child {
+            node[end, label=below:12] {}
+          }
+          child {
+            node[end, label=below:8] {}
+          }
+      }
+      child {
+        node[box] {3}
+          child {
+            node[end, label=below:3] {}
+          }
+          child {
+            node[end, label=below:200] {}
+            edge from parent
+            node[] {$\times$}
+          }
+          child {
+            node[end, label=below:1] {}
+            edge from parent
+            node[] {$\times$}
+          }
+      }
+      child {
+        node[box] {4}
+          child {
+            node[end, label=below:8] {}
+          }
+          child {
+            node[end, label=below:4] {}
+          }
+          child {
+            node[end, label=below:13] {}
+            edge from parent
+            node[] {$\times$}
           }
       };
   \end{tikzpicture}
