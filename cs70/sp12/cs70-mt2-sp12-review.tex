@@ -1,0 +1,277 @@
+% Thanks to Dan Wang for the Beamer template!
+
+\documentclass[9pt]{beamer}
+
+% Fill in variables below %
+% ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ %
+\newcommand{\thesemester}{Spring 2012}
+\newcommand{\themidterm}{CS 70 Midterm 2 Review}
+\newcommand{\theauthors}{Sung Roa Yoon, Edwin Liao, Vamsi Chitters, Jonathan Ho, Shawn Mei (with some questions by Chris Gioia)}
+\newcommand{\theorganization}{Eta Kappa Nu, Mu Chapter \\
+University of California, Berkeley}
+\newcommand{\thedate}{April 8 2012}
+\newcommand{\thelanguage}{Java}
+% ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ %
+
+% Preamble %
+% ---------------------------------------------------------------------------- %
+\usepackage{url}
+\usepackage{relsize}
+\usepackage{color}
+\usepackage{listings}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{bm}
+\usepackage{framed}
+\usepackage{amsfonts}
+
+% Listings Package %
+\usepackage{listings}
+\lstset{numbers=left,
+    basicstyle=\ttfamily,
+    numberstyle=\tiny,
+    showstringspaces=false,
+    frame=leftline,
+    language=Java,
+    escapeinside=\$\$,
+    keywordstyle=\color{blue},
+    xleftmargin=20pt,
+    morecomment=[l]{//},
+    }
+
+\usetheme{Singapore}
+\setbeamertemplate{mini frames}[circle]
+\setbeamertemplate{footline}[frame number]
+
+
+\title{\themidterm}
+\author{\theauthors}
+\institute{\theorganization}
+\date{\thedate}
+% ---------------------------------------------------------------------------- %
+
+\begin{document}
+
+% Title Page %
+% ---------------------------------------------------------------------------- %
+
+\begin{frame}[fragile]
+  \titlepage
+\end{frame}
+
+
+% Counting/Probability %
+% ---------------------------------------------------------------------------- %
+\section{Counting/Probability}
+\subsection{Counting/Probability}
+
+\begin{frame}[fragile]
+  \frametitle{Poisson's Paradise} 
+{\small
+On an island called Poisson's Paradise, the government is trying to create a social security system that will help uniquely identify the different citizens that live on the island. Their outdated database only allows them to store SSN's that contain exactly 2 different numerical digits (where each social security number is 11 digits long). As more and more people move to this island, the government officials are wondering whether there are enough unique SSN's for all of the people. \\ \vspace{5.0mm}
+\uncover<2->{If I choose the two numbers to be 3 and 5: \\ \vspace{3.0mm}
+An example valid SSN is: \\
+\underline{3} \underline{3} \underline{5} \underline{5} \underline{3} \underline{3} \underline{5} \underline{3} \underline{3} \underline{5} \underline{3} \\ \vspace{3.0mm}
+An example of an invalid SSN is: \\
+\underline{3} \underline{3} \underline{5} \underline{5} \underline{3} \underline{3} \underline{5} \underline{3} \underline{3} \underline{5} \underline{7} (invalid because the SSN contains more than two types of digits)} \\ \vspace{5.0mm}
+\uncover<3->{How many different social security numbers can they create that contain exactly 2 different numerical digits? (You may leave it as an unsimplified expression).} \\
+\uncover<4->{\alert<4> {${10 \choose 2} \times (2^{11} - 2)$}}
+}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{U.S. Senators}
+Each of the 50 states has two US senators. A committee of 20 senators is chosen uniformly at random from among all 100 senators.
+\begin{enumerate}[(a)]
+\uncover<2->{\item Let A be the event that the committee includes both of the senators from California. What is the probability of A?}
+\uncover<3->{\alert<3>{ $\frac{{98 \choose 18}}{ {100 \choose 20} }$ }}\\
+\uncover<2->{\item What is the probability that at least one state has two members in the committee?}
+\uncover<4->{\alert<4>{ $1 - \frac{ {50 \choose 20} \cdot 2^{20} }{{100 \choose 20}}$}}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Sorting Files}
+James is a clerk. He is asked to organize three types of files. The three types are $a$, $b$, and $c$. There are $m$ files of each type.
+\begin{enumerate}[(a)]
+\uncover<2->{ \item How many distinguishable ways are there to organize these three files? }
+\uncover<3->{\alert<3>{ $\frac{(3m)!}{(m!)^3}$}}\\
+\uncover<2->{  \item Suppose the boss asks James to organize the files so that all types of files are contiguous to each other. For instance, if $m$ = 3, the sequence $bbbaaaccc$ is contiguous, but the sequence $bbaabaccc$ is not contiguous. What is the probability that a random permutation of the files will be contiguous?}
+\uncover<4->{\alert{ $\frac{3!(m!)^3}{(3m)!}$ }}
+\end{enumerate}
+\end{frame}
+
+
+
+% Random Variables and Expectation %
+% ---------------------------------------------------------------------------- %
+\section{Random Variables and Expectation}
+\subsection{Random Variables and Expectation}
+
+\begin{frame}[fragile]
+  \frametitle{Random variables mod p}
+Let the random variables $X$ and $Y$ be distributed independently and uniformly at random in the set ${0, 1, \dots, p-1}$, where $p>2$ is a prime. \\
+\begin{enumerate}[(a)]
+\uncover<2->{\item What is the expectation $\mathbb{E}[X]$?}
+\uncover<3->{\alert<3>{ $\frac{p-1}{2}$ }}\\
+\uncover<2->{\item Let $S = (X + Y) \mod p$ and $T = XY \mod p$. What are the distributions of $S$ and $T$?}
+\uncover<4->{\alert<4>{ $P(S = i) = \frac{1}{p}, i \in \{0, 1, \dots, (p-1)\}; P(T = 0) = \frac{2p-1}{p^2}, P(T = i) = \frac{p-1}{p^2}, i \in \{1, 2, \dots , (p-1) \}$ }}\\
+\uncover<2->{\item What are the expectations $\mathbb{E}[S]$ and $\mathbb{E}[T]$?}
+\uncover<5->{\alert<5>{ $\mathbb{E}[S] = \frac{(p-1)}{2}; \mathbb{E}[T] = \frac{(p-1)^2}{2p} $ }}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Coin Flips}
+Say we're flipping a fair coin repeatedly. Assume all the flips are independent. \\
+\begin{enumerate}[(a)]
+\uncover<2->{ \item What is the expected number of flips we need to make to get a head? }
+\uncover<3->{ \alert<3>{2}}\\
+\uncover<2->{ \item What is the expected number of flips we need to make to get two consecutive heads?}
+\uncover<4->{ \alert<4>{6}}
+\end{enumerate}
+\end{frame}
+
+
+
+% Conditional Probability %
+% ---------------------------------------------------------------------------- %
+\section{Conditional Probability}
+  \subsection{Conditional Probability}
+
+\begin{frame}[fragile]
+  \frametitle{Am I Crazy?}
+Chris wants to know if he has bipolar disorder. Let $C$ be the event that Chris has bipolar disorder. The incidence of bipolar disorder in the general population is 1\%. He is really poor, so he asks his older brother Alex to make his diagnosis. If someone has bipolar disorder, Alex correctly identifies it 80\% of the time, but if someone does not have bipolar disorder, Alex makes a false accusation of bipolar 30\% of the time. Let $A$ be the event that Alex diagnoses Chris of having bipolar disorder. Assume $Pr[C]$ = 0.01. \\
+\begin{enumerate}[(a)]
+\uncover<2->{\item Find $Pr[A|C]$ }
+\uncover<3->{\alert<3>{ 0.8 }}\\ 
+\uncover<2->{\item Find $Pr[A]$}
+\uncover<4->{\alert<4>{ 0.305 }}\\ 
+\uncover<2->{\item Find $Pr[C|A]$ (The probability that Chris has bipolar disorder given that Alex diagnoses him with bipolar disorder). }
+\uncover<5->{\alert<5>{ $\frac{8}{305}$ }}\\
+\uncover<2->{\item Let $B$ be the event that Chris receives a correct diagnoses from Alex. Find $Pr[B]$ }
+\uncover<6->{\alert<6>{ $0.701$ }}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Am I Crazy? (cont.)}
+\begin{enumerate}[(a)]
+\setcounter{enumi}{4}
+\item Let's generalize the answer to (d). Let $D$ be the event that a psychologist diagnoses Chris as having bipolar disorder. $Pr[D|C] = p$ and $Pr[D|\neg C] = q$. Let $Pr[C] = s$. Let $B'$ be the event that Chris receives a correct diagnosis from the psychologist. \\
+\begin{enumerate}[i]
+\uncover<2->{\item Find $Pr[B'].$ }
+\uncover<3->{\alert<3>{ $sp+(1-s)(1-q)$ }}\\ \vspace{5.00mm}
+\uncover<2->{\item What is the effect of raising p? (Does this make intuitive sense?) }\\
+\uncover<4->{\alert<4>{ Increases accuracy of diagnosis }}\\ \vspace{5.00mm}
+\uncover<2->{\item What is the effect of raising q? (Does this make intuitive sense?) }\\
+\uncover<5->{\alert<5>{ Decreases accuracy of diagnosis }}\\ \vspace{5.00mm}
+\uncover<2->{\item What is the effect of raising s? (Why is this the case?) }\\
+\uncover<6->{\alert<6>{ It depends... }}
+\end{enumerate}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Search and Rescue}
+Suppose there is a boy missing. He can either be in the city $C$ or the forest $F$ with equal likelihood. The local fire department can only search the city. Each day, the local fire department has a 50\% chance of finding the boy, independent of the previous days. \\
+\begin{enumerate}[(a)]
+\uncover<2->{\item After how many days of searching the city and not finding the boy will the probability that the boy is in the forest be greater than 90\%?}
+\uncover<3->{\alert<3>{5}}
+\uncover<2->{\item Suppose the local fire department has searched the city for \textbf{at most} 2 days.
+\begin{enumerate}[i]
+\item What is the probability that they found the boy? \uncover<4->{\alert<4>{ $\frac{3}{8}$ }}
+\item What is the probability that they can correctly determine if the boy is in the city or the forest? \uncover<5->{\alert<5>{ $\frac{7}{8}$ }}
+\end{enumerate}
+}
+\end{enumerate}
+\end{frame}
+
+
+% Distributions %
+% ---------------------------------------------------------------------------- %
+\section{Distributions}
+\subsection{Distributions}
+
+\begin{frame}[fragile]
+  \frametitle{Distributions}
+Solve each of the following:
+\begin{enumerate}[(a)]
+\uncover<2->{\item Every Starcraft game you play, you have a 55\%  chance of winning. If you play 10 games today, what is the probability that you will win more than 8 of them? \\}
+\uncover<3->{\alert<3>{ Binomial distribution: ${10 \choose 9} \cdot 0.55^9 \cdot 0.45^1 + {10 \choose 10} \cdot 0.55^{10} \cdot 0.45^0 $ }} \\
+\uncover<2->{\item On your daily drive to school, you pass by an average of 10 cars. What is the probability that you will pass by 50 cars tomorrow? } \\
+\uncover<4->{\alert<4>{ Poisson distribution: $\lambda = 10 \implies \frac{10^{50}}{50!} \cdot e^{-10} $ }} \\
+\uncover<2->{ \item If you are trapped on an island where all the fresh water is contaminated and you have a 2\% chance of getting water poisoning each day, how many days can you expect to survive without getting poisoned?}\\
+\uncover<5->{\alert<5>{ Geometric distribution: $E(X) = \frac{1}{p} \implies \text{You will live for } \frac{1}{0.02} = 50 \text{ days.} $ }}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Distributions (cont.)}
+When you solve homework problems, you can solve an average of 10 per day. However, because you are often busy on Reddit and/or Facebook, you get easily distracted and you usually get 80\% of them correct. What is the probability that you will solve 30 questions \textbf{and} get exactly 20 of them correct on any given day? \\
+\uncover<2->{\alert<2>{
+\begin{eqnarray}
+& &\text{Pr[You answer 30 questions} \cap \text{You answer 20 questions correctly]} \nonumber \\
+&=& \text{Pr[You answer 30 questions]} \nonumber \\
+& & \times \text{Pr[You get 20 questions correct } | \text{ You answer 30 questions]} \nonumber \\
+&=& \frac{10^{30}}{30!} \cdot e^{-10} \cdot {30 \choose 20} \cdot 0.8^{20} \cdot 0.2^{10} \nonumber
+\end{eqnarray}
+}}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{The evolution of a social network (Midterm 2, Fall 2011)}
+Say one person in a class of $n$ people knows a secret, perhaps where the midterm is. Occasionally, a randomly chosen person $A$ \textbf{who doesn't know the secret} calls a randomly chosen person $B (B \neq A)$ and learns the secret if $B$ knows it. Let $X_2$ be a random variable that represents the number of calls (no two calls are simultaneous) until two people know the secret. \\ \vspace{5.00mm} 
+\begin{enumerate} [(a)]
+\uncover<2->{\item What is the distribution of $X_2$?}
+\uncover<3->{\alert<3>{ Geometric, $p = \frac{1}{n-1}$}}\\
+\uncover<2->{\item What is $E[X_2]$?}
+\uncover<4->{\alert<4> {$n-1$}}\\
+\uncover<5->{\item Let $X_i$ be the number of calls needed to go from $i-1$ people knowing the secret to $i$ people. What is $E[X_i]$?}
+\uncover<6->{\alert<6>{ $\frac{n-1}{i-1} $}}\\
+\uncover<5->{\item What is the expected time for everyone to know the secret? }\\
+\uncover<7->{\alert<7>{ $\displaystyle\sum\limits_{i \ge 2}^n \frac{n-1}{i-1} = (n-1)(\ln (n-1) + \gamma)$ }}
+\end{enumerate}
+\end{frame}
+
+
+
+% Graphs %
+% ---------------------------------------------------------------------------- %
+\section{Graphs}
+\subsection{Graphs}
+
+\begin{frame}[fragile]
+  \frametitle{Graphs}
+Wikipedia: "A \textbf{complete} graph is an undirected graph in which every pair of distinct vertices is connected by a unique edge."
+\begin{enumerate}[(a)]
+\item How many edges are in a complete graph with 100 nodes? \uncover<2->{\alert<2>{ $\frac{100 \cdot 99}{2}$ }}
+\item Does an Eulerian path exist such a graph? \uncover<3->{\alert<3>{ No }}
+\item Does an Eulerian cycle exist in such a graph? \uncover<3->{\alert<3>{ No }}
+\item Does a Hamiltonian path exist in such a graph? \uncover<4->{\alert<4>{ Yes }}
+\item Does a Hamiltonian cycle exist in such a graph? \uncover<4->{\alert<4>{ Yes }}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Graphs (cont.)}
+Now we generate a complete graph with 101 nodes. Then we remove 1 randomly chosen edge.
+\begin{enumerate}[(a)]
+\item Does an Eulerian path exist in this graph?  \uncover<2->{\alert<2>{ Yes }}
+\item Does an Eulerian cycle exist in this graph?  \uncover<3->{\alert<3>{ No }}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Hamiltonian Paths and Cycles}
+How do you determine whether a graph has a Hamiltonian path/cycle? \\
+\uncover<2->{\alert<2>{ You take CS170. This is an NP-complete problem. }}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Hypercubes}
+\uncover<2->{\alert<2->{\begin{center}\Huge{...?}\end{center}}}
+\end{frame}
+
+
+\end{document}
