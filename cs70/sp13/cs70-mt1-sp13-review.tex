@@ -97,7 +97,62 @@ p(x) &=& 0 \cdot \delta_1 + 1 \cdot \delta_2 + 0 \cdot \delta_3 = -x^2 + 4x -3 =
 \subsection{Stable Marriage}
 
 \begin{frame}[fragile]
-  \frametitle{Winning the Lottery}
+  \frametitle{Stable Marriage Question}
+  {\bf Objective}: Given that there are n men and n women, match them up (male to female pairing) in such a way that there are no {\it rogue couples}.\newline
+  
+\uncover<2->{
+  {\bf Rogue couples}: A man and a woman who prefer each other as opposed to their current partners. (BOTH sides must prefer each other to their current partners!)
+  }
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Few thins to note}
+I'm not going to go over the whole proof with you, for the sake of time, but you should have a look at it again. Instead, how about some pointers to help you remember a few key facts?
+\begin{enumerate}
+\uncover<2->{
+\item
+  {\bf TMA is male-optimal}: You can think of it this way - if all of the males prefer unique woman for their first choice, would the women have ANY say in the matter?\\
+  {\it Remember, male-optimal means that every male has the highest choice woman he can be hoped to paired with in ANY stable pairing.}
+  }
+\uncover<3->{
+\item
+{\bf Stable pairing that is both male- and female-optimal}: Is it possible to have both in a stable pairing? Yes. However, that also means that there is only 1 stable pairing possible, as that specific pairing needs to be both Male-optimal AND male-pessimal, female-optimal AND female-pessimal.
+}
+\uncover<4-> {
+\item 
+{\bf Runtime of TMA}: TMA has runtime of $O(n^2)$. You can think of it this way - even in the worst case situation, there will be at least 1 man who was rejected at each cycle. Since there are n men and each has n choices, there will be at longest $n^2$ number of iterations.
+}
+\end{enumerate}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Go go go!}
+Now let's try a practice question.\\ 
+What is the female-optimal pairing in this set?\\ %Sarah, Ariel, Mira, Nova, Jim, Tychus, Matt, Horace
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+Male Pref & 1 & 2 & 3 & 4\\
+\hline
+Jim & S & A & M & N\\
+Matt & A & N & M & S\\
+Valerian & N & A & M & S\\
+Tychus & M & N & A & S\\
+\hline
+\end{tabular}
+\quad
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+Female Pref & 1 & 2 & 3 & 4\\
+\hline
+Sarah & J & M & V & T\\
+Ariel & J & M & V & T\\
+Mira & J & V & M & T\\
+Nova & V & M & J & T\\
+\hline
+\end{tabular}
+\newline
+\\
+\uncover<2->{\alert<2>{
+The female-optimal pairings are: \{(Sarah, Jim), (Ariel, Matt), (Nova, Valerian), (Mira, Tychus)\}
+}}
 \end{frame}
 
 
