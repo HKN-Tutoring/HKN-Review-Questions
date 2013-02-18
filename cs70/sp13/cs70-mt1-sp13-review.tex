@@ -66,14 +66,6 @@ University of California, Berkeley}
 \section{Propositions and Proof Techniques}
 \subsection{Propositions and Proof Techniques}
 
-
-\begin{frame}[fragile]
-  \frametitle{Propositions}
-
-
-
-\end{frame}
-
 \begin{frame}[fragile]
   \frametitle{Direct Proof}
      \begin{itemize}
@@ -98,10 +90,6 @@ University of California, Berkeley}
         \end{eqnarray}
 }}
     \end{itemize}   
-
-
-
- 
 \end{frame}
 
 \begin{frame}[fragile]
@@ -134,8 +122,6 @@ x^2 = (2k + 1)^2 = 4k^2 + 4k + 1 = 2(2k^2 + 2k) + 1 \nonumber \\
 \end{frame}
 
 
-
-
 \begin{frame}[fragile]
   \frametitle{Proof by Contradiction}
 
@@ -163,10 +149,6 @@ x^2 = (2k + 1)^2 = 4k^2 + 4k + 1 = 2(2k^2 + 2k) + 1 \nonumber \\
         Therefore there is no greatest integer.
 }}
     \end{itemize}   
-
-
-
-
 \end{frame}
 
 
@@ -232,7 +214,7 @@ $mn - 1$.\newline \\
 necessary, and we observe that $g(r) = r - 1 = 0$. \newline \\
   }}
   \uncover<4->{\alert<4->{
-      Induction Hypothesis: Assume $\forall s \leq k g(s) = s - 1$. (Strong induction)\newline \\
+      Induction Hypothesis: Assume $\forall s \leq k, g(s) = s - 1$. (Strong induction)\newline \\
   }}
   \uncover<5->{\alert<5>{
       Induction Step: Prove for $P(m + 1)$. \\
@@ -245,16 +227,11 @@ Therefore, for any bar of size $mn$, it takes a minimum of $mn − 1$ breaks.
 \end{frame}
 
 
-
-
-
-
-
-
 % Stable Marriage %
 % ---------------------------------------------------------------------------- %
 \section{Stable Marriage}
 \subsection{Stable Marriage}
+
 
 \begin{frame}[fragile]
   \frametitle{Stable Marriage Question}
@@ -286,7 +263,7 @@ I'm not going to go over the whole proof with you, for the sake of time, but you
 \begin{frame}[fragile]
 \frametitle{Go go go!}
 Now let's try a practice question.\\ 
-What is the female-optimal pairing in this set?\\ %Sarah, Ariel, Mira, Nova, Jim, Tychus, Matt, Horace
+What is the male- and female-optimal pairing in this set?\\ %Sarah, Ariel, Mira, Nova, Jim, Tychus, Matt, Horace
 \begin{tabular}{|c|c|c|c|c|}
 \hline
 Male Pref & 1 & 2 & 3 & 4\\
@@ -311,6 +288,7 @@ Nova & V & M & J & T\\
 \newline
 \\
 \uncover<2->{\alert<2>{
+The male-optimal pairings are: \{(Sarah, Jim), (Ariel, Matt), (Nova, Valerian), (Mira, Tychus)\}\\
 The female-optimal pairings are: \{(Sarah, Jim), (Ariel, Matt), (Nova, Valerian), (Mira, Tychus)\}
 }}
 \end{frame}
@@ -322,24 +300,189 @@ The female-optimal pairings are: \{(Sarah, Jim), (Ariel, Matt), (Nova, Valerian)
   \subsection{Modular Arithmetic}
 
 \begin{frame}[fragile]
-  \frametitle{\emph{En Taro} Tassadar}
+  \frametitle{\emph{Euclid's Extended Algorithm}}
+ Evaluate:
+ \newline
+ \centerline{extended-gcd(37,10)}
+ \newline
+ \newline
+ Show all recursive steps and return values. Use this information to provide a solution, if any to:
+ \newline
+ \centerline{$10x = 1 \text{ mod } 37$}
+
+\begin{verbatim}
+algorithm extended-gcd(x,y):
+   if y = 0 then return(x, 1, 0)
+   else:
+      (d, a, b) := extended-gcd(y, x mod y)
+      return((d, b, a - (x div y) * b))
+\end{verbatim}
+
+\end{frame}
+
+\begin{frame}[fragile]
+ \frametitle{\emph{Euclid's Extended Algorithm}}
+
+\begin{eqnarray}
+extended-gcd(37, 10) &->& \uncover<6->{\alert<6->{returns (1, 3, -11)}} \\
+extended-gcd(10, 7) &->& \uncover<5->{returns (1, -2, 3)}\\
+extended-gcd(7, 3) &->& \uncover<4->{returns (1, 1, -2)}\\
+extended-gcd(3, 1) &->& \uncover<3->{returns (1, 0, 1)} \\
+extended-gcd(1, 0)  &->& \uncover<2->{returns (1,1,0)}
+\end{eqnarray}
+
+ \uncover<7->{
+ So a solution for $10x = 1 \text{ mod } 37$ is $x=-11$, or
+equivalently, x = 26 mod 37.
+ }
+
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{\emph{Fermat's Little Theorem:}}
+  \emph{Fermat's Little Theorem:} \\
+  $a^{p-1} = 1 \text{ mod p (p is a prime) }$
+  \newline
+  \\
+ \huge{Calculate $2^{125}$ mod 127. Hint: 127 is prime.}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{\emph{Fermat's Little Theorem}}
+ \huge{Calculate $2^{125}$ mod 127. Hint: 127 is prime.}
+ \newline
+ \setcounter{equation}{0}
+ \begin{eqnarray}
+        \uncover<2->{ &=& 2^{-1} \cdot 2^{126} \text{ mod 127} } \\
+        \uncover<3->{ &=& 2^{-1} \cdot 1  \text{ mod 127 } } \\
+        \uncover<3->{ &=& 2^{-1}  \text{ mod 127 (using extended euclid's) } } \\
+        \uncover<4->{ &=& 64 \text{ mod 127} } \\
+        \uncover<5->{ &=& 2^{-1} = -63 = 64 \text{ mod 127}}
+ \end{eqnarray}
 \end{frame}
 
 
 % Public Key Cryptography %
 % ---------------------------------------------------------------------------- %
 \section{Public Key Cryptography}
-  \subsection{Public Key Cryptography}
+  \subsection{Review}
 
 \begin{frame}[fragile]
-  \frametitle{\emph{En Taro} Tassadar}
+  \frametitle{RSA Review}
+\uncover<2->{\large{RSA requires:}}
+\uncover<3->{
+\begin{itemize}
+\item $p, q:$ large prime numbers (approx. 512 bits each, $N = pq$)
+\item $e:$ positive integer relatively prime to $(p-1)(q-1)$
+\item $d:$ inverse of $e \pmod{(p-1)(q-1)}$ \newline
+\end{itemize}}
+\uncover<4->{
+Public key: $(N, e)$ \\
+Private key: $d$ \\
+Unencrypted message: $x$}
+\uncover<5->{
+ $= x^{ed} \pmod{N}$ \\}
+\uncover<4->{
+Encrypted message: $x^e \pmod{N}$}
+\end{frame}
+
+\subsection{What's wrong with these RSA schemes?}
+\begin{frame}[fragile]
+\frametitle{What's wrong with these RSA schemes?}
+\begin{itemize}
+\item $p = 3$
+\item $q = 4$
+\item $e = 5$
+\item $d = 5$
+\end{itemize}
+\begin{enumerate}
+\item $p, q$ are too small.
+\item ... \uncover<2->{\alert<2>{$q$ is not prime!}}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{What's wrong with these RSA schemes?}
+\begin{itemize}
+\item $p = 7$
+\item $q = 11$
+\item $e = 3$
+\item $d = 23$
+\end{itemize}
+\begin{enumerate}
+\item $p, q$ are too small.
+\item ... \uncover<2->{\alert<2>{$e$ is not relatively prime to $(p-1)(q-1)$!}}
+\item ... \uncover<3->{\alert<3>{therefore, $e$ has no inverse mod $(p-1)(q-1)$ and $d$ does not exist!}}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{What's wrong with these RSA schemes?}
+\begin{itemize}
+\item $p = 11$
+\item $q = 11$
+\item $e = 9$
+\item $d = 90$
+\end{itemize}
+\begin{enumerate}
+\item $p, q$ are too small.
+\item ... \uncover<2->{\alert<2>{$d$ does not equal $e^{-1}$!}} \newline \\
+\uncover<3->{So what should $d$ be?} \uncover<4->{\alert<4>{$d = 89: 9 \times 89 \equiv 801 \equiv 1 \pmod{100}$}} \newline \\
+\uncover<5->{(Also, $p$ and $q$ are the same... Semi-related aside: taking the square root of a number does not take a lot of time, so it would not cost much for a hacker to check if $p == q == \sqrt{N}$. It also doesn't take a lot of time for you to generate another large prime - in other words, don't choose $p == q$)}
+\end{enumerate}
+\end{frame}
+
+\subsection{Let's do an example!}
+\begin{frame}[fragile]
+\frametitle{Let's do an example!}
+\uncover<2->{Start by choosing $p, q, e, d$.} \uncover<3->{ Let's use $p = 3, q = 5$.}\newline \\
+\uncover<4->{What are acceptable values for $e$?} \\
+\uncover<5->{\alert<5>{Any number relatively prime to $(p-1)(q-1) = 2 \times 4 = 8$, so $1, 3, 5, 7, 9, ...$ (i.e. any odd number)}} \newline \\
+\uncover<6->{So let's choose $e$. How about $e=1$?} \uncover<7->{\alert<7>{\textbf{NO!}}} \uncover<8->{Why not?}
+\begin{itemize}
+\uncover<9->{\item Unencrypted message = $x$}
+\uncover<10->{\item Encrypted message = $x^e = x^1 = x$...}
+\end{itemize}
+\uncover<11->{Well, that's embarrassing. Our encrypted message is the same as our unencrypted message! And everyone will know this because they will have access to our public key $(N, e)$.} \newline \\
+\uncover<12->{Ok, let's use $e = 3$.} \uncover<13->{What should our secret key $d$ be?} \\
+\uncover<14->{\alert<14>{$d = 3: 3^{-1} \equiv 3 \pmod{8}$}} \newline \\
+\uncover<15->{Great! Now we're ready to announce our public key $(N, e)$ to the world!}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Let's send a message!}
+\large{We are given $N=15, e=3$} \newline \\
+\uncover<2->{What are valid messages we can send?} \\
+\uncover<3->{\alert<3>{Any integer in the range [0, 14] because encryption / decryption is done mod $N$ and $N = 15$}} \newline \\
+\uncover<4->{Why is it a bad idea to send 0 or 1 as our message?} \\
+\uncover<5->{\alert<5>{An adversary can obtain the encrypted message $x^e \pmod{N}$ and knows that the secret message is $x \equiv (x^{e})^d \pmod{N}$ for some secret key $d$. If $x = 0$, then $x^e = 0$ and the adversary can deduce that $x^{ed} = 0$ for any $d$. There is a similar argument against sending the message $x = 1$.}} \newline \\
+\uncover<6>{From here, we can just choose a message ($x$), encrypt the message ($x^e \pmod{N}$), and send the message to the person who knows $d$ without having to worry about the message being intercepted. Let's say our message is $x=2$, which means our encrypted message is $2^3 \pmod{15} = 8$.}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Let's decrypt a message!}
+\begin{center}{\large{We receive $x^e=8$ and we know that $p=3, q=5, e=3, d=3$}} \newline \\ \end{center}
+\uncover<2->{How do we decrypt this message?} \\
+\uncover<3->{\alert<3>{Take $x^e$ and raise it to the $d^\text{th}$ power mod $N$:}}
+\uncover<4->{\alert<4>{
+\begin{eqnarray}
+(x^e)^d \pmod{15} &=& 8^3 \pmod{15} \nonumber \\
+&=& 512 \pmod{15} \nonumber \\
+&\equiv& 2 \pmod{15} \nonumber
+\end{eqnarray}}}
+\uncover<5>{Thus, the original message was $x = 2$! We're done! RSA worked!}
 \end{frame}
 
 % The End %
 % ---------------------------------------------------------------------------- %
 
+\subsection{Finish!}
 \begin{frame}
   \frametitle{\huge{That's it!}}
+\begin{center}
+\huge{Thanks for coming! \\ Good luck on your midterm!}
+\end{center}
 \end{frame}
 
 \end{document}
