@@ -1,0 +1,130 @@
+% Thanks to Dan Wang for the Beamer template!
+
+\documentclass[9pt]{beamer}
+
+% Fill in variables below %
+% ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ %
+\newcommand{\thesemester}{Spring 2013}
+\newcommand{\themidterm}{CS 70 Midterm 1 Review}
+\newcommand{\theauthors}{Edwin Liao, Sung Roa Yoon}
+\newcommand{\theorganization}{Eta Kappa Nu, Mu Chapter \\
+University of California, Berkeley}
+\newcommand{\thedate}{February 18, 2013}
+\newcommand{\thelanguage}{Java}
+% ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ %
+
+% Preamble %
+% ---------------------------------------------------------------------------- %
+\usepackage{url}
+\usepackage{relsize}
+\usepackage{color}
+\usepackage{listings}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{bm}
+\usepackage{framed}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+
+% Listings Package %
+\usepackage{listings}
+\lstset{numbers=left,
+    basicstyle=\ttfamily,
+    numberstyle=\tiny,
+    showstringspaces=false,
+    frame=leftline,
+    language=Java,
+    escapeinside=\$\$,
+    keywordstyle=\color{blue},
+    xleftmargin=20pt,
+    morecomment=[l]{//},
+    }
+
+\usetheme{Singapore}
+\setbeamertemplate{mini frames}[circle]
+\setbeamertemplate{footline}[frame number]
+
+
+\title{\themidterm}
+\author{\theauthors}
+\institute{\theorganization}
+\date{\thedate}
+% ---------------------------------------------------------------------------- %
+
+\begin{document}
+
+% Title Page %
+% ---------------------------------------------------------------------------- %
+
+\begin{frame}[fragile]
+  \titlepage
+\end{frame}
+
+
+% Propositions and Proof Techniques %
+% ---------------------------------------------------------------------------- %
+\section{Propositions and Proof Techniques}
+\subsection{Propositions and Proof Techniques}
+
+\begin{frame}[fragile]
+  \frametitle{Proof by Awesomeness}
+Given points (1, 0), (2, 1), (3, 0) over $GF(7)$, find the polynomial of degree 2 using Lagrange Interpolation. \newline
+\uncover<2->{\alert<2>{
+\begin{eqnarray}
+\Delta_1 (x) &=& \text{\emph{Don't care!}} \nonumber \\
+\Delta_2 (x) &=& \frac{(x-1)(x-3)}{(2-1)(2-3)} = -x^2 + 4x - 3 \nonumber \\
+\Delta_3 (x) &=& \text{\emph{Don't care!}} \nonumber \\
+p(x) &=& 0 \cdot \delta_1 + 1 \cdot \delta_2 + 0 \cdot \delta_3 = -x^2 + 4x -3 = 6x^2 + 4x + 4 \nonumber
+\end{eqnarray}
+}}
+\end{frame}
+
+
+
+% Induction %
+% ---------------------------------------------------------------------------- %
+\section{Induction}
+\subsection{Induction}
+
+\begin{frame}[fragile]
+  \frametitle{Graphs}
+\end{frame}
+
+
+% Stable Marriage %
+% ---------------------------------------------------------------------------- %
+\section{Stable Marriage}
+\subsection{Stable Marriage}
+
+\begin{frame}[fragile]
+  \frametitle{Winning the Lottery}
+\end{frame}
+
+
+% Modular Arithmetic %
+% ---------------------------------------------------------------------------- %
+\section{Modular Arithmetic}
+  \subsection{Modular Arithmetic}
+
+\begin{frame}[fragile]
+  \frametitle{\emph{En Taro} Tassadar}
+\end{frame}
+
+
+% Public Key Cryptography %
+% ---------------------------------------------------------------------------- %
+\section{Public Key Cryptography}
+  \subsection{Public Key Cryptography}
+
+\begin{frame}[fragile]
+  \frametitle{\emph{En Taro} Tassadar}
+\end{frame}
+
+% The End %
+% ---------------------------------------------------------------------------- %
+
+\begin{frame}
+  \frametitle{\huge{That's it!}}
+\end{frame}
+
+\end{document}
