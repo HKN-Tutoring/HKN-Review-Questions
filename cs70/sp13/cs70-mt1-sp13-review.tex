@@ -66,17 +66,107 @@ University of California, Berkeley}
 \section{Propositions and Proof Techniques}
 \subsection{Propositions and Proof Techniques}
 
+
 \begin{frame}[fragile]
-  \frametitle{Proof by Awesomeness}
-Given points (1, 0), (2, 1), (3, 0) over $GF(7)$, find the polynomial of degree 2 using Lagrange Interpolation. \newline
+  \frametitle{Propositions}
+
+
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Direct Proof}
+     \begin{itemize}
+        \item Theory:
+        \begin{itemize}
+            \item Direct Proof of $P \Rightarrow Q$: Assume $P$ \dots Therefore $Q$
+            \item This is often useful when you have an easy-to-expand expression as $P$ (For example, in the exercise below)
+        \end{itemize}
+        \item Exercise:
+
+            Prove that, if $m, n$ are odd integers, then $mn$ is also an odd integer.
+            
+       \item Solution:
 \uncover<2->{\alert<2>{
-\begin{eqnarray}
-\Delta_1 (x) &=& \text{\emph{Don't care!}} \nonumber \\
-\Delta_2 (x) &=& \frac{(x-1)(x-3)}{(2-1)(2-3)} = -x^2 + 4x - 3 \nonumber \\
-\Delta_3 (x) &=& \text{\emph{Don't care!}} \nonumber \\
-p(x) &=& 0 \cdot \delta_1 + 1 \cdot \delta_2 + 0 \cdot \delta_3 = -x^2 + 4x -3 = 6x^2 + 4x + 4 \nonumber
-\end{eqnarray}
+        \begin{eqnarray}       
+            \text{ We can write } m = 2k + 1, n = 2q + 1 \text{ for some } k, q \in \mathbb{Z} \nonumber \\
+            (2k + 1)(2q + 1)  \nonumber \\
+            4kq + 2k + 2q + 1 \nonumber \\
+            2(2kq + k + q) + 1 \nonumber \\
+            2a + 1 \text{ for some } a \in \mathbb{Z} \nonumber \\
+            \text{ So } mn \text{ is, by definition, an odd number } \nonumber
+        \end{eqnarray}
 }}
+    \end{itemize}   
+
+
+
+ 
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Proof by Contraposition}
+     \begin{itemize}
+        \item Theory:
+        \begin{itemize}
+            \item Proof by Contraposition of $P \Rightarrow Q$: Assume $\neg Q$ \dots Therefore $\neg P$
+            
+            So $\neg Q \Rightarrow \neg P \equiv P \Rightarrow Q$
+
+            \item This is often useful when you have an easy-to-expand expression as $P$ (For example, in the exercise below)
+        \end{itemize}
+        \item Exercise:
+
+            Prove that, if $x^2$ is even, then $x$ is even, for all $x \in \mathbb{Z}$
+            
+       \item Solution:
+\uncover<2->{\alert<2>{
+        \begin{eqnarray}       
+\text{Suppose that } x \text{ is not even.} \nonumber \\
+\text{Let } x = 2k + 1 \text{ for } k \in \mathbb{Z} \nonumber \\
+x^2 = (2k + 1)^2 = 4k^2 + 4k + 1 = 2(2k^2 + 2k) + 1 \nonumber \\
+\text{We proved that } x^2 \text{ is an odd number, so we have completed} \nonumber \\
+\text{our proof by contrapositive} \nonumber
+        \end{eqnarray}
+}}
+
+    \end{itemize}   
+\end{frame}
+
+
+
+
+\begin{frame}[fragile]
+  \frametitle{Proof by Contradiction}
+
+     \begin{itemize}
+        \item Theory:
+        \begin{itemize}
+            \item  Proof by Contradiction of $P$:  \\
+            Assume $\neg P$ \\
+            \dots \\
+            $R$ \\
+            \dots \\
+            $\neg R$. \\
+            Contradiction, therefore $P$
+        \end{itemize}
+        \item Exercise:
+
+            Prove that there is no greatest integer.
+            
+       \item Solution:
+\uncover<2->{\alert<2>{
+        Assume that there is a greatest integer $N$. But we know that $N+1$ is also
+        an integer (since integers are closed under addition, by definition), and
+        $N + 1 > N$ so $N$ is not the greatest integer. Contradiction.
+
+        Therefore there is no greatest integer.
+}}
+    \end{itemize}   
+
+
+
+
 \end{frame}
 
 
