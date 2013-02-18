@@ -5,8 +5,8 @@
 % Fill in variables below %
 % ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ %
 \newcommand{\thesemester}{Spring 2013}
-\newcommand{\themidterm}{CS70 Midterm 1 Review}
-\newcommand{\theauthors}{Alton Zheng, Edwin Liao, Joy Jeng, Sagar Karandikar, Sung Roa Yoon}
+\newcommand{\themidterm}{CS 70 Midterm 1 Review}
+\newcommand{\theauthors}{Edwin Liao, Sung Roa Yoon}
 \newcommand{\theorganization}{Eta Kappa Nu, Mu Chapter \\
 University of California, Berkeley}
 \newcommand{\thedate}{February 18, 2013}
@@ -84,10 +84,77 @@ p(x) &=& 0 \cdot \delta_1 + 1 \cdot \delta_2 + 0 \cdot \delta_3 = -x^2 + 4x -3 =
 % Induction %
 % ---------------------------------------------------------------------------- %
 \section{Induction}
-\subsection{Induction}
 
+\subsection{Summary}
 \begin{frame}[fragile]
-  \frametitle{Graphs}
+  \frametitle{Proofs by Induction}
+  Prove by induction $\forall k \in \mathbb{N}, P(k)$, where $\sum\limits_{i=1}^k i = \frac{k(k+1)}{2}$ \\
+  \uncover<2->{\alert<2>{
+      Base Case: $P(1)$. Then $\sum\limits_{i=1}^1 i = \frac{1(1+1)}{2} = 1$ \\
+  }}
+  \uncover<3->{\alert<3>{
+      Induction Hypothesis: Assume $P(m)$ for some $m$. \\
+  }}
+  \uncover<4->{\alert<4>{
+      Induction Step: Prove for $P(m + 1)$. \\
+      \begin{align}
+      P(m + 1) &= P(m) + (m + 1)\nonumber \\
+      &= \frac{m(m+1)}{2} + (m + 1) \nonumber \\
+      &= \frac{m^2 + m + 2(m + 1)}{2} \nonumber \\
+      &= \frac{m^2 + 3m + 2}{2}  \nonumber \\
+      &= \frac{(m + 1) (m + 2)}{2}  \nonumber \\
+      \end{align}
+  }}
+\end{frame}
+
+\subsection{Question1}
+\begin{frame}[fragile]
+  \frametitle{Cubed $\rightarrow$ Squared}
+  Prove by induction $\forall k \in \mathbb{N}, P(k)$, where $\sum\limits_{i=1}^k i^3 = (\frac{k(k+1)}{2})^2$ \\
+  \uncover<2->{\alert<2->{
+      Base Case: $P(1)$. Then $\sum\limits_{i=1}^1 i^3 = (\frac{1(1+1)}{2})^2 = 1$ \\
+  }}
+  \uncover<3->{\alert<3->{
+      Induction Hypothesis: Assume $P(m)$ for some $m$. \\
+  }}
+  \uncover<4->{\alert<4>{
+      Induction Step: Prove for $P(m + 1)$. \\
+      \begin{align}
+      P(m + 1) &= P(m) + (m + 1)^3\nonumber \\
+      &= (\frac{m(m+1)}{2})^2 + (m + 1)^3 \nonumber \\
+      &= \frac{m^2(m+1)^2}{4} + \frac{4(m+1)(m + 1)^2}{4} \nonumber \\
+      &= \frac{(m^2 + 4m + 4)(m+1)^2}{4} \nonumber \\
+      &= \frac{(m+2)^2(m+1)^2}{4} \nonumber \\
+      &= (\frac{m+1)(m+2)}{2})^2 \nonumber
+      \end{align}
+  }}
+\end{frame}
+
+\subsection{Question2}
+\begin{frame}[fragile]
+  \frametitle{Chocolate}
+  (Vazirani Fa12 Midterm 1 3b)
+  You wish to break a standard $m × n$ Hershey chocolate bar into $mn$ little squares to distribute to $mn$ kids. In each step you can pick up exactly one piece of chocolate and break it along one
+of the horizontal or vertical lines etched into the bar. No stacking! Prove by induction that the minimum number of steps required to completely break the bar into $mn$ little squares is
+$mn - 1$.\newline \\
+  \uncover<2->{\alert<2->{
+      We will use induction on $r = mn$; induction on the number of pieces in the bar. \newline \\
+  }}
+  \uncover<3->{\alert<3->{
+      Base Case: The minimum number of breaks required is $g(r)$. $r = 1$. $m = 1$, $n = 1$. No breaks are
+necessary, and we observe that $g(r) = r - 1 = 0$. \newline \\
+  }}
+  \uncover<4->{\alert<4->{
+      Induction Hypothesis: Assume $\forall s \leq k g(s) = s - 1$. (Strong induction)\newline \\
+  }}
+  \uncover<5->{\alert<5>{
+      Induction Step: Prove for $P(m + 1)$. \\
+      Consider $r = k + 1$. Since we have one big piece and $k + 1$ pieces to distribute, we need to begin by making 1 break. This results in two bars, one with $u < k + 1$ and another with
+$v < k+1$ pieces, where $u+v = k+1$. Applying the inductive hypothesis, it takes a minimum of
+$g(v) = v−1$ breaks on the bar of size $v$, and it takes $g(u) = u−1$ breaks on the bar of size $u$. The
+total minimum number of breaks is then $g(k+1) = 1+(v−1)+(u−1) = (u+v)−1 = (k+1)−1$.
+Therefore, for any bar of size $mn$, it takes a minimum of $mn − 1$ breaks. 
+  }}
 \end{frame}
 
 
