@@ -201,6 +201,29 @@ x^2 = (2k + 1)^2 = 4k^2 + 4k + 1 = 2(2k^2 + 2k) + 1 \nonumber \\
 \end{frame}
 
 \begin{frame}[fragile]
+  \frametitle{Divisible?}
+  (Fa06 Papadimitriou and Vazirani) Prove by induction that for every odd number (positive integer) n, $3^n + 4^n$ is divisible by 7. \newline \\
+  \uncover<2->{\alert<2->{
+      Base Case: For n = 1, we know that $3 + 4 = 7$, which is divisible by 7. \newline  \\
+  }}
+  \uncover<3->{\alert<3->{
+      Induction Hypothesis: Assume $3^n + 4^n$, where n is some positive odd integer, is divisible by 7. \newline \\
+  }}
+  \uncover<4->{\alert<4>{
+      Induction Step: We want to prove that $3^{n+2} + 4^{n+2}$ is divisible by 7. \newline \\
+      
+      $3^{n+2} + 4^{n+2} = 9 * 3^n + 16 * 4^n$ \\
+      We know that \\
+      $9 * 3^n + 16 * 4^n$ is divisible by 7 if \\
+      $9 * 3^n + 16 * 4^n$ (mod 7) $= 0$. \\
+      $9 * 3^n + 16 * 4^n$ (mod 7) $= 2 * 3^n + 2 * 4^n$ \\
+      $= 2 (3^n + 4^n)$ (mod 7)\\
+      From the induction hypothesis, we know that $3^n + 4^n$ is divisible by 7, and therefore so is $2(3^n + 4^n)$.
+      
+  }}
+\end{frame}
+
+\begin{frame}[fragile]
   \frametitle{Chocolate}
   (Vazirani Fa12 Midterm 1 3b)
   You wish to break a standard $m × n$ Hershey chocolate bar into $mn$ little squares to distribute to $mn$ kids. In each step you can pick up exactly one piece of chocolate and break it along one
@@ -216,15 +239,28 @@ necessary, and we observe that $g(r) = r - 1 = 0$. \newline \\
   \uncover<4->{\alert<4->{
       Induction Hypothesis: Assume $\forall s \leq k, g(s) = s - 1$. (Strong induction)\newline \\
   }}
-  \uncover<5->{\alert<5>{
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Chocolate Step}
+  (Vazirani Fa12 Midterm 1 3b)
+  You wish to break a standard $m × n$ Hershey chocolate bar into $mn$ little squares to distribute to $mn$ kids. In each step you can pick up exactly one piece of chocolate and break it along one
+of the horizontal or vertical lines etched into the bar. No stacking! Prove by induction that the minimum number of steps required to completely break the bar into $mn$ little squares is
+$mn - 1$.\newline \\
+  \uncover<2->{\alert<2->{
+      We will use induction on $r = mn$; induction on the number of pieces in the bar. \newline \\
+  }}
+  \uncover<3->{\alert<3->{
       Induction Step: Prove for $P(m + 1)$. \\
       Consider $r = k + 1$. Since we have one big piece and $k + 1$ pieces to distribute, we need to begin by making 1 break. This results in two bars, one with $u < k + 1$ and another with
-$v < k+1$ pieces, where $u+v = k+1$. Applying the inductive hypothesis, it takes a minimum of
-$g(v) = v−1$ breaks on the bar of size $v$, and it takes $g(u) = u−1$ breaks on the bar of size $u$. The
-total minimum number of breaks is then $g(k+1) = 1+(v−1)+(u−1) = (u+v)−1 = (k+1)−1$.
-Therefore, for any bar of size $mn$, it takes a minimum of $mn − 1$ breaks. 
+$v < k + 1$ pieces, where $u + v = k + 1$. Applying the inductive hypothesis, it takes a minimum of
+$g(v) =  v - 1$ breaks on the bar of size $v$, and it takes $g(u) = u - 1$ breaks on the bar of size $u$. The
+total minimum number of breaks is then $g(k + 1) = 1 + (v - 1) + (u - 1) = (u + v) - 1 = (k + 1) - 1$.
+Therefore, for any bar of size $mn$, it takes a minimum of $mn - 1$ breaks. 
   }}
 \end{frame}
+
 
 
 % Stable Marriage %
