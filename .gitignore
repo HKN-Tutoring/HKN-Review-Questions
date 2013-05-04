@@ -6,3 +6,4 @@
 *.log
 *.aux
 *.swp
+*.DS_Store
